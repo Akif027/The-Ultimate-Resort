@@ -1183,6 +1183,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  room: {fileID: 5677624454203027906}
 --- !u!65 &3531575055935916289
 BoxCollider:
   m_ObjectHideFlags: 0

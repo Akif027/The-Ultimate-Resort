@@ -9,6 +9,7 @@ public class CleanAnim : GameManager
     [SerializeField] float cleaningTime;
     public string furnitureName;
     public UnityEvent OnCleaned;
+    [SerializeField] Room room;
     private bool isCleaning = false;
     protected override void Initialize()
     {
@@ -40,6 +41,11 @@ public class CleanAnim : GameManager
         // Play the cleaning animation
         PlayAnimation("Clean");
         OnCleaned?.Invoke();
+        RoomData roomData = RoomManager.instance.FindRoomData(room.RoomNumber);
+        if (roomData != null)
+            roomData.isClean = true;
+        else
+            Debug.LogError("Room not found in cleanAnim Script");
 
 
     }

@@ -101,6 +101,16 @@ public class RoomManager : GameManager
         }
     }
 
+    public RoomData FindRoomData(int roomNumber)
+    {
+        foreach (var data in roomData)
+        {
+            if (data.RoomNumber == roomNumber)
+                return data;
+        }
+        return null;
+    }
+
 
     public void ToggleMultipleRooms(int numberOfRooms, bool enable)
     {
