@@ -56,14 +56,14 @@ public class AnimationManager : GameManager
     public void RoomPlayAllCleanAnimation(int roomNumber)
     {
 
-        roomManager.roomDatas[roomNumber - 1].PlayAllCleanAnimation();
+        roomManager.roomData[roomNumber - 1].PlayAllCleanAnimation();
     }
 
 
     public void RoomPlayAllDirtyAnimation(int roomNumber)
     {
 
-        roomManager.roomDatas[roomNumber - 1].PlayAllDirtyAnimation();
+        roomManager.roomData[roomNumber - 1].PlayAllDirtyAnimation();
     }
 
 }

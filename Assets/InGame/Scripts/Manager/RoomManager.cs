@@ -10,7 +10,7 @@ public class RoomManager : GameManager
     public Dictionary<int, Room> RoomContainer;
     public List<Room> room = new List<Room>();
 
-    public List<RoomData> roomDatas = new List<RoomData>();
+    public List<RoomData> roomData = new List<RoomData>();
     protected override void Initialize()
     {
         if (instance == null)
@@ -33,13 +33,13 @@ public class RoomManager : GameManager
         {
             r.gameObject.SetActive(false);
             r.RoomNumber = roomNumber; // Assign the current room number
-            roomDatas.Add(new RoomData(roomNumber, r.gameObject));
+            roomData.Add(new RoomData(roomNumber, r.gameObject));
             CleanAnim[] anim = r.GetComponentsInChildren<CleanAnim>();
 
             RoomContainer.Add(roomNumber, r);
             foreach (var a in anim)
             {
-                roomDatas[roomNumber - 1].animationHolders.Add(new AnimationHolder(a));
+                roomData[roomNumber - 1].animationHolders.Add(new AnimationHolder(a));
 
             }
             roomNumber++; // Increment the room number for the next room
@@ -111,7 +111,7 @@ public class RoomData
         RoomNumber = Rno;
         isAllot = false;
         isClean = true;
-        RoomDoor = RoomDoor;
+        this.RoomDoor = RoomDoor;
         animationHolders = new List<AnimationHolder>();
     }
 

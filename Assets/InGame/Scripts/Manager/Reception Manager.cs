@@ -12,13 +12,13 @@ public class ReceptionManager : GameManager
         if (other.tag == "customer")
         {
             RoomData room = Available_Room();
-            other.gameObject.GetComponent<Customer>().Room_Allot(room.RoomObj, room.grade);
+            other.gameObject.GetComponent<Customer>().Room_Allot(room.RoomDoor, room.grade);
         }
     }
 
     RoomData Available_Room()
     {
-        foreach (var room in RoomManager.instance.roomDatas)
+        foreach (var room in RoomManager.instance.roomData)
         {
             if (room.isClean == true && room.isAllot == false)
             {
