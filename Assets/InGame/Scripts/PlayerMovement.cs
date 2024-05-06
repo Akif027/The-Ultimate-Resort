@@ -75,9 +75,14 @@ public class PlayerMovement : GameManager
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
-        // Calculate the move direction based on keyboard input
-        moveDirection = new Vector3(horizontalInput, 0, verticalInput).normalized;
+        // Get the camera's forward and right vectors, ignoring the y component
+        Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
+        Vector3 cameraRight = Camera.main.transform.right;
+
+        // Calculate the move direction based on keyboard input and camera orientation
+        moveDirection = (verticalInput * cameraForward + horizontalInput * cameraRight).normalized;
     }
+
 
     private void MovePlayer()
     {
@@ -87,19 +92,21 @@ public class PlayerMovement : GameManager
         // Check if the player is moving
         if (moveDirection.magnitude > 0)
         {
-            // If the player is moving, play the walking animation
-            AnimationManager.Instance.PlayerAnimationPlay("isWalking", true);
-
             // Rotate the player to face the direction of movement
             Vector3 newForward = new Vector3(moveDirection.x, 0, moveDirection.z);
             Quaternion targetRotation = Quaternion.LookRotation(newForward);
             rb.rotation = Quaternion.Slerp(rb.rotation, targetRotation, Time.fixedDeltaTime * 5f);
         }
+        if (moveDirection.magnitude > 0)
+        {
+            Debug.Log("Playing Walking Animation");
+            AnimationManager.Instance.PlayerAnimationPlay("isWalking", true);
+        }
         else
         {
-            // If the player is not moving, play the idle animation
+            Debug.Log("Playing Idle Animation");
             AnimationManager.Instance.PlayerAnimationPlay("isWalking", false);
-            AnimationManager.Instance.PlayerAnimationPlay("isIdle", true);
+
         }
     }
 }
