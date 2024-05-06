@@ -27964,7 +27964,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1330746163}
   - component: {fileID: 1330746162}
-  - component: {fileID: 1330746164}
   m_Layer: 0
   m_Name: RoomManager
   m_TagString: Untagged
@@ -28005,19 +28004,6 @@ Transform:
   - {fileID: 516684083}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 88.695, z: 0}
---- !u!114 &1330746164
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1330746161}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70430d85356bd2148bc1c27f9ce91f7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Player: {fileID: 0}
 --- !u!4 &1331191233 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000012288194582, guid: fa8ebb25a387eeb4ebfe7827b9c9135c,
