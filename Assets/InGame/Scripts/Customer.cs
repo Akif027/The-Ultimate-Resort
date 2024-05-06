@@ -65,6 +65,7 @@ public class Customer : GameManager
     {
         Debug.Log("Room checkout");
         room.isAllot = false;
+        room.PlayAllDirtyAnimation();
         navMeshAgent.SetDestination(RoomManager.instance.EndPoint.transform.position);
     }
 
