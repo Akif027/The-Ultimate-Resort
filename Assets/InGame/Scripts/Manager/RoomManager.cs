@@ -106,12 +106,13 @@ public class RoomData
     public char grade = 'A';
 
     public List<AnimationHolder> animationHolders;
-    public RoomData(int Rno, GameObject RoomDoor)
+    public RoomData(int Rno, GameObject Room)
     {
         RoomNumber = Rno;
         isAllot = false;
         isClean = true;
-        this.RoomDoor = RoomDoor;
+        RoomDoor = Room.transform.GetChild(1).transform.GetChild(0).gameObject;
+        RoomBed = Room.transform.GetChild(1).transform.GetChild(1).gameObject;
         animationHolders = new List<AnimationHolder>();
     }
 
