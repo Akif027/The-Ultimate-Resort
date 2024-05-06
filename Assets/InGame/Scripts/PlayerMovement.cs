@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : GameManager
 {
     public float moveSpeed = 5f;
     private Rigidbody rb;
@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 touchStartPosition;
     private Vector3 touchEndPosition;
 
-    void Start()
+    protected override void Initialize()
     {
         rb = GetComponent<Rigidbody>();
     }
