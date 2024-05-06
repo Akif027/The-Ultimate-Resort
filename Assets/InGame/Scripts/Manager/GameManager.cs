@@ -5,7 +5,8 @@ using UnityEngine;
 public abstract class GameManager : MonoBehaviour
 {
 
-    protected GameObject player;
+
+
 
 
     protected virtual void Initialize()

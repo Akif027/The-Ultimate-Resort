@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class AIGenerator : MonoBehaviour
+public class AIGenerator : GameManager
 {
     public NavMeshAgent agent;
     public Transform spawnPoint;

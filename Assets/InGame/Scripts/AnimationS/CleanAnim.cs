@@ -7,6 +7,7 @@ public class CleanAnim : GameManager
 {
     Animator _Anim;
     [SerializeField] float cleaningTime;
+    public string furnitureName;
     public UnityEvent OnCleaned;
     private bool isCleaning = false;
     protected override void Initialize()
@@ -15,12 +16,13 @@ public class CleanAnim : GameManager
 
     }
 
-    void PlayAnimation(String AnimName)
+    public void PlayAnimation(String AnimName)
     {
         _Anim.SetTrigger(AnimName);
+        Debug.Log("playing " + AnimName);
     }
 
-    void StartCleaning()
+    public void StartCleaning()
     {
         StartCoroutine(WaitAndClean());
     }
