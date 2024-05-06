@@ -11,7 +11,7 @@ public class QueueManager : MonoBehaviour
 
     public Transform getPoint()
     {
-        //if empty assing.
+        //if empty assign.
 
         //count of ava
         return points[availableAgents.Count];

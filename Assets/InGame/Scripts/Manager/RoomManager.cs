@@ -5,12 +5,18 @@ using UnityEngine;
 
 public class RoomManager : GameManager
 {
+    public static RoomManager instance;
+
     public Dictionary<int, Room> RoomContainer;
     public List<Room> room = new List<Room>();
 
     public List<RoomData> roomDatas = new List<RoomData>();
     protected override void Initialize()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
         base.Initialize();
         RoomContainer = new Dictionary<int, Room>();
 
@@ -92,12 +98,19 @@ public class RoomData
 {
     public string RoomName;
     public int RoomNumber;
-    public GameObject RoomObj;
+    public GameObject RoomDoor;
+    public GameObject RoomBed;
+
+    public bool isClean;
+    public bool isAllot;
+    public char grade = 'A';
 
     public List<AnimationHolder> animationHolders;
     public RoomData(int Rno, GameObject Roomobj)
     {
         RoomNumber = Rno;
+        isAllot = false;
+        isClean = true;
         RoomObj = Roomobj;
         animationHolders = new List<AnimationHolder>();
     }
@@ -108,6 +121,7 @@ public class RoomData
         {
             a.CleanAnimtion();
         }
+        isClean = true;
     }
 
     public void PlayAllDirtyAnimation()
@@ -116,5 +130,6 @@ public class RoomData
         {
             a.DirtyAnimtion();
         }
+        isClean = false;
     }
 }
