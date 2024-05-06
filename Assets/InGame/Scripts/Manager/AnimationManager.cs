@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+
 using UnityEngine;
 
 public class AnimationManager : GameManager
 {
 
-
-
+    [SerializeField] GameObject Player;
+    private Animator PlayerAnim;
     private static AnimationManager _instance;
 
     private RoomManager roomManager;
@@ -39,11 +39,12 @@ public class AnimationManager : GameManager
 
     protected override void Initialize()
     {
+        PlayerAnim = Player.GetComponent<Animator>();
         roomManager = GetComponent<RoomManager>();
         if (_instance == null)
         {
             _instance = this;
-            DontDestroyOnLoad(gameObject);
+            //   DontDestroyOnLoad(gameObject);
         }
         else if (_instance != this)
         {
@@ -66,5 +67,11 @@ public class AnimationManager : GameManager
         roomManager.roomData[roomNumber - 1].PlayAllDirtyAnimation();
     }
 
+    public void PlayerAnimationPlay(string animName, bool isTrue)
+    {
+        PlayerAnim.SetBool(animName, isTrue);
+
+
+    }
 }
 

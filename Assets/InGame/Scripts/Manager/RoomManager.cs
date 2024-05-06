@@ -10,16 +10,44 @@ public class RoomManager : GameManager
     public Dictionary<int, Room> RoomContainer;
     public List<Room> room = new List<Room>();
 
+
     public List<RoomData> roomData = new List<RoomData>();
 
     //Other Variables
     public float roomWaitTime = 5f;
     public GameObject EndPoint;
+
+    public static RoomManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                // Find the existing instance in the scene
+                instance = FindObjectOfType<RoomManager>();
+
+                // If not found, create a new instance
+                if (instance == null)
+                {
+                    GameObject obj = new GameObject();
+                    instance = obj.AddComponent<RoomManager>();
+                }
+            }
+            return instance;
+        }
+    }
+
+
     protected override void Initialize()
     {
         if (instance == null)
         {
             instance = this;
+            //   Don't DestroyOnLoad(gameObject);
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
         }
         base.Initialize();
         RoomContainer = new Dictionary<int, Room>();
