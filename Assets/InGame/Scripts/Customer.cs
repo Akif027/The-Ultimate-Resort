@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,7 @@ public class Customer : GameManager
 
     // Room alloted to the customer
     [SerializeField]
-    GameObject room;
+    RoomData room = null;
 
     /**
     Room
@@ -23,18 +24,54 @@ public class Customer : GameManager
     [SerializeField]
     char grade;
 
+
     [SerializeField] NavMeshAgent navMeshAgent;
 
-
+    [SerializeField] bool isRoomReached = false;
     protected override void Initialize()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
 
     }
-    public void Room_Allot(GameObject room, char grade)
+    public void Room_Allot(RoomData room)
     {
-        navMeshAgent.SetDestination(room.transform.position);
+        this.room = room;
+        grade = room.grade;
+        room.isAllot = true;
+        navMeshAgent.SetDestination(room.RoomDoor.transform.position);
+        Debug.Log("Room Alloted");
     }
 
-    //ontriiger bed
+    protected override void UpdateGame()
+    {
+        //checking if the customer get the room or not
+        if (room != null && isRoomReached != true)
+        {
+            //check if the customer reached the room or not
+            if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
+            {
+                if (!navMeshAgent || navMeshAgent.velocity.sqrMagnitude == 0f)
+                {
+                    Debug.Log("Room reached");
+                    isRoomReached = true;
+                    StartCoroutine(waitTimer(RoomManager.instance.roomWaitTime, Room_checkOut));
+
+                }
+            }
+        }
+    }
+
+    void Room_checkOut()
+    {
+        Debug.Log("Room checkout");
+        room.isAllot = false;
+        navMeshAgent.SetDestination(RoomManager.instance.EndPoint.transform.position);
+    }
+
+    IEnumerator waitTimer(float time, Action action)
+    {
+        Debug.Log("Wait in room");
+        yield return new WaitForSeconds(time);
+        action();
+    }
 }

@@ -13,12 +13,12 @@ public class AnimationHolder
     {
         this.cleanAnim = cleanAnim;
     }
-    public void CleanAnimtion()
+    public void CleanAnimation()
     {
         cleanAnim.PlayAnimation("Clean");
     }
 
-    public void DirtyAnimtion()
+    public void DirtyAnimation()
     {
         cleanAnim.PlayAnimation("Dirty");
     }

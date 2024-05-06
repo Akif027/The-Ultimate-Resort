@@ -11,6 +11,10 @@ public class RoomManager : GameManager
     public List<Room> room = new List<Room>();
 
     public List<RoomData> roomData = new List<RoomData>();
+
+    //Other Variables
+    public float roomWaitTime = 5f;
+    public GameObject EndPoint;
     protected override void Initialize()
     {
         if (instance == null)
@@ -120,7 +124,7 @@ public class RoomData
     {
         foreach (var a in animationHolders)
         {
-            a.CleanAnimtion();
+            a.CleanAnimation();
         }
         isClean = true;
     }
@@ -129,7 +133,7 @@ public class RoomData
     {
         foreach (var a in animationHolders)
         {
-            a.DirtyAnimtion();
+            a.DirtyAnimation();
         }
         isClean = false;
     }

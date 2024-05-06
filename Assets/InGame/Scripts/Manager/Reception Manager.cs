@@ -11,8 +11,7 @@ public class ReceptionManager : GameManager
 
         if (other.tag == "customer")
         {
-            RoomData room = Available_Room();
-            other.gameObject.GetComponent<Customer>().Room_Allot(room.RoomDoor, room.grade);
+            other.gameObject.GetComponent<Customer>().Room_Allot(Available_Room());
         }
     }
 
