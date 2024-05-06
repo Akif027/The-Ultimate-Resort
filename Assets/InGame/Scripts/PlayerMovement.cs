@@ -83,5 +83,23 @@ public class PlayerMovement : GameManager
     {
         // Move the player in the calculated direction at the specified speed
         rb.MovePosition(rb.position + moveDirection * moveSpeed * Time.fixedDeltaTime);
+
+        // Check if the player is moving
+        if (moveDirection.magnitude > 0)
+        {
+            // If the player is moving, play the walking animation
+            AnimationManager.Instance.PlayerAnimationPlay("isWalking", true);
+
+            // Rotate the player to face the direction of movement
+            Vector3 newForward = new Vector3(moveDirection.x, 0, moveDirection.z);
+            Quaternion targetRotation = Quaternion.LookRotation(newForward);
+            rb.rotation = Quaternion.Slerp(rb.rotation, targetRotation, Time.fixedDeltaTime * 5f);
+        }
+        else
+        {
+            // If the player is not moving, play the idle animation
+            AnimationManager.Instance.PlayerAnimationPlay("isWalking", false);
+            AnimationManager.Instance.PlayerAnimationPlay("isIdle", true);
+        }
     }
 }
