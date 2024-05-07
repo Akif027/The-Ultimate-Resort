@@ -6,12 +6,13 @@ public class ReceptionManager : GameManager
 {
 
 
+    RoomData roomAlloted = null;
     private void OnTriggerEnter(Collider other)
     {
 
         if (other.tag == "customer")
         {
-            other.gameObject.GetComponent<Customer>().Room_Allot(Available_Room());
+            StartCoroutine(waitRoom(other.gameObject));
         }
     }
 
@@ -25,5 +26,15 @@ public class ReceptionManager : GameManager
             }
         }
         return null;
+    }
+
+    IEnumerator waitRoom(GameObject customer)
+    {
+        while (roomAlloted == null)
+        {
+            yield return new WaitForSeconds(1);
+            roomAlloted = Available_Room();
+        }
+        customer.GetComponent<Customer>().Room_Allot(roomAlloted);
     }
 }

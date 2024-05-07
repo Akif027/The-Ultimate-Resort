@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - customer
+  - endPoint
   layers:
   - Default
   - TransparentFX

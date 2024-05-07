@@ -26,8 +26,6 @@ public class Customer : GameManager
 
 
     [SerializeField] NavMeshAgent navMeshAgent;
-
-    [SerializeField] bool isRoomReached = false;
     protected override void Initialize()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -40,25 +38,13 @@ public class Customer : GameManager
         room.isAllot = true;
         navMeshAgent.SetDestination(room.RoomDoor.transform.position);
         Debug.Log("Room Alloted");
+        //Inform Next customer in queue
+        Boarding.Instance.NextCustomer();
     }
 
-    protected override void UpdateGame()
+    public void Room_reached()
     {
-        //checking if the customer get the room or not
-        if (room != null && isRoomReached != true)
-        {
-            //check if the customer reached the room or not
-            if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
-            {
-                if (!navMeshAgent || navMeshAgent.velocity.sqrMagnitude == 0f)
-                {
-                    Debug.Log("Room reached");
-                    isRoomReached = true;
-                    StartCoroutine(waitTimer(RoomManager.instance.roomWaitTime, Room_checkOut));
-
-                }
-            }
-        }
+        StartCoroutine(waitTimer(RoomManager.instance.roomWaitTime, Room_checkOut));
     }
 
     void Room_checkOut()
@@ -74,5 +60,14 @@ public class Customer : GameManager
         Debug.Log("Wait in room");
         yield return new WaitForSeconds(time);
         action();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "endPoint")
+        {
+            Boarding.Instance.CustomerDeparture();
+            Destroy(this.gameObject);
+        }
     }
 }
