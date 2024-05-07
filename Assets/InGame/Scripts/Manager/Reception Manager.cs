@@ -7,15 +7,24 @@ public class ReceptionManager : GameManager
 
 
     RoomData roomAlloted = null;
-    private void OnTriggerEnter(Collider other)
+    public GameObject Customer = null;
+
+    protected override void OnTriggerEnter(Collider other)
     {
 
         if (other.tag == "customer")
         {
-            StartCoroutine(waitRoom(other.gameObject));
+            //  StartCoroutine(waitRoom(other.gameObject));
+            Customer = other.gameObject;
+
         }
     }
 
+    public void AllocateRoom()
+    {
+        StartCoroutine(waitRoom(Customer));
+
+    }
     RoomData Available_Room()
     {
         foreach (var room in RoomManager.instance.roomData)

@@ -15,7 +15,7 @@ public class PlayerMovement : GameManager
         rb = GetComponent<Rigidbody>();
     }
 
-    void Update()
+    protected override void UpdateGame()
     {
         HandleTouchInput();
         HandleKeyboardInput();
@@ -99,12 +99,12 @@ public class PlayerMovement : GameManager
         }
         if (moveDirection.magnitude > 0)
         {
-            Debug.Log("Playing Walking Animation");
+            //  Debug.Log("Playing Walking Animation");
             AnimationManager.Instance.PlayerAnimationPlay("isWalking", true);
         }
         else
         {
-            Debug.Log("Playing Idle Animation");
+            //  Debug.Log("Playing Idle Animation");
             AnimationManager.Instance.PlayerAnimationPlay("isWalking", false);
 
         }

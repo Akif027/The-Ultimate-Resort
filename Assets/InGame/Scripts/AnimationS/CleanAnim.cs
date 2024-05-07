@@ -49,7 +49,8 @@ public class CleanAnim : GameManager
 
 
     }
-    void OnTriggerEnter(Collider other)
+
+    protected override void OnTriggerEnter(Collider other)
     {
         // Check if the collider belongs to the player
         if (other.gameObject.CompareTag("Player"))

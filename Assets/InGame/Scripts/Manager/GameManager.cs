@@ -31,5 +31,14 @@ public abstract class GameManager : MonoBehaviour
         UpdateGame();
     }
 
+    protected virtual void OnCollisionEnter(Collision collision)
+    {
+        // Common logic for handling collision events
+    }
 
+    // Unity's OnTriggerEnter method, which can be overridden by subclasses
+    protected virtual void OnTriggerEnter(Collider other)
+    {
+        // Common logic for handling trigger events
+    }
 }

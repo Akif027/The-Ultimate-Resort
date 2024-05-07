@@ -62,7 +62,8 @@ public class Customer : GameManager
         action();
     }
 
-    private void OnTriggerEnter(Collider other)
+
+    protected override void OnTriggerEnter(Collider other)
     {
         if (other.tag == "endPoint")
         {
