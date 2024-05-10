@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 
 using UnityEngine;
-
+using UltimateResort;
 public class AnimationManager : GameManager
 {
 

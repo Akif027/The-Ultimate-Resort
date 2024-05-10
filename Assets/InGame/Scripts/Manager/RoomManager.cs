@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-
+using UltimateResort;
 public class RoomManager : GameManager
 {
     public static RoomManager instance;

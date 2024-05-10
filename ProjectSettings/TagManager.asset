@@ -4,9 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - customer
-  - endPoint
-  - ReceptionManager
+  - Cleaner
+  - Currency
   layers:
   - Default
   - TransparentFX
@@ -14,11 +13,11 @@ TagManager:
   - 
   - Water
   - UI
-  - Walkable
   - 
   - 
-  - 
-  - 
+  - PostProcessing
+  - EnvMountains
+  - Player
   - 
   - 
   - 

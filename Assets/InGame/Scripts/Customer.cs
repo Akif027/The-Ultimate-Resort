@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-
+using UltimateResort;
 public class Customer : GameManager
 {
     // Customer queue ID

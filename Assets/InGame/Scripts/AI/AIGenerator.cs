@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-
+using UltimateResort;
 public class AIGenerator : GameManager
 {
     public NavMeshAgent agent;

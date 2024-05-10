@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UltimateResort;
 public class PlayerMovement : GameManager
 {
     public float moveSpeed = 5f;

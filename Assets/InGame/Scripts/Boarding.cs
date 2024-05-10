@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.AI;
-
+using UltimateResort;
 public class Boarding : GameManager
 {
     public static Boarding Instance { get; private set; }
