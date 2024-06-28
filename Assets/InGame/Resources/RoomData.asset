@@ -12,4 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a27b66d3a4a7bc49b9f1f59007732f8, type: 3}
   m_Name: RoomData
   m_EditorClassIdentifier: 
-  rooms: []
+  upgradeEffect: {fileID: 0}
+  textEffect: {fileID: 0}
+  customerPrefab: {fileID: 0}
+  characterDatas:
+  - type: 1
+    model:
+    - {fileID: 6534824338324418642, guid: b6e57af25c7689c44992c14f78bc4be5, type: 3}
+  botDatas: []

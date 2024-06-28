@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class RoomManager : GameManager
+public class RoomManager : Manager
 {
     public static RoomManager instance;
 
@@ -38,8 +38,9 @@ public class RoomManager : GameManager
     }
 
 
-    protected override void Initialize()
+    public override void Init()
     {
+
         if (instance == null)
         {
             instance = this;
@@ -49,13 +50,13 @@ public class RoomManager : GameManager
         {
             Destroy(gameObject);
         }
-        base.Initialize();
+
         RoomContainer = new Dictionary<int, Room>();
 
         InitializeRooms();
 
-        //ToggleRoom(1, true);
-        ToggleMultipleRooms(1, true);
+        // ToggleRoom(1, true);
+        ToggleMultipleRooms(2, true);
     }
     private void InitializeRooms()
     {
@@ -65,17 +66,19 @@ public class RoomManager : GameManager
         {
             r.gameObject.SetActive(false);
             r.RoomNumber = roomNumber; // Assign the current room number
-            roomData.Add(new RoomData(roomNumber, r.gameObject));
+            roomData.Add(new RoomData(roomNumber, r));
             CleanAnim[] anim = r.GetComponentsInChildren<CleanAnim>();
 
             RoomContainer.Add(roomNumber, r);
             foreach (var a in anim)
             {
                 roomData[roomNumber - 1].animationHolders.Add(new AnimationHolder(a));
-
             }
+
             roomNumber++; // Increment the room number for the next room
         }
+
+
     }
 
 
@@ -110,8 +113,40 @@ public class RoomManager : GameManager
         }
         return null;
     }
+    public bool HasAvailableRooms()
+    {
+        foreach (var roomData in roomData)
+        {
+            if (!roomData.isAllot && roomData.isClean)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 
-
+    public RoomData AssignRoom()
+    {
+        foreach (var roomData in roomData)
+        {
+            if (!roomData.isAllot && roomData.isClean)
+            {
+                roomData.isAllot = true; // Mark the room as allocated
+                return roomData;
+            }
+        }
+        return null; // Return null if no rooms are available
+    }
+    public void FreeRoom(int roomNumber)
+    {
+        var roomData_ = roomData.Find(r => r.RoomNumber == roomNumber);
+        if (roomData_ != null)
+        {
+            roomData_.isAllot = false; // Mark the room as free
+            // Optionally, set the room to dirty or clean based on game logic
+            roomData_.isClean = false; // Assuming the room becomes dirty after use
+        }
+    }
     public void ToggleMultipleRooms(int numberOfRooms, bool enable)
     {
         if (RoomContainer.Count < numberOfRooms)
@@ -140,21 +175,18 @@ public class RoomData
 {
     public string RoomName;
     public int RoomNumber;
-    public GameObject RoomDoor;
-    public GameObject RoomBed;
-
+    public Room room;
     public bool isClean;
     public bool isAllot;
-    public char grade = 'A';
+
 
     public List<AnimationHolder> animationHolders;
-    public RoomData(int Rno, GameObject Room)
+    public RoomData(int Rno, Room _room)
     {
         RoomNumber = Rno;
         isAllot = false;
         isClean = true;
-        RoomDoor = Room.transform.GetChild(1).transform.GetChild(0).gameObject;
-        RoomBed = Room.transform.GetChild(1).transform.GetChild(1).gameObject;
+        room = _room;
         animationHolders = new List<AnimationHolder>();
     }
 

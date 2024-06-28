@@ -1,49 +1,69 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class ReceptionManager : GameManager
+public class ReceptionManager : MonoBehaviour
 {
 
+   [SerializeField] QueueManager queueManager;
+   [SerializeField] RoomManager roomManager;
+   void Start()
+   {
 
-    RoomData roomAlloted = null;
-    public GameObject Customer = null;
+      EventManager.Subscribe(HandleRoomRequest);
+      queueManager = GameManager.Instance.GetManager<QueueManager>() as QueueManager;
+      roomManager = GameManager.Instance.GetManager<RoomManager>() as RoomManager;
 
-    protected override void OnTriggerEnter(Collider other)
-    {
+   }
+   void HandleRoomRequest(GameObject customerObj)
+   {
 
-        if (other.tag == "customer")
-        {
-            //  StartCoroutine(waitRoom(other.gameObject));
-            Customer = other.gameObject;
 
-        }
-    }
-
-    public void AllocateRoom()
-    {
-        StartCoroutine(waitRoom(Customer));
-
-    }
-    RoomData Available_Room()
-    {
-        foreach (var room in RoomManager.instance.roomData)
-        {
-            if (room.isClean == true && room.isAllot == false)
+      if (roomManager.HasAvailableRooms())
+      {
+         Debug.Log($"{queueManager.customerQueue.Count} Customers is requesting room");
+         RoomData assignedRoom = roomManager.AssignRoom();
+         if (assignedRoom != null)
+         {
+            Debug.Log("room assigned");
+            customer c = customerObj.GetComponent<customer>();
+            if (c != null)
             {
-                return room;
-            }
-        }
-        return null;
-    }
+               c.roomDestination = assignedRoom.room.RoomDesitnation;
+               c.ChangeState(CustomerState.MovingToRoom);
+               queueManager.RemoveCustomerFromQueue(customerObj);
 
-    IEnumerator waitRoom(GameObject customer)
-    {
-        while (roomAlloted == null)
-        {
-            yield return new WaitForSeconds(1);
-            roomAlloted = Available_Room();
-        }
-        customer.GetComponent<Customer>().Room_Allot(roomAlloted);
-    }
+            }
+
+
+         }
+
+      }
+      else
+      {
+         // Add the customer to a waiting queue
+         //   queueManager.customerQueue.Enqueue(customerObj);
+
+      }
+   }
+
+   private void OnTriggerEnter(Collider other)
+   {
+      if (other.CompareTag("Player"))
+      {
+         Debug.Log("Player arrived at reception.");
+         // Call a method to handle the reception interaction
+         HandleReceptionInteraction();
+      }
+   }
+   private void HandleReceptionInteraction() // will invoke a button when click assign the room to the customer
+   {
+      // Implementation of the interaction logic goes here
+   }
+   void OnDestroy()
+   {
+      EventManager.Unsubscribe(HandleRoomRequest);
+   }
 }

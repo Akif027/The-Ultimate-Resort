@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-public class CleanAnim : GameManager
+public class CleanAnim : MonoBehaviour
 {
     Animator _Anim;
     [SerializeField] float cleaningTime;
@@ -11,7 +11,7 @@ public class CleanAnim : GameManager
     public UnityEvent OnCleaned;
     [SerializeField] Room room;
     private bool isCleaning = false;
-    protected override void Initialize()
+    void Start()
     {
         _Anim = GetComponent<Animator>();
 
@@ -50,7 +50,7 @@ public class CleanAnim : GameManager
 
     }
 
-    protected override void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         // Check if the collider belongs to the player
         if (other.gameObject.CompareTag("Player"))

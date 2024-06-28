@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-public class AnimationManager : GameManager
+public class AnimationManager : Singleton<AnimationManager>
 {
 
     [SerializeField] GameObject Player;
@@ -13,31 +13,12 @@ public class AnimationManager : GameManager
     private RoomManager roomManager;
 
 
-    public static AnimationManager Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                // Find the existing instance in the scene
-                _instance = FindObjectOfType<AnimationManager>();
-
-                // If not found, create a new instance
-                if (_instance == null)
-                {
-                    GameObject obj = new GameObject();
-                    _instance = obj.AddComponent<AnimationManager>();
-                }
-            }
-            return _instance;
-        }
-    }
 
 
     private AnimationManager() { }
 
 
-    protected override void Initialize()
+    void Start()
     {
         PlayerAnim = Player.GetComponent<Animator>();
         roomManager = GetComponent<RoomManager>();
@@ -67,11 +48,6 @@ public class AnimationManager : GameManager
         roomManager.roomData[roomNumber - 1].PlayAllDirtyAnimation();
     }
 
-    public void PlayerAnimationPlay(string animName, bool isTrue)
-    {
-        PlayerAnim.SetBool(animName, isTrue);
 
-
-    }
 }
 

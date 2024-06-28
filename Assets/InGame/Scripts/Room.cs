@@ -2,16 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Room : GameManager
+public class Room : MonoBehaviour
 {
     public int RoomNumber;
+    public Transform RoomDesitnation;
 
-
-    protected override void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "customer")
-        {
-            other.gameObject.GetComponent<Customer>().Room_reached();
-        }
-    }
 }

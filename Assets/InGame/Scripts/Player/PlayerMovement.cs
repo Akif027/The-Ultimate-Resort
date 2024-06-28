@@ -2,20 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : GameManager
+public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
     private Rigidbody rb;
     private Vector3 moveDirection;
     private Vector3 touchStartPosition;
     private Vector3 touchEndPosition;
+    [SerializeField] Animation animator;
 
-    protected override void Initialize()
+
+    void Start()
     {
         rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animation>();
     }
 
-    protected override void UpdateGame()
+    void Update()
     {
         HandleTouchInput();
         HandleKeyboardInput();
@@ -100,12 +103,14 @@ public class PlayerMovement : GameManager
         if (moveDirection.magnitude > 0)
         {
             //  Debug.Log("Playing Walking Animation");
-            AnimationManager.Instance.PlayerAnimationPlay("isWalking", true);
+            animator.AnimationPlay("isWalking", true);
+            animator.AnimationPlay("Idle", false);
         }
         else
         {
             //  Debug.Log("Playing Idle Animation");
-            AnimationManager.Instance.PlayerAnimationPlay("isWalking", false);
+            animator.AnimationPlay("isWalking", false);
+            animator.AnimationPlay("Idle", true);
 
         }
     }
