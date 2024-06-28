@@ -3,24 +3,37 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ReceptionManager : MonoBehaviour
 {
 
    [SerializeField] QueueManager queueManager;
    [SerializeField] RoomManager roomManager;
+   [SerializeField] UIManager uIManager;
+   [SerializeField] GameObject WaitingCustomerObj;
+
+   public Button AcceptCustomerB;
    void Start()
    {
 
       EventManager.Subscribe(HandleRoomRequest);
       queueManager = GameManager.Instance.GetManager<QueueManager>() as QueueManager;
       roomManager = GameManager.Instance.GetManager<RoomManager>() as RoomManager;
+      uIManager = GameManager.Instance.GetManager<UIManager>() as UIManager;
+      uIManager.AddUIElement("AcceptCustomerB", AcceptCustomerB.gameObject);
 
+      uIManager.HideUIElement("AcceptCustomerB");
    }
    void HandleRoomRequest(GameObject customerObj)
    {
+      WaitingCustomerObj = customerObj;
+      AcceptCustomerB.onClick.AddListener(AssignRoomToCustomer);
 
 
+   }
+   private void AssignRoomToCustomer()
+   {
       if (roomManager.HasAvailableRooms())
       {
          Debug.Log($"{queueManager.customerQueue.Count} Customers is requesting room");
@@ -28,12 +41,12 @@ public class ReceptionManager : MonoBehaviour
          if (assignedRoom != null)
          {
             Debug.Log("room assigned");
-            customer c = customerObj.GetComponent<customer>();
+            customer c = WaitingCustomerObj.GetComponent<customer>();
             if (c != null)
             {
                c.roomDestination = assignedRoom.room.RoomDesitnation;
                c.ChangeState(CustomerState.MovingToRoom);
-               queueManager.RemoveCustomerFromQueue(customerObj);
+               queueManager.RemoveCustomerFromQueue(WaitingCustomerObj);
 
             }
 
@@ -43,27 +56,33 @@ public class ReceptionManager : MonoBehaviour
       }
       else
       {
-         // Add the customer to a waiting queue
-         //   queueManager.customerQueue.Enqueue(customerObj);
+         Debug.LogError("NO ROOM AVAILABLE!");
+
+      }
+   }
+   void OnTriggerStay(Collider other)
+   {
+      // Check if the other object has a specific tag
+      if (other.CompareTag("Player"))
+      {
+         // Perform actions while the player is inside the trigger
+         if (WaitingCustomerObj != null) uIManager.ShowUIElement("AcceptCustomerB");
 
       }
    }
 
-   private void OnTriggerEnter(Collider other)
+   private void OnTriggerExit(Collider other)
    {
       if (other.CompareTag("Player"))
       {
-         Debug.Log("Player arrived at reception.");
-         // Call a method to handle the reception interaction
-         HandleReceptionInteraction();
+         uIManager.HideUIElement("AcceptCustomerB");
       }
    }
-   private void HandleReceptionInteraction() // will invoke a button when click assign the room to the customer
-   {
-      // Implementation of the interaction logic goes here
-   }
+
    void OnDestroy()
    {
       EventManager.Unsubscribe(HandleRoomRequest);
    }
+
+
 }

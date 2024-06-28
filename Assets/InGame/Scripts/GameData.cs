@@ -30,7 +30,6 @@ public class GameData : ScriptableObject
     }
 
 
-
 }
 
 [System.Serializable]
