@@ -11,6 +11,11 @@ public class Animation : MonoBehaviour
     {
         anim.SetBool(animName, isTrue);
 
+    }
+
+    public void AnimationPlay(string animName)
+    {
+        anim.SetTrigger(animName);
 
     }
 }

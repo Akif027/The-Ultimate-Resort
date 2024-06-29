@@ -13,9 +13,6 @@ public class RoomManager : Manager
 
     public List<RoomData> roomData = new List<RoomData>();
 
-    //Other Variables
-    public float roomWaitTime = 5f;
-    public GameObject EndPoint;
 
     public static RoomManager Instance
     {
@@ -56,7 +53,7 @@ public class RoomManager : Manager
         InitializeRooms();
 
         // ToggleRoom(1, true);
-        ToggleMultipleRooms(2, true);
+        ToggleMultipleRooms(3, true);
     }
     private void InitializeRooms()
     {

@@ -1,28 +1,39 @@
 using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 public class customer : MonoBehaviour
 {
-   public string customerId; // Unique identifier for each customer
 
 
-   [SerializeField] bool RoomAllotted = false;
+   public string customerId; // Unique identifier for each custome
+   public bool RoomAllotted = false;
+
    [SerializeField] Animation animator;
+   [SerializeField] float SleepingTIme = 5f;
+   [SerializeField] CustomerState currentState = CustomerState.waiting;
+
    private NavMeshAgent agent; // Reference to the NavMeshAgent component
-   public Transform roomDestination = null;
-   public Transform toiletDestination = null;
+   private RoomData roomData;
+   private Transform roomDestination = null;
 
-   public CustomerState currentState = CustomerState.waiting;
-   Rigidbody rb;
 
+   [SerializeField]
+   private float probExitingRoom = 0.9f; // Adjusted to half since there are only two states
+   [SerializeField]
+   private float probGoingToilet = 0.3f; // Adjusted to half since there are only two states
+   [SerializeField]
+   private float totalProbability = 1.0f; // Sum of the two probabilities
+
+
+   #region Unity
    void Start()
    {
       ChangeState(CustomerState.waiting);
       // Initialize the NavMeshAgent
       agent = GetComponent<NavMeshAgent>();
       animator = GetComponent<Animation>();
-      rb = GetComponent<Rigidbody>();
+
    }
 
    void Update()
@@ -63,52 +74,6 @@ public class customer : MonoBehaviour
    }
 
 
-   private void MoveToRoom()
-   {
-      RoomAllotted = true;
-      agent.destination = roomDestination.position;
-
-
-      // Transition to Sleeping state after reaching the room
-      // StartCoroutine(WaitAndTransition());
-   }
-
-   private IEnumerator WaitAndTransition()
-   {
-      yield return new WaitForSeconds(1); // Simulate sleeping time
-      ChangeState(CustomerState.ExitingRoom);
-   }
-
-   private void Sleep()
-   {
-      // animator.AnimationPlay("isWalking", false);
-      // animator.AnimationPlay("Idle", true);
-   }
-   private void ExitRoom()
-   {
-      agent.destination = roomDestination.position + Vector3.up * 5; // Exit the room
-                                                                     // Transition to GoingToilet state after exiting the room
-      StartCoroutine(WaitAndTransition());
-   }
-
-   private void GoToilet()
-   {
-      agent.destination = toiletDestination.position;
-      // Transition back to MovingToRoom after using the toilet
-      StartCoroutine(WaitAndTransition());
-   }
-
-   public void ChangeState(CustomerState newState)
-   {
-      currentState = newState;
-   }
-   void RequestRoom()
-   {
-      EventManager.InvokeRoomRequested(gameObject);
-   }
-
-
-
    void OnTriggerEnter(Collider collider)
    {
       if (collider.tag == "Reception")
@@ -124,6 +89,91 @@ public class customer : MonoBehaviour
       }
 
    }
+
+   #endregion
+
+   #region Customer Behaviour logic
+   private void MoveToRoom()
+   {
+      RoomAllotted = true;
+      agent.destination = roomDestination.position;
+
+   }
+
+
+   private void Sleep()
+   {
+      roomData.room.SleepIn(gameObject);
+      animator.AnimationPlay("Sleeping");
+      animator.AnimationPlay("isWalking", false);
+      animator.AnimationPlay("Idle", false);
+      StartCoroutine(WaitAndTransition());
+   }
+
+   private IEnumerator WaitAndTransition()
+   {
+      yield return new WaitForSeconds(SleepingTIme); // Simulate sleeping time
+                                                     //  ChangeState(CustomerState.GoingToilet);
+      RandomizeState();
+      roomData.room.SleepOver(gameObject);
+
+
+   }
+   private void ExitRoom()
+   {
+
+      agent.destination = DestinationManager.Instance.GetDestination("Exit").position;
+
+   }
+
+   private bool hasRandomizedState = false;
+   public void RandomizeState()
+   {
+      if (hasRandomizedState)
+      {
+         // Prevent re-entry
+         return;
+      }
+
+      // For example:
+      float randomValue = UnityEngine.Random.value * totalProbability;
+
+      if (randomValue <= probExitingRoom) ChangeState(CustomerState.ExitingRoom);
+      else ChangeState(CustomerState.GoingToilet);
+
+      // Mark as done
+      hasRandomizedState = true;
+   }
+   private void GoToilet()
+   {
+      agent.destination = DestinationManager.Instance.GetDestination("Toilet").position;
+      // Transition back to MovingToRoom after using the toilet
+      // StartCoroutine(WaitAndTransition());
+   }
+
+   public void ChangeState(CustomerState newState)
+   {
+      currentState = newState;
+   }
+   void RequestRoom()
+   {
+      EventManager.InvokeRoomRequested(gameObject);
+   }
+
+   #endregion
+   public void AssginRoomData(RoomData _roomData)
+   {
+
+      roomData = _roomData;
+   }
+
+
+   public void AssginRoomDestination(Transform _roomDestination)
+   {
+
+      roomDestination = _roomDestination;
+   }
+
 
 
 }

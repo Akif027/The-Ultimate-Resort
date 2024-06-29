@@ -36,20 +36,28 @@ public class ReceptionManager : MonoBehaviour
    {
       if (roomManager.HasAvailableRooms())
       {
+         customer c = WaitingCustomerObj.GetComponent<customer>();
+         if (c.RoomAllotted && c == null)
+         {
+            return;
+         }
          Debug.Log($"{queueManager.customerQueue.Count} Customers is requesting room");
          RoomData assignedRoom = roomManager.AssignRoom();
          if (assignedRoom != null)
          {
             Debug.Log("room assigned");
-            customer c = WaitingCustomerObj.GetComponent<customer>();
+
+
+
             if (c != null)
             {
-               c.roomDestination = assignedRoom.room.RoomDesitnation;
+               c.AssginRoomDestination(assignedRoom.room.RoomDesitnation);
+               c.AssginRoomData(assignedRoom);
                c.ChangeState(CustomerState.MovingToRoom);
                queueManager.RemoveCustomerFromQueue(WaitingCustomerObj);
+               WaitingCustomerObj = null;
 
             }
-
 
          }
 
@@ -66,7 +74,16 @@ public class ReceptionManager : MonoBehaviour
       if (other.CompareTag("Player"))
       {
          // Perform actions while the player is inside the trigger
-         if (WaitingCustomerObj != null) uIManager.ShowUIElement("AcceptCustomerB");
+         if (WaitingCustomerObj != null)
+         {
+
+            uIManager.ShowUIElement("AcceptCustomerB");
+         }
+         else
+         {
+
+            uIManager.HideUIElement("AcceptCustomerB");
+         }
 
       }
    }
