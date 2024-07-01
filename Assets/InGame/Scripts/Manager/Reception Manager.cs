@@ -21,9 +21,10 @@ public class ReceptionManager : MonoBehaviour
       queueManager = GameManager.Instance.GetManager<QueueManager>() as QueueManager;
       roomManager = GameManager.Instance.GetManager<RoomManager>() as RoomManager;
       uIManager = GameManager.Instance.GetManager<UIManager>() as UIManager;
-      uIManager.AddUIElement("AcceptCustomerB", AcceptCustomerB.gameObject);
-
+      AcceptCustomerB = uIManager.GetUIElement<GameObject>("AcceptCustomerB").GetComponent<Button>();
       uIManager.HideUIElement("AcceptCustomerB");
+
+
    }
    void HandleRoomRequest(GameObject customerObj)
    {
@@ -45,9 +46,8 @@ public class ReceptionManager : MonoBehaviour
          RoomData assignedRoom = roomManager.AssignRoom();
          if (assignedRoom != null)
          {
+            assignedRoom.room.ChangeState(RoomDescript.CheckIn);
             Debug.Log("room assigned");
-
-
 
             if (c != null)
             {

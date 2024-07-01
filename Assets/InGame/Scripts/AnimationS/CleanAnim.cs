@@ -17,10 +17,22 @@ public class CleanAnim : MonoBehaviour
 
     }
 
-    public void PlayAnimation(String AnimName)
+    public void PlayAnimation(string animName)
     {
-        _Anim.SetTrigger(AnimName);
-        Debug.Log("playing " + AnimName);
+        // Get the current state index of the base layer
+        int currentStateIndex = _Anim.GetCurrentAnimatorStateInfo(0).shortNameHash;
+
+        // Check if the current state matches the animation we want to play
+        if (_Anim.GetCurrentAnimatorStateInfo(0).IsName(animName))
+        {
+            Debug.Log("Animation is already playing.");
+            return; // Do nothing if the animation is already playing
+        }
+
+        // Set the trigger for the animation
+        _Anim.SetTrigger(animName);
+
+        Debug.Log("Playing " + animName);
     }
 
     public void StartCleaning()

@@ -1,3 +1,4 @@
+# uimanager Genric
 
 using System.Collections.Generic;
 using TMPro;
@@ -6,7 +7,7 @@ using UnityEngine;
 
 public class UIManager : Manager
 {
-    public static UIManager Instance { get; private set; }
+public static UIManager Instance { get; private set; }
 
     [SerializeField]
     private List<GameObject> holdUIElements = new List<GameObject>();
@@ -33,14 +34,30 @@ public class UIManager : Manager
 
     public override void Init()
     {
-        roomManager = GameManager.Instance.GetManager<RoomManager>() as RoomManager;
-        InitializeUIElements(holdUIElements);
-
-        InitializeRoomRoofElements();
+        // Any initialization logic specific to UIManager can go here
     }
 
+    void Start()
+    {
+        roomManager = GameManager.Instance.GetManager<RoomManager>() as RoomManager;
 
+        InitializeUIElements(holdUIElements);
+        DebugUIElements();
+        InitializeRoomRoofElements();
 
+    }
+    public void DebugUIElements()
+    {
+        foreach (var kvp in uiElements)
+        {
+            Debug.Log($"UI Element Key: {kvp.Key}, GameObject: {kvp.Value?.name}");
+        }
+    }
+    void Update()
+    {
+        //GameObject textElement = GetUIElement<GameObject>("AcceptCustomerB");
+        // textElement.SetActive(false);
+    }
     private void InitializeUIElements(IEnumerable<GameObject> elements)
     {
         foreach (var uiObject in holdUIElements)
@@ -112,12 +129,10 @@ public class UIManager : Manager
         GameObject element = GetUIElement<GameObject>(elementName);
         if (element != null)
         {
-            element.SetActive(isActive);
+            Debug.LogError($"Element '{elementName}' could not be retrieved.");
+            return;
         }
-        else
-        {
-            Debug.LogError($"UI element '{elementName}' not found in the dictionary.");
-        }
+        element.SetActive(isActive);
     }
     public void UpdateUIElement<T>(string elementName, string newValue) where T : UnityEngine.Object
     {

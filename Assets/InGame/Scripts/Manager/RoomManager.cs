@@ -13,6 +13,8 @@ public class RoomManager : Manager
 
     public List<RoomData> roomData = new List<RoomData>();
 
+    [SerializeField] UIManager uIManager;
+
 
     public static RoomManager Instance
     {

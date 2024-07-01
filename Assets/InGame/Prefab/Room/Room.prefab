@@ -70,6 +70,7 @@ Transform:
   - {fileID: 4212727589620340566}
   - {fileID: 3875910522195407153}
   - {fileID: 5276583009255652901}
+  - {fileID: 8827039267478305774}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0.852, y: 168.732, z: -1.444}
 --- !u!114 &5150957325954020941
@@ -88,6 +89,10 @@ MonoBehaviour:
   RoomDesitnation: {fileID: 6900447723387117718}
   Exit: {fileID: 5276583009255652901}
   SleepInPosition: {fileID: 3875910522195407153}
+  SleepingRoofPos: {fileID: 8827039267478305774}
+  Rooflayer: {fileID: 0}
+  uIManager: {fileID: 0}
+  RoomState: 0
 --- !u!1 &433732741995203704
 GameObject:
   m_ObjectHideFlags: 0
@@ -1468,6 +1473,37 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -4305487175580620494, guid: 4d903c085cce4014a85165ef665b3889, type: 3}
+--- !u!1 &3512571225155906394
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8827039267478305774}
+  m_Layer: 6
+  m_Name: SleepingRoof
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8827039267478305774
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3512571225155906394}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.7074043, y: 0.0053366367, z: 0.008717909, w: 0.7067353}
+  m_LocalPosition: {x: 4.88, y: 1.64, z: 10.09}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4473978247597938716}
+  m_LocalEulerAnglesHint: {x: -89.722, y: -100.623, z: 101.761}
 --- !u!1 &3529689012974044702
 GameObject:
   m_ObjectHideFlags: 0

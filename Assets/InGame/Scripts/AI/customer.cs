@@ -125,6 +125,11 @@ public class customer : MonoBehaviour
       agent.destination = DestinationManager.Instance.GetDestination("Exit").position;
 
    }
+   private void GoToilet()
+   {
+      agent.destination = DestinationManager.Instance.GetDestination("Toilet").position;
+
+   }
 
    private bool hasRandomizedState = false;
    public void RandomizeState()
@@ -144,12 +149,7 @@ public class customer : MonoBehaviour
       // Mark as done
       hasRandomizedState = true;
    }
-   private void GoToilet()
-   {
-      agent.destination = DestinationManager.Instance.GetDestination("Toilet").position;
-      // Transition back to MovingToRoom after using the toilet
-      // StartCoroutine(WaitAndTransition());
-   }
+
 
    public void ChangeState(CustomerState newState)
    {

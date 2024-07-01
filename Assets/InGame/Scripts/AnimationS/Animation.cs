@@ -9,6 +9,7 @@ public class Animation : MonoBehaviour
 
     public void AnimationPlay(string animName, bool isTrue)
     {
+
         anim.SetBool(animName, isTrue);
 
     }
