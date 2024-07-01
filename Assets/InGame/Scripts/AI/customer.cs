@@ -29,6 +29,7 @@ public class customer : MonoBehaviour
    #region Unity
    void Start()
    {
+
       ChangeState(CustomerState.waiting);
       // Initialize the NavMeshAgent
       agent = GetComponent<NavMeshAgent>();
@@ -39,22 +40,21 @@ public class customer : MonoBehaviour
    void Update()
    {
 
-      if (agent.hasPath && agent.remainingDistance > agent.stoppingDistance + 0.2)
+      if (agent.hasPath && agent.remainingDistance > agent.stoppingDistance + 0.1f)
       {
 
          // The customer is moving, play the walking animation
          animator.AnimationPlay("isWalking", true);
-         animator.AnimationPlay("Idle", false);
+
       }
       else
       {
 
          animator.AnimationPlay("isWalking", false);
-         animator.AnimationPlay("Idle", true);
+
          // The customer is idle or not moving significantly, stop the walking animation
 
       }
-
       switch (currentState)
       {
 
@@ -100,24 +100,22 @@ public class customer : MonoBehaviour
 
    }
 
-
    private void Sleep()
    {
       roomData.room.SleepIn(gameObject);
       animator.AnimationPlay("Sleeping");
       animator.AnimationPlay("isWalking", false);
-      animator.AnimationPlay("Idle", false);
-      StartCoroutine(WaitAndTransition());
+
+      TimerManager.Instance?.ScheduleAction(SleepingTIme, WakeUp);
    }
 
-   private IEnumerator WaitAndTransition()
+   private void WakeUp()
    {
-      yield return new WaitForSeconds(SleepingTIme); // Simulate sleeping time
-                                                     //  ChangeState(CustomerState.GoingToilet);
-      RandomizeState();
+
       roomData.room.SleepOver(gameObject);
+      animator.AnimationPlay("Idle", true);
 
-
+      RandomizeState();
    }
    private void ExitRoom()
    {

@@ -125,8 +125,10 @@ MonoBehaviour:
   RoomAllotted: 0
   animator: {fileID: 5233441670040801422}
   SleepingTIme: 5
-  toiletDestination: {fileID: 0}
   currentState: 0
+  probExitingRoom: 0.5
+  probGoingToilet: 0.5
+  totalProbability: 1
 --- !u!114 &5233441670040801422
 MonoBehaviour:
   m_ObjectHideFlags: 0

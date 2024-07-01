@@ -4,7 +4,7 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
     private static T _instance;
     private static readonly object _lock = new object();
-    private static bool _applicationIsQuitting = false;
+    protected static bool _applicationIsQuitting = false;
 
     public static T Instance
     {
@@ -13,8 +13,7 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
             if (_applicationIsQuitting)
             {
                 Debug.LogWarning("[Singleton] Instance '" + typeof(T) +
-                    "' already destroyed on application quit." +
-                    " Won't create again - returning null.");
+                    "' already destroyed on application quit. Won't create again - returning null.");
                 return null;
             }
 
@@ -22,16 +21,7 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
             {
                 if (_instance == null)
                 {
-                    _instance = (T)FindObjectOfType(typeof(T));
-
-                    if (FindObjectsOfType(typeof(T)).Length > 1)
-                    {
-                        Debug.LogError("[Singleton] Something went really wrong " +
-                            " - there should never be more than 1 singleton!" +
-                            " Reopening the scene might fix it.");
-                        return _instance;
-                    }
-
+                    _instance = FindObjectOfType<T>();
                     if (_instance == null)
                     {
                         GameObject singleton = new GameObject();
@@ -44,10 +34,11 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
                             " is needed in the scene, so '" + singleton +
                             "' was created with DontDestroyOnLoad.");
                     }
-                    else
+                    else if (FindObjectsOfType(typeof(T)).Length > 1)
                     {
-                        Debug.Log("[Singleton] Using instance already created: " +
-                            _instance.gameObject.name);
+                        Debug.LogError("[Singleton] More than one instance of " + typeof(T) +
+                            " found. There should never be more than one singleton!");
+                        return _instance;
                     }
                 }
 
@@ -56,8 +47,26 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
+    protected virtual void OnDestroy()
     {
+        if (_instance == this)
+        {
+            _instance = null;
+        }
+    }
+
+    protected virtual void OnApplicationQuit()
+    {
+        _applicationIsQuitting = true;
+    }
+
+    protected virtual void OnDisable()
+    {
+        if (_instance == this)
+        {
+            _instance = null;
+        }
+
         _applicationIsQuitting = true;
     }
 }

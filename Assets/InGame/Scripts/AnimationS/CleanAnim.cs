@@ -25,7 +25,7 @@ public class CleanAnim : MonoBehaviour
         // Check if the current state matches the animation we want to play
         if (_Anim.GetCurrentAnimatorStateInfo(0).IsName(animName))
         {
-            Debug.Log("Animation is already playing.");
+            //  Debug.Log("Animation is already playing.");
             return; // Do nothing if the animation is already playing
         }
 
