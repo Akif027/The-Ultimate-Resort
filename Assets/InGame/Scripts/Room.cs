@@ -14,13 +14,15 @@ public class Room : MonoBehaviour
 
     [SerializeField] GameObject Rooflayer;
     [SerializeField] UIManager uIManager;
-
+    [SerializeField] CleanAnim[] cleanAnim;
     [SerializeField]
     RoomDescript RoomState = RoomDescript.RoomEmpty;
 
     RoomManager roomManager;
 
     RoomData roomData;
+
+
     void Start()
     {
         roomManager = GetComponentInParent<RoomManager>();
@@ -62,7 +64,10 @@ public class Room : MonoBehaviour
 
         roomData.PlayAllDirtyAnimation();
         RoomState = RoomDescript.RoomEmpty;
-
+        foreach (CleanAnim c in cleanAnim)
+        {
+            c.PlaceCleaningSign();
+        }
 
     }
     public void SleepIn(GameObject C) // Assuming C has a NavMeshAgent component

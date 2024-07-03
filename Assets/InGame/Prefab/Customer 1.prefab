@@ -108,7 +108,7 @@ NavMeshAgent:
   m_Height: 1.4
   m_BaseOffset: -0.09
   m_WalkableMask: 1
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!114 &6424226253729600359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,11 +124,11 @@ MonoBehaviour:
   customerId: 
   RoomAllotted: 0
   animator: {fileID: 5233441670040801422}
-  SleepingTIme: 5
-  currentState: 0
+  Sleepingtime: 5
   probExitingRoom: 0.5
   probGoingToilet: 0.5
   totalProbability: 1
+  currentState: 0
 --- !u!114 &5233441670040801422
 MonoBehaviour:
   m_ObjectHideFlags: 0

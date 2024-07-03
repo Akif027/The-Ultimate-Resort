@@ -6,10 +6,8 @@ using UnityEngine;
 public class RoomManager : Manager
 {
     public static RoomManager instance;
-
     public Dictionary<int, Room> RoomContainer;
     public List<Room> room = new List<Room>();
-
 
     public List<RoomData> roomData = new List<RoomData>();
 
@@ -55,8 +53,10 @@ public class RoomManager : Manager
         InitializeRooms();
 
         // ToggleRoom(1, true);
-        ToggleMultipleRooms(3, true);
+        ToggleMultipleRooms(UpgradeManager.Instance.UpgradeDataValues().Rooms, true);
     }
+
+
     private void InitializeRooms()
     {
 
@@ -148,26 +148,35 @@ public class RoomManager : Manager
     }
     public void ToggleMultipleRooms(int numberOfRooms, bool enable)
     {
-        if (RoomContainer.Count < numberOfRooms)
+        int enabledRooms = 0; // Counter for tracking the number of rooms enabled/disabled
+
+        // Iterate through all room data entries
+        foreach (var roomData in roomData)
         {
-            Debug.LogError("Not enough rooms to enable/disable.");
-            return;
+            // Check if the room meets any specific criteria before enabling/disabling
+            // For example, you might check if the room is clean and not currently allotted
+            if (!roomData.isAllot && roomData.isClean)
+            {
+                // Find the corresponding Room object in RoomContainer using RoomNumber
+                if (RoomContainer.TryGetValue(roomData.RoomNumber, out Room room))
+                {
+                    room.gameObject.SetActive(enable);
+                    enabledRooms++;
+
+                    // Break the loop if the target number of rooms has been enabled/disabled
+                    if (enabledRooms >= numberOfRooms)
+                        break;
+                }
+            }
         }
 
-        int roomNumber = 1; // Start with room number 1
-        foreach (var roomEntry in RoomContainer)
+        // Log an error if not enough eligible rooms were found
+        if (enabledRooms < numberOfRooms)
         {
-            if (roomNumber <= numberOfRooms)
-            {
-                roomEntry.Value.gameObject.SetActive(enable);
-            }
-            else
-            {
-                break; // Exit the loop once the specified number of rooms have been processed
-            }
-            roomNumber++;
+            Debug.LogError($"Not enough eligible rooms to enable/disable. Found {enabledRooms}, but requested {numberOfRooms}.");
         }
     }
+
 }
 [System.Serializable]
 public class RoomData

@@ -10,16 +10,12 @@ public class QueueManager : Manager
     public Queue<GameObject> customerQueue = new Queue<GameObject>();
     public List<GameObject> customersList = new List<GameObject>();
     public Transform CustomerStart;
-
     public Transform ReceptionDesk;
-
     public int currentCustomerIndex = 0;
-
+    [SerializeField] float Stoppingdistance = 3f;
     [SerializeField] bool queueStart = false;
-
-
-
     [SerializeField] bool isQueueUpdated = false; // not making it false
+
     public override void StartGame()
     {
 
@@ -153,11 +149,8 @@ public class QueueManager : Manager
 
             GameObject frontCustomer = customersList[currentCustomer - 1];
             Vector3 currentCustomerPosition = frontCustomer.transform.position;
-
-            // Move back by 5 units along the z-axis
-            currentCustomerPosition.z += 2;
-
-            return currentCustomerPosition;
+            Vector3 positionBehindRight = currentCustomerPosition + frontCustomer.transform.right * 2 - frontCustomer.transform.forward * Stoppingdistance;
+            return positionBehindRight;
         }
     }
 }

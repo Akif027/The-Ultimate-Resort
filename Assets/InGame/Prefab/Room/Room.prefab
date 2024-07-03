@@ -71,6 +71,7 @@ Transform:
   - {fileID: 3875910522195407153}
   - {fileID: 5276583009255652901}
   - {fileID: 8827039267478305774}
+  - {fileID: 1592448958586761036}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0.852, y: 168.732, z: -1.444}
 --- !u!114 &5150957325954020941
@@ -92,6 +93,8 @@ MonoBehaviour:
   SleepingRoofPos: {fileID: 8827039267478305774}
   Rooflayer: {fileID: 0}
   uIManager: {fileID: 0}
+  cleanAnim:
+  - {fileID: 9083193328133630101}
   RoomState: 0
 --- !u!1 &433732741995203704
 GameObject:
@@ -430,14 +433,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4212727589620340566}
-  - component: {fileID: 4973223446428290818}
+  - component: {fileID: 3617124337099785209}
   m_Layer: 6
   m_Name: TOBed
-  m_TagString: Untagged
+  m_TagString: ToBed
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4212727589620340566
 Transform:
   m_ObjectHideFlags: 0
@@ -453,26 +456,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4473978247597938716}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4973223446428290818
-MonoBehaviour:
+--- !u!65 &3617124337099785209
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 693208520575389541}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6eeb5dc026fdf4b488bc7ae0138ab719, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AgentTypeID: 0
-  m_StartPoint: {x: -0.2337062, y: 0.41942346, z: 0.44812217}
-  m_EndPoint: {x: -0.4439864, y: 1.7204301, z: 2.8101783}
-  m_Width: 0
-  m_CostModifier: -1
-  m_Bidirectional: 1
-  m_AutoUpdatePosition: 1
-  m_Area: 0
+  serializedVersion: 3
+  m_Size: {x: 0.6, y: 1, z: 1.15}
+  m_Center: {x: -0.47, y: 0.67, z: 0.23}
 --- !u!1 &790809519519485135
 GameObject:
   m_ObjectHideFlags: 0
@@ -485,7 +489,7 @@ GameObject:
   - component: {fileID: 5787150327174871806}
   - component: {fileID: 7382234249033645946}
   - component: {fileID: 2192105475719821737}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Floor2m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3946,6 +3950,69 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3673535683595005244, guid: fc4c98dc86b2e8a4e88fe1bf93f7361e, type: 3}
+--- !u!1 &7784413585019971615
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1592448958586761036}
+  m_Layer: 6
+  m_Name: DirtySign
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1592448958586761036
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7784413585019971615}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.16, y: 2.002, z: 10.058}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4752703849267507764}
+  m_Father: {fileID: 4473978247597938716}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7806280472278583479
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4752703849267507764}
+  m_Layer: 6
+  m_Name: Bed
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4752703849267507764
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7806280472278583479}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.11983586, y: -0.5936315, z: 0.11805149, w: 0.78695923}
+  m_LocalPosition: {x: -0.021903038, y: 0.34701252, z: 0.0013790131}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1592448958586761036}
+  m_LocalEulerAnglesHint: {x: 19.194, y: -73.61, z: 2.642}
 --- !u!1 &7877013602181879171
 GameObject:
   m_ObjectHideFlags: 0
@@ -4179,22 +4246,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cleaningTime: 5
   furnitureName: Bed
-  OnCleaned:
+  OnCleaning:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   room: {fileID: 5150957325954020941}
+  ProgressSignPos: {fileID: 4752703849267507764}
+  circularProgressBar: {fileID: 0}
+  energizedEffect: {fileID: 0}
 --- !u!65 &5843324045854601962
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4214,8 +4272,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.52589417, y: 0.5231749, z: 0.7065866}
-  m_Center: {x: 0.22448823, y: 0.26358423, z: -1.0466403}
+  m_Size: {x: 2.16, y: 0.5231749, z: 2.5}
+  m_Center: {x: 0.33, y: 0.27, z: 0}
 --- !u!1 &8579533361143404318
 GameObject:
   m_ObjectHideFlags: 0

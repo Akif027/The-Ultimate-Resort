@@ -10,12 +10,7 @@ public class customer : MonoBehaviour
    public bool RoomAllotted = false;
 
    [SerializeField] Animation animator;
-   [SerializeField] float SleepingTIme = 5f;
-   [SerializeField] CustomerState currentState = CustomerState.waiting;
-
-   private NavMeshAgent agent; // Reference to the NavMeshAgent component
-   private RoomData roomData;
-   private Transform roomDestination = null;
+   [SerializeField] float Sleepingtime = 5f;
 
 
    [SerializeField]
@@ -24,6 +19,14 @@ public class customer : MonoBehaviour
    private float probGoingToilet = 0.3f; // Adjusted to half since there are only two states
    [SerializeField]
    private float totalProbability = 1.0f; // Sum of the two probabilities
+
+
+   [SerializeField] CustomerState currentState = CustomerState.waiting;
+   private NavMeshAgent agent; // Reference to the NavMeshAgent component
+   private RoomData roomData;
+   private Transform roomDestination = null;
+
+
 
 
    #region Unity
@@ -83,7 +86,7 @@ public class customer : MonoBehaviour
          Debug.Log("room Requested");
       }
 
-      if (collider.tag == "Bed")
+      if (collider.tag == "ToBed")
       {
          ChangeState(CustomerState.Sleeping);
       }
@@ -106,7 +109,7 @@ public class customer : MonoBehaviour
       animator.AnimationPlay("Sleeping");
       animator.AnimationPlay("isWalking", false);
 
-      TimerManager.Instance?.ScheduleAction(SleepingTIme, WakeUp);
+      TimerManager.Instance?.ScheduleAction(Sleepingtime, WakeUp);
    }
 
    private void WakeUp()

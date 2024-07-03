@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.AI;
 public class Game : Manager
 {
+
+  public GameData gameData;
   void Start()
   {
 

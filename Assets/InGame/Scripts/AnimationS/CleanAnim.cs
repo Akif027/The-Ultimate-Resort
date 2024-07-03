@@ -8,9 +8,12 @@ public class CleanAnim : MonoBehaviour
     Animator _Anim;
     [SerializeField] float cleaningTime;
     public string furnitureName;
-    public UnityEvent OnCleaned;
+    public UnityEvent OnCleaning;
     [SerializeField] Room room;
     private bool isCleaning = false;
+
+    [SerializeField] Transform ProgressSignPos;
+    [SerializeField] RadialProgressBar circularProgressBar;
     void Start()
     {
         _Anim = GetComponent<Animator>();
@@ -35,30 +38,48 @@ public class CleanAnim : MonoBehaviour
         Debug.Log("Playing " + animName);
     }
 
-    public void StartCleaning()
+
+
+    private void StartCleaning()
     {
-        StartCoroutine(WaitAndClean());
+
+        if (circularProgressBar.isActive) return;
+
+
+        ExecuteCleaningProgressSignEffect();
+        //  TimerManager.Instance.ScheduleAction(cleaningTime, OnCleaned);
+
+
+
     }
-
-    IEnumerator WaitAndClean()
+    [SerializeField] GameObject energizedEffect = null;
+    public void PlaceCleaningSign()
     {
-        // Prevent multiple coroutines from starting
-        if (isCleaning) yield break;
+        energizedEffect = ObjectPool.Instance.GetPooledObject("CleaningProgress");
+        circularProgressBar = energizedEffect.GetComponent<RadialProgressBar>();
+        energizedEffect.transform.SetPositionAndRotation(ProgressSignPos.position, ProgressSignPos.rotation);
 
-        isCleaning = true;
+    }
+    private void ExecuteCleaningProgressSignEffect()
+    {
 
-        // Wait for 5 seconds
-        yield return new WaitForSeconds(cleaningTime);
-
-        // Play the cleaning animation
+        circularProgressBar.ActivateCountDown(cleaningTime);
+    }
+    private void OnCleaned()
+    {
         PlayAnimation("Clean");
-        OnCleaned?.Invoke();
         RoomData roomData = RoomManager.instance.FindRoomData(room.RoomNumber);
         if (roomData != null)
+        {
             roomData.isClean = true;
+        }
         else
+        {
             Debug.LogError("Room not found in cleanAnim Script");
+        }
 
+        // Optionally, reset the cleaning flag after performing the cleaning action
+        isCleaning = false;
 
     }
 
@@ -68,6 +89,8 @@ public class CleanAnim : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             StartCleaning();
+            circularProgressBar?.ResumeCountdown();
+            circularProgressBar.OnComplete.AddListener(OnCleaned);
         }
     }
 
@@ -76,7 +99,9 @@ public class CleanAnim : MonoBehaviour
         // Check if the collider belongs to the player
         if (other.gameObject.CompareTag("Player"))
         {
-            isCleaning = false; // Reset cleaning state
+
+            circularProgressBar?.PauseCountdown();
+
         }
     }
 }

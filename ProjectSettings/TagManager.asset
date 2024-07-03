@@ -9,6 +9,7 @@ TagManager:
   - ReceptionManager
   - Reception
   - Bed
+  - ToBed
   layers:
   - Default
   - TransparentFX

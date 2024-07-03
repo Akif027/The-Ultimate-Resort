@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [CreateAssetMenu(fileName = "RoomData", menuName = "Room Data", order = 1)]
+
 public class GameData : ScriptableObject
 {
 
@@ -10,6 +11,11 @@ public class GameData : ScriptableObject
     public GameObject customerPrefab;
 
     public List<CharacterData> characterDatas = new List<CharacterData>();
+    public List<UpgradeData> upgrades = new List<UpgradeData>();
+    public UpgradeData UpgradeData(Level level)
+    {
+        return upgrades.Find(upgrade => upgrade.Level == level); // Use the public property instead of the field
+    }
     public CharacterData CharacterData(CharacterData.Type type)
     {
         return characterDatas.Find((CharacterData cd) => cd.type == type);
@@ -62,3 +68,27 @@ public enum BotType
 {
     cleaner
 }
+[System.Serializable]
+public class UpgradeData
+{
+    [SerializeField] // Allows Unity to serialize the field without making it public
+    private Level _level; // Keep _level private
+
+    public Level Level => _level; // Public property for read-only access
+
+    public string upgradeName;
+    public int cost;
+    public int Rooms;
+    // Constructor
+    private UpgradeData() { }
+
+    // Example method to apply the upgrade
+    public void ApplyUpgrade()
+    {
+        Debug.Log($"Applying upgrade: {upgradeName}");
+        // Implement logic to apply the upgrade benefits here
+    }
+}
+
+
+public enum Level { Level_1, Level_2, Level_3 }
