@@ -4244,12 +4244,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f8e2c8340eea5346804e8725b38ed1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cleaningTime: 5
   furnitureName: Bed
-  OnCleaning:
+  OnCleanedEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5150957325954020941}
+        m_TargetAssemblyTypeName: Room, Assembly-CSharp
+        m_MethodName: FreeRoomToEmtyOnclean
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   room: {fileID: 5150957325954020941}
+  cleaningTime: 5
   ProgressSignPos: {fileID: 4752703849267507764}
   circularProgressBar: {fileID: 0}
   energizedEffect: {fileID: 0}

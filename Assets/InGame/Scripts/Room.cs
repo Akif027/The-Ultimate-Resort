@@ -102,7 +102,24 @@ public class Room : MonoBehaviour
         agent.Warp(Exit.position);
     }
 
-
+    public void FreeRoomToEmtyOnclean()
+    {
+        if (IsEverythingCleaned())
+        {
+            roomManager.FreeRoom(RoomNumber);
+        }
+    }
+    public bool IsEverythingCleaned()
+    {
+        foreach (var cleanAnim in cleanAnim)
+        {
+            if (!cleanAnim.IsCleaningComplete)
+            {
+                return false; // Not everything is cleaned yet
+            }
+        }
+        return true; // Everything is cleaned
+    }
     public void ChangeState(RoomDescript newState)
     {
         RoomState = newState;

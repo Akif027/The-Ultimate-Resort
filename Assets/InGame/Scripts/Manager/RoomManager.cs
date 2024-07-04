@@ -11,7 +11,7 @@ public class RoomManager : Manager
 
     public List<RoomData> roomData = new List<RoomData>();
 
-    [SerializeField] UIManager uIManager;
+
 
 
     public static RoomManager Instance
@@ -143,7 +143,7 @@ public class RoomManager : Manager
         {
             roomData_.isAllot = false; // Mark the room as free
             // Optionally, set the room to dirty or clean based on game logic
-            roomData_.isClean = false; // Assuming the room becomes dirty after use
+            roomData_.isClean = true; // Assuming the room becomes dirty after use
         }
     }
     public void ToggleMultipleRooms(int numberOfRooms, bool enable)

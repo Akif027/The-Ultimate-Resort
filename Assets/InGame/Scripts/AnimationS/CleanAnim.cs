@@ -6,14 +6,16 @@ using UnityEngine.Events;
 public class CleanAnim : MonoBehaviour
 {
     Animator _Anim;
-    [SerializeField] float cleaningTime;
     public string furnitureName;
-    public UnityEvent OnCleaning;
+    [SerializeField] UnityEvent OnCleanedEvent;
+    public bool IsCleaningComplete { get; private set; } = false;
     [SerializeField] Room room;
-    private bool isCleaning = false;
-
+    [SerializeField] float cleaningTime;
     [SerializeField] Transform ProgressSignPos;
     [SerializeField] RadialProgressBar circularProgressBar;
+
+
+
     void Start()
     {
         _Anim = GetComponent<Animator>();
@@ -78,11 +80,13 @@ public class CleanAnim : MonoBehaviour
             Debug.LogError("Room not found in cleanAnim Script");
         }
 
-        // Optionally, reset the cleaning flag after performing the cleaning action
-        isCleaning = false;
-
+        CompleteCleaning();
+        OnCleanedEvent?.Invoke();
     }
-
+    public void CompleteCleaning()
+    {
+        IsCleaningComplete = true;
+    }
     void OnTriggerEnter(Collider other)
     {
         // Check if the collider belongs to the player
