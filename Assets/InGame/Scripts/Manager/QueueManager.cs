@@ -9,6 +9,9 @@ public class QueueManager : Manager
     // Use a Queue instead of a List for managing customers
     public Queue<GameObject> customerQueue = new Queue<GameObject>();
     public List<GameObject> customersList = new List<GameObject>();
+
+    public Queue<GameObject> customerToiletQueue = new Queue<GameObject>();
+    public List<GameObject> customersToiletList = new List<GameObject>();
     public Transform CustomerStart;
     public Transform ReceptionDesk;
     public int currentCustomerIndex = 0;
@@ -49,7 +52,18 @@ public class QueueManager : Manager
         queueStart = true;
     }
 
+    public void AddCustomerToToiletQueueAndList(GameObject customer)
+    {
+        // Check if the customer is already in the list
+        if (!customersToiletList.Contains(customer))
+        {
+            // Add the customer to the queue
+            customerToiletQueue.Enqueue(customer);
 
+            // Add the customer to the list
+            customersToiletList.Add(customer);
+        }
+    }
     void Update()
     {
         if (customerQueue.Count < 4 && queueStart)
@@ -63,22 +77,18 @@ public class QueueManager : Manager
             UpdateCustomerPositions();
 
         }
-        // Debug.Log(customerQueue.Count);
-        // if (Input.GetMouseButtonDown(0)) //temp
-        // {
-        //     if (customerQueue.Count > 0)
-        //     {
-        //         customerQueue.Dequeue(); // Remove the first customer from the queue
-        //         NavMeshAgent agent = customersList[0].GetComponent<NavMeshAgent>();
-        //         agent.SetDestination(tempo.position);
-        //         customersList.RemoveAt(0); // Also remove from the list to maintain order
-        //         currentCustomerIndex--; // Decrement the current customer index
-        //         isQueueUpdated = true;
-        //     }
-        // }
+        if (customerToiletQueue.Count > 0)
+        {
+            UpdateToiletCustomerWaitingPositions();
+        }
 
     }
+    public void RemoveCustomerFromToiletQueue(GameObject customerObj)
+    {
+        customerToiletQueue.Dequeue(); // Remove the first customer from the queue
+        customersToiletList.Remove(customerObj); // Also remove from the list to maintain order
 
+    }
     public void RemoveCustomerFromQueue(GameObject customerObj)
     {
         customerQueue.Dequeue(); // Remove the first customer from the queue
@@ -107,7 +117,29 @@ public class QueueManager : Manager
         }
     }
 
+    void UpdateToiletCustomerWaitingPositions()
+    {
+        if (customersToiletList.Count > 0)
+        {
+            for (int i = 0; i < customersToiletList.Count; i++)
+            {
+                GameObject customerInstance = customersToiletList[i];
+                NavMeshAgent agent = customerInstance.GetComponent<NavMeshAgent>();
+                if (agent != null)
+                {
+                    // Assuming you have a method to determine the next spot for the toilet customer
+                    Vector3 nextSpot = DetermineNextSpot(i, DestinationManager.Instance.GetDestination("Toilet"), customersToiletList); // Implement this method based on your game logic
+                    agent.SetDestination(nextSpot);
 
+                }
+                else
+                {
+                    Debug.LogError("Toilet customer instance does not have a NavMeshAgent component.");
+                }
+
+            }
+        }
+    }
 
     void UpdateCustomerPositions()
     {
@@ -119,38 +151,38 @@ public class QueueManager : Manager
                 NavMeshAgent agent = customerInstance.GetComponent<NavMeshAgent>();
                 if (agent != null)
                 {
-                    // Assuming you have a method to determine the next spot for the customer
-                    Vector3 nextSpot = DetermineNextSpot(i); // Implement this method based on your game logic
-                    agent.SetDestination(nextSpot);
+                    // Determine the next spot for the customer
+                    Vector3 nextSpot = DetermineNextSpot(i, DestinationManager.Instance.GetDestination("ReceptionDeskStop"), customersList);
 
+                    agent.SetDestination(nextSpot);
                 }
                 else
                 {
                     Debug.LogError("Customer instance does not have a NavMeshAgent component.");
                 }
-
             }
-
         }
-
     }
-    Vector3 DetermineNextSpot(int currentCustomer)
+
+    Vector3 DetermineNextSpot(int currentCustomerIndex, Transform StopPos, List<GameObject> customersInQueue)
     {
-
-
         // If it's the first customer, set the destination to ReceptionDesk
-        if (currentCustomer == 0)
+        if (currentCustomerIndex == 0)
         {
 
-            return ReceptionDesk.position;
+            return StopPos.position;
         }
         else
         {
-
-            GameObject frontCustomer = customersList[currentCustomer - 1];
+            GameObject frontCustomer = customersInQueue[currentCustomerIndex - 1];
             Vector3 currentCustomerPosition = frontCustomer.transform.position;
-            Vector3 positionBehindRight = currentCustomerPosition + frontCustomer.transform.right * 2 - frontCustomer.transform.forward * Stoppingdistance;
-            return positionBehindRight;
+
+            // Calculate the position directly behind the front customer
+            Vector3 positionBehind = currentCustomerPosition - frontCustomer.transform.forward * Stoppingdistance;
+
+
+            return positionBehind;
         }
     }
+
 }

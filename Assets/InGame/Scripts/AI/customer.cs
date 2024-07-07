@@ -8,15 +8,15 @@ public class customer : MonoBehaviour
 
    public string customerId; // Unique identifier for each custome
    public bool RoomAllotted = false;
-
+   public bool ToiletAllocated = false;
    [SerializeField] Animation animator;
    [SerializeField] float Sleepingtime = 5f;
 
 
    [SerializeField]
-   private float probExitingRoom = 0.9f; // Adjusted to half since there are only two states
+   private float probExitingRoom = 0.2f; // Adjusted to half since there are only two states
    [SerializeField]
-   private float probGoingToilet = 0.3f; // Adjusted to half since there are only two states
+   private float probGoingToilet = 0.9f; // Adjusted to half since there are only two states
    [SerializeField]
    private float totalProbability = 1.0f; // Sum of the two probabilities
 
@@ -24,7 +24,8 @@ public class customer : MonoBehaviour
    [SerializeField] CustomerState currentState = CustomerState.waiting;
    private NavMeshAgent agent; // Reference to the NavMeshAgent component
    private RoomData roomData;
-   private Transform roomDestination = null;
+   private QueueManager queueManager;
+   public Transform NextDestination = null;
 
 
 
@@ -32,32 +33,58 @@ public class customer : MonoBehaviour
    #region Unity
    void Start()
    {
-
+      queueManager = GameManager.Instance.GetManager<QueueManager>() as QueueManager;
       ChangeState(CustomerState.waiting);
       // Initialize the NavMeshAgent
       agent = GetComponent<NavMeshAgent>();
       animator = GetComponent<Animation>();
 
    }
-
-   void Update()
+   private void CustomerAnimationWalkAndIdle()
    {
 
       if (agent.hasPath && agent.remainingDistance > agent.stoppingDistance + 0.1f)
       {
+         if (currentState == CustomerState.GoingToilet)
+         {
+            animator.AnimationPlay("Walktoilet", true);
+            animator.AnimationPlay("ToiletIdle", false);
 
-         // The customer is moving, play the walking animation
-         animator.AnimationPlay("isWalking", true);
+
+         }
+         else
+         {
+            animator.AnimationPlay("ToiletIdle", false);
+            animator.AnimationPlay("Walktoilet", false);
+            animator.AnimationPlay("isWalking", true);
+         }
+
 
       }
       else
       {
+         if (currentState == CustomerState.GoingToilet)
+         {
 
-         animator.AnimationPlay("isWalking", false);
+            animator.AnimationPlay("ToiletIdle", true);
+            animator.AnimationPlay("Walktoilet", false);
 
-         // The customer is idle or not moving significantly, stop the walking animation
+         }
+         else
+         {
+
+            animator.AnimationPlay("isWalking", false);
+         }
+
+
+
 
       }
+   }
+   void Update()
+   {
+
+      CustomerAnimationWalkAndIdle();
       switch (currentState)
       {
 
@@ -67,7 +94,7 @@ public class customer : MonoBehaviour
          case CustomerState.Sleeping:
             Sleep();
             break;
-         case CustomerState.ExitingRoom:
+         case CustomerState.Exiting:
             ExitRoom();
             break;
          case CustomerState.GoingToilet:
@@ -90,7 +117,10 @@ public class customer : MonoBehaviour
       {
          ChangeState(CustomerState.Sleeping);
       }
-
+      // if (collider.tag == "Toilet")
+      // {
+      //    RequestToilet();
+      // }
    }
 
    #endregion
@@ -99,7 +129,7 @@ public class customer : MonoBehaviour
    private void MoveToRoom()
    {
       RoomAllotted = true;
-      agent.destination = roomDestination.position;
+      agent.destination = NextDestination.position;
 
    }
 
@@ -116,9 +146,9 @@ public class customer : MonoBehaviour
    {
 
       roomData.room.SleepOver(gameObject);
-      animator.AnimationPlay("Idle", true);
-
-      RandomizeState();
+      // animator.AnimationPlay("Idle", true);
+      ChangeState(CustomerState.GoingToilet);
+      // RandomizeState();
    }
    private void ExitRoom()
    {
@@ -126,9 +156,19 @@ public class customer : MonoBehaviour
       agent.destination = DestinationManager.Instance.GetDestination("Exit").position;
 
    }
+   private bool hasBeenAddedToToiletQueue = false;
    private void GoToilet()
    {
-      agent.destination = DestinationManager.Instance.GetDestination("Toilet").position;
+
+
+      if (!hasBeenAddedToToiletQueue)
+      {
+         queueManager.AddCustomerToToiletQueueAndList(gameObject);
+         RequestToilet();
+         hasBeenAddedToToiletQueue = true; // Set the flag to true after adding the customer to the queue
+      }
+
+
 
    }
 
@@ -144,7 +184,7 @@ public class customer : MonoBehaviour
       // For example:
       float randomValue = UnityEngine.Random.value * totalProbability;
 
-      if (randomValue <= probExitingRoom) ChangeState(CustomerState.ExitingRoom);
+      if (randomValue <= probExitingRoom) ChangeState(CustomerState.Exiting);
       else ChangeState(CustomerState.GoingToilet);
 
       // Mark as done
@@ -160,6 +200,10 @@ public class customer : MonoBehaviour
    {
       EventManager.InvokeRoomRequested(gameObject);
    }
+   void RequestToilet()
+   {
+      EventManager.InvokeToiletRequested(this);
+   }
 
    #endregion
    public void AssginRoomData(RoomData _roomData)
@@ -168,11 +212,16 @@ public class customer : MonoBehaviour
       roomData = _roomData;
    }
 
-
-   public void AssginRoomDestination(Transform _roomDestination)
+   public void SetDestination()
    {
 
-      roomDestination = _roomDestination;
+      agent.destination = NextDestination.position;
+   }
+
+   public void AssginDestination(Transform _destination)
+   {
+
+      NextDestination = _destination;
    }
 
 
@@ -183,6 +232,6 @@ public enum CustomerState
    waiting,
    MovingToRoom,
    Sleeping,
-   ExitingRoom,
+   Exiting,
    GoingToilet
 }

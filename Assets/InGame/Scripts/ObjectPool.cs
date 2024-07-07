@@ -38,7 +38,39 @@ public class ObjectPool : Singleton<ObjectPool>
             }
         }
     }
+    // public void AddPooledObject(string name, GameObject prefab, Transform parent = null, int initialSize = 10, int maxSize = 20)
+    // {
+    //     // Create a new PooledObject instance with the provided parameters
+    //     PooledObject newPooledObject = new PooledObject
+    //     {
+    //         name = name,
+    //         prefab = prefab,
+    //         parent = parent,
+    //         initialSize = initialSize,
+    //         maxSize = maxSize
+    //     };
 
+    //     // Add the new PooledObject to the pooledObjects list
+    //     pooledObjects.Add(newPooledObject);
+
+    //     // Initialize the new PooledObject
+    //     availableObjects[name] = new Queue<GameObject>();
+    //     reservedObjects[name] = new HashSet<GameObject>();
+
+    //     // Instantiate the initial number of objects for the new pooled object
+    //     for (int i = 0; i < initialSize; i++)
+    //     {
+    //         GameObject obj = Instantiate(prefab);
+
+    //         if (parent != null)
+    //         {
+    //             obj.transform.SetParent(parent);
+    //         }
+
+    //         obj.SetActive(false);
+    //         availableObjects[name].Enqueue(obj);
+    //     }
+    // }
     public GameObject GetPooledObject(string name)
     {
         if (availableObjects.ContainsKey(name))

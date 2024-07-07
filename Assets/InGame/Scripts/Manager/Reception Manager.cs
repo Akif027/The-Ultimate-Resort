@@ -17,7 +17,7 @@ public class ReceptionManager : MonoBehaviour
    void Start()
    {
 
-      EventManager.Subscribe(HandleRoomRequest);
+      EventManager.SubscribeRoomRequest(HandleRoomRequest);
       queueManager = GameManager.Instance.GetManager<QueueManager>() as QueueManager;
       roomManager = GameManager.Instance.GetManager<RoomManager>() as RoomManager;
       uIManager = GameManager.Instance.GetManager<UIManager>() as UIManager;
@@ -51,7 +51,7 @@ public class ReceptionManager : MonoBehaviour
 
             if (c != null)
             {
-               c.AssginRoomDestination(assignedRoom.room.RoomDesitnation);
+               c.AssginDestination(assignedRoom.room.RoomDesitnation);
                c.AssginRoomData(assignedRoom);
                c.ChangeState(CustomerState.MovingToRoom);
                queueManager.RemoveCustomerFromQueue(WaitingCustomerObj);
@@ -74,7 +74,7 @@ public class ReceptionManager : MonoBehaviour
       if (other.CompareTag("Player"))
       {
          // Perform actions while the player is inside the trigger
-         if (WaitingCustomerObj != null)
+         if (WaitingCustomerObj != null && !WaitingCustomerObj.GetComponent<customer>().RoomAllotted)
          {
 
             uIManager.ShowUIElement("AcceptCustomerB");
@@ -98,7 +98,7 @@ public class ReceptionManager : MonoBehaviour
 
    void OnDestroy()
    {
-      EventManager.Unsubscribe(HandleRoomRequest);
+      EventManager.UnsubscribeRoomRequest(HandleRoomRequest);
    }
 
 

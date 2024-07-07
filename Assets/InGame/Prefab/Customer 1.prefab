@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5233441670040801422}
   m_Layer: 0
   m_Name: Customer 1
-  m_TagString: Untagged
+  m_TagString: Customer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -123,12 +123,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   customerId: 
   RoomAllotted: 0
+  ToiletAllocated: 0
   animator: {fileID: 5233441670040801422}
   Sleepingtime: 5
   probExitingRoom: 0.5
   probGoingToilet: 0.5
   totalProbability: 1
   currentState: 0
+  NextDestination: {fileID: 0}
 --- !u!114 &5233441670040801422
 MonoBehaviour:
   m_ObjectHideFlags: 0
