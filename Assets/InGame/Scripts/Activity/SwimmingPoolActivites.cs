@@ -1,16 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SwimmingPoolActivites : MonoBehaviour
 {
     public List<RelaxChairs> relaxChairs = new List<RelaxChairs>();
     public List<PoolPlay> Pool = new List<PoolPlay>();
+    public Material targetMaterial;
 
+    [SerializeField] Color Dirty;
+    [SerializeField] Color Clean;
     [SerializeField] QueueManager queueManager;
+    [SerializeField] UnityEvent OnDirty;
 
+    public static int CoustomerPlayCount;
+
+    private bool isDirty = false;
     void Start()
     {
+        CoustomerPlayCount = 0;
+        ChangeColor(Clean);
         queueManager = GameManager.Instance.GetManager<QueueManager>() as QueueManager;
         EventManager.SubscribeSwimmingPoolRequest(HandleRequest);
     }
@@ -26,15 +37,35 @@ public class SwimmingPoolActivites : MonoBehaviour
             }
         }
 
+        if (CoustomerPlayCount >= 3) //make it dirty
+        {
+
+
+            if (!isDirty)
+            {
+                DirtyPool();
+                OnDirty?.Invoke();
+                isDirty = true;
+            }
+        }
+
     }
+    public void DirtyPool() { ChangeColor(Dirty); }
+
+    public void CleanPool() { ChangeColor(Clean); }
     void HandleRequest(customer customerInstance)
     {
+        if (CoustomerPlayCount > 3)
+        {
+            return;
+        }
         PoolPlay p = AssignPool();
         RelaxChairs r = AssignRelaxChair();
 
         if (p != null)
         {
             AssignToDestination(customerInstance, p.gameObject, p);
+
         }
         else if (r != null)
         {
@@ -69,9 +100,20 @@ public class SwimmingPoolActivites : MonoBehaviour
         }
         return null;
     }
-
+    public void ChangeColor(Color newColor)
+    {
+        if (targetMaterial != null)
+        {
+            targetMaterial.color = newColor;
+        }
+        else
+        {
+            Debug.LogError("Target material is not assigned.");
+        }
+    }
     void AssignToDestination(customer customerInstance, GameObject destination, MonoBehaviour activity)
     {
+
         customerInstance.AssginDestination(destination.transform);
         customerInstance.SetDestination();
 

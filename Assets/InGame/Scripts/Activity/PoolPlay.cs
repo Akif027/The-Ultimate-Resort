@@ -9,9 +9,13 @@ public class PoolPlay : MonoBehaviour
     public bool IsOccupied { get; private set; } = false;
 
     [SerializeField] float playTime = 10f;
-    [SerializeField] float swimRadius = 5f;
+    [SerializeField] float swimDistance = 5f; // Distance for swimming forward and backward
     [SerializeField] customer customer;
     [SerializeField] Transform poolCenter; // Center of the pool area
+
+    private Vector3 pointA;
+    private Vector3 pointB;
+    private bool movingToPointA = true;
 
     void Start()
     {
@@ -20,6 +24,10 @@ public class PoolPlay : MonoBehaviour
         {
             Debug.LogError("Pool center is not assigned!");
         }
+
+        // Define the two points for straight-line swimming
+        pointA = poolCenter.position + poolCenter.forward * swimDistance;
+        pointB = poolCenter.position - poolCenter.forward * swimDistance;
     }
 
     public void Occupy(customer c)
@@ -39,7 +47,7 @@ public class PoolPlay : MonoBehaviour
         customer.Animator.ChangeState(AnimationState.Idle);
         customer = null;
         StopCoroutine(SwimAround()); // Stop the swimming routine when vacated
-
+        SwimmingPoolActivites.CoustomerPlayCount++;
     }
 
     void OnTriggerEnter(Collider collider)
@@ -47,8 +55,8 @@ public class PoolPlay : MonoBehaviour
         if (!IsOccupied) return;
         if (collider.tag == "Customer")
         {
-            TimerManager.Instance.ScheduleAction(playTime, Vacate);
             StartCoroutine(SwimAround());
+            TimerManager.Instance.ScheduleAction(playTime, Vacate);
 
         }
     }
@@ -59,20 +67,21 @@ public class PoolPlay : MonoBehaviour
         customer.Animator.ChangeState(AnimationState.Swim);
         while (IsOccupied)
         {
-            SetRandomDestination(agent);
+            SetStraightLineDestination(agent);
             yield return new WaitForSeconds(2f); // Adjust this to control how often the agent picks a new destination
         }
     }
 
-    void SetRandomDestination(NavMeshAgent agent)
+    void SetStraightLineDestination(NavMeshAgent agent)
     {
-        Vector3 randomDirection = Random.insideUnitSphere * swimRadius;
-        randomDirection += poolCenter.position;
-
-        NavMeshHit hit;
-        if (NavMesh.SamplePosition(randomDirection, out hit, swimRadius, 1))
+        if (movingToPointA)
         {
-            agent.SetDestination(hit.position);
+            agent.SetDestination(pointA);
         }
+        else
+        {
+            agent.SetDestination(pointB);
+        }
+        movingToPointA = !movingToPointA; // Toggle the destination
     }
 }

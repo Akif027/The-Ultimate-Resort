@@ -4266,6 +4266,8 @@ MonoBehaviour:
   ProgressSignPos: {fileID: 4752703849267507764}
   circularProgressBar: {fileID: 0}
   energizedEffect: {fileID: 0}
+  isThisRoom: 1
+  isThisAcitivity: 0
 --- !u!65 &5843324045854601962
 BoxCollider:
   m_ObjectHideFlags: 0

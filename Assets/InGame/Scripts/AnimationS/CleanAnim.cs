@@ -13,6 +13,8 @@ public class CleanAnim : MonoBehaviour
     [SerializeField] float cleaningTime;
     [SerializeField] Transform ProgressSignPos;
     [SerializeField] RadialProgressBar circularProgressBar;
+    [SerializeField] GameObject energizedEffect = null;
+    [SerializeField] bool isThisRoom, isThisAcitivity;
 
 
 
@@ -54,7 +56,7 @@ public class CleanAnim : MonoBehaviour
 
 
     }
-    [SerializeField] GameObject energizedEffect = null;
+
     public void PlaceCleaningSign()
     {
         energizedEffect = ObjectPool.Instance.GetPooledObject("CleaningProgress");
@@ -67,7 +69,7 @@ public class CleanAnim : MonoBehaviour
 
         circularProgressBar.ActivateCountDown(cleaningTime);
     }
-    private void OnCleaned()
+    private void OnCleanedForRoom()
     {
         PlayAnimation("Clean");
         RoomData roomData = RoomManager.instance.FindRoomData(room.RoomNumber);
@@ -83,6 +85,13 @@ public class CleanAnim : MonoBehaviour
         CompleteCleaning();
         OnCleanedEvent?.Invoke();
     }
+
+    private void OnCleanedForActivity()
+    {
+
+        CompleteCleaning();
+        OnCleanedEvent?.Invoke();
+    }
     public void CompleteCleaning()
     {
         IsCleaningComplete = true;
@@ -94,7 +103,7 @@ public class CleanAnim : MonoBehaviour
         {
             StartCleaning();
             circularProgressBar?.ResumeCountdown();
-            circularProgressBar.OnComplete.AddListener(OnCleaned);
+            circularProgressBar.OnComplete.AddListener(isThisRoom ? OnCleanedForRoom : OnCleanedForActivity);
         }
     }
 
