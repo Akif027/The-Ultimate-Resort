@@ -10,6 +10,9 @@ public static class EventManager
     public delegate void ToiletRequestEventHandler(customer customer);
     private static event ToiletRequestEventHandler onToiletRequested;
 
+    public delegate void SwimmingPoolRequestEventHandler(customer customer);
+    private static event SwimmingPoolRequestEventHandler onSwimmingPoolRequested;
+
     public static void SubscribeRoomRequest(RoomRequestEventHandler handler)
     {
         onRoomRequested += handler;
@@ -39,4 +42,22 @@ public static class EventManager
     {
         onToiletRequested?.Invoke(customer);
     }
+
+
+
+    public static void SubscribeSwimmingPoolRequest(SwimmingPoolRequestEventHandler handler)
+    {
+        onSwimmingPoolRequested += handler;
+    }
+
+    public static void UnsubscribeSwimmingPoolRequest(SwimmingPoolRequestEventHandler handler)
+    {
+        onSwimmingPoolRequested -= handler;
+    }
+
+    public static void InvokeSwimmingPoolRequested(customer customer)
+    {
+        onSwimmingPoolRequested?.Invoke(customer);
+    }
+
 }

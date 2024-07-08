@@ -12,6 +12,9 @@ public class QueueManager : Manager
 
     public Queue<GameObject> customerToiletQueue = new Queue<GameObject>();
     public List<GameObject> customersToiletList = new List<GameObject>();
+
+    public Queue<GameObject> customerPoolQueue = new Queue<GameObject>();
+    public List<GameObject> customersPoolList = new List<GameObject>();
     public Transform CustomerStart;
     public Transform ReceptionDesk;
     public int currentCustomerIndex = 0;
@@ -64,6 +67,19 @@ public class QueueManager : Manager
             customersToiletList.Add(customer);
         }
     }
+
+    public void AddCustomerToSwimmingPoolQueueAndList(GameObject customer)
+    {
+        // Check if the customer is already in the list
+        if (!customersPoolList.Contains(customer))
+        {
+            // Add the customer to the queue
+            customerPoolQueue.Enqueue(customer);
+
+            // Add the customer to the list
+            customersPoolList.Add(customer);
+        }
+    }
     void Update()
     {
         if (customerQueue.Count < 4 && queueStart)
@@ -81,12 +97,21 @@ public class QueueManager : Manager
         {
             UpdateToiletCustomerWaitingPositions();
         }
-
+        if (customersPoolList.Count > 0)
+        {
+            UpdateSwimmingPoolCustomerWaitingPositions();
+        }
     }
     public void RemoveCustomerFromToiletQueue(GameObject customerObj)
     {
         customerToiletQueue.Dequeue(); // Remove the first customer from the queue
         customersToiletList.Remove(customerObj); // Also remove from the list to maintain order
+
+    }
+    public void RemoveCustomerFromSwimmingPoolListAndQueue(GameObject customerObj)
+    {
+        customerPoolQueue.Dequeue(); // Remove the first customer from the queue
+        customersPoolList.Remove(customerObj); // Also remove from the list to maintain order
 
     }
     public void RemoveCustomerFromQueue(GameObject customerObj)
@@ -116,7 +141,27 @@ public class QueueManager : Manager
             Debug.LogError("Customer instance does not have a NavMeshAgent component.");
         }
     }
-
+    void UpdateSwimmingPoolCustomerWaitingPositions()
+    {
+        if (customersPoolList.Count > 0)
+        {
+            for (int i = 0; i < customersPoolList.Count; i++)
+            {
+                GameObject customerInstance = customersPoolList[i];
+                NavMeshAgent agent = customerInstance.GetComponent<NavMeshAgent>();
+                if (agent != null)
+                {
+                    // Assuming you have a method to determine the next spot for the swimming pool customer
+                    Vector3 nextSpot = DetermineNextSpot(i, DestinationManager.Instance.GetDestination("WaitingPoolPos"), customersPoolList); // Implement this method based on your game logic
+                    agent.SetDestination(nextSpot);
+                }
+                else
+                {
+                    Debug.LogError("Swimming pool customer instance does not have a NavMeshAgent component.");
+                }
+            }
+        }
+    }
     void UpdateToiletCustomerWaitingPositions()
     {
         if (customersToiletList.Count > 0)

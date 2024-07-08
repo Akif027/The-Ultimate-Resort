@@ -1,0 +1,834 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <created>2022-08-06T19:05:49Z</created>
+    <modified>2022-08-06T19:05:49Z</modified>
+    <revision>1.0</revision>
+  </asset>
+  <library_images>
+    <image id="Part_1-diffuse-tex" name="Part_1-diffuse-tex">
+      <init_from>Chaise longe_res/Part_1_diffuse.png</init_from>
+    </image>
+    <image id="Part_1-emissive-tex" name="Part_1-emissive-tex">
+      <init_from>Chaise longe_res/Part_1_emissive.png</init_from>
+    </image>
+    <image id="Part_2-diffuse-tex" name="Part_2-diffuse-tex">
+      <init_from>Chaise longe_res/Part_2_diffuse.png</init_from>
+    </image>
+    <image id="Part_2-emissive-tex" name="Part_2-emissive-tex">
+      <init_from>Chaise longe_res/Part_2_emissive.png</init_from>
+    </image>
+    <image id="Part_3-diffuse-tex" name="Part_3-diffuse-tex">
+      <init_from>Chaise longe_res/Part_3_diffuse.png</init_from>
+    </image>
+    <image id="Part_3-emissive-tex" name="Part_3-emissive-tex">
+      <init_from>Chaise longe_res/Part_3_emissive.png</init_from>
+    </image>
+    <image id="Part_4-diffuse-tex" name="Part_4-diffuse-tex">
+      <init_from>Chaise longe_res/Part_4_diffuse.png</init_from>
+    </image>
+    <image id="Part_4-emissive-tex" name="Part_4-emissive-tex">
+      <init_from>Chaise longe_res/Part_4_emissive.png</init_from>
+    </image>
+    <image id="Part_5-diffuse-tex" name="Part_5-diffuse-tex">
+      <init_from>Chaise longe_res/Part_5_diffuse.png</init_from>
+    </image>
+    <image id="Part_5-emissive-tex" name="Part_5-emissive-tex">
+      <init_from>Chaise longe_res/Part_5_emissive.png</init_from>
+    </image>
+    <image id="Part_6-diffuse-tex" name="Part_6-diffuse-tex">
+      <init_from>Chaise longe_res/Part_6_diffuse.png</init_from>
+    </image>
+    <image id="Part_6-emissive-tex" name="Part_6-emissive-tex">
+      <init_from>Chaise longe_res/Part_6_emissive.png</init_from>
+    </image>
+  </library_images>
+  <library_effects>
+    <effect id="Part_1-Effect">
+      <profile_COMMON>
+        <newparam sid="Part_1-diffuse-surface">
+          <surface type="2D">
+            <init_from>Part_1-diffuse-tex</init_from>
+            <format>A8R8G8B8</format>
+          </surface>
+        </newparam>
+        <newparam sid="Part_1-emissive-surface">
+          <surface type="2D">
+            <init_from>Part_1-emissive-tex</init_from>
+            <format>A8R8G8B8</format>
+          </surface>
+        </newparam>
+        <newparam sid="Part_1-diffuse-sampler">
+          <sampler2D>
+            <source>Part_1-diffuse-surface</source>
+            <wrap_s>CLAMP</wrap_s>
+            <wrap_t>CLAMP</wrap_t>
+            <minfilter>NONE</minfilter>
+            <magfilter>NONE</magfilter>
+            <mipfilter>NONE</mipfilter>
+          </sampler2D>
+        </newparam>
+        <newparam sid="Part_1-emissive-sampler">
+          <sampler2D>
+            <source>Part_1-emissive-surface</source>
+            <wrap_s>CLAMP</wrap_s>
+            <wrap_t>CLAMP</wrap_t>
+            <minfilter>NONE</minfilter>
+            <magfilter>NONE</magfilter>
+            <mipfilter>NONE</mipfilter>
+          </sampler2D>
+        </newparam>
+        <technique sid="phong1">
+          <phong>
+            <emission>
+              <texture texcoord="Part_1-tex-bind" texture="Part_1-emissive-sampler"/>
+            </emission>
+            <ambient>
+              <color>1.0 1.0 1.0 1.0</color>
+            </ambient>
+            <diffuse>
+              <texture texcoord="Part_1-tex-bind" texture="Part_1-diffuse-sampler"/>
+            </diffuse>
+            <specular>
+              <color>0.0 0.0 0.0 1.0</color>
+            </specular>
+            <shininess>
+              <float>5.0</float>
+            </shininess>
+            <reflective>
+              <color>1.0 1.0 1.0 1.0</color>
+            </reflective>
+            <reflectivity>
+              <float>0.2</float>
+            </reflectivity>
+            <transparent>
+              <color>1.0 1.0 1.0 1.0</color>
+            </transparent>
+            <transparency>
+              <float>1.0</float>
+            </transparency>
+          </phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="Part_2-Effect">
+      <profile_COMMON>
+        <newparam sid="Part_2-diffuse-surface">
+          <surface type="2D">
+            <init_from>Part_2-diffuse-tex</init_from>
+            <format>A8R8G8B8</format>
+          </surface>
+        </newparam>
+        <newparam sid="Part_2-emissive-surface">
+          <surface type="2D">
+            <init_from>Part_2-emissive-tex</init_from>
+            <format>A8R8G8B8</format>
+          </surface>
+        </newparam>
+        <newparam sid="Part_2-diffuse-sampler">
+          <sampler2D>
+            <source>Part_2-diffuse-surface</source>
+            <wrap_s>CLAMP</wrap_s>
+            <wrap_t>CLAMP</wrap_t>
+            <minfilter>NONE</minfilter>
+            <magfilter>NONE</magfilter>
+            <mipfilter>NONE</mipfilter>
+          </sampler2D>
+        </newparam>
+        <newparam sid="Part_2-emissive-sampler">
+          <sampler2D>
+            <source>Part_2-emissive-surface</source>
+            <wrap_s>CLAMP</wrap_s>
+            <wrap_t>CLAMP</wrap_t>
+            <minfilter>NONE</minfilter>
+            <magfilter>NONE</magfilter>
+            <mipfilter>NONE</mipfilter>
+          </sampler2D>
+        </newparam>
+        <technique sid="phong1">
+          <phong>
+            <emission>
+              <texture texcoord="Part_2-tex-bind" texture="Part_2-emissive-sampler"/>
+            </emission>
+            <ambient>
+              <color>1.0 1.0 1.0 1.0</color>
+            </ambient>
+            <diffuse>
+              <texture texcoord="Part_2-tex-bind" texture="Part_2-diffuse-sampler"/>
+            </diffuse>
+            <specular>
+              <color>0.0 0.0 0.0 1.0</color>
+            </specular>
+            <shininess>
+              <float>5.0</float>
+            </shininess>
+            <reflective>
+              <color>1.0 1.0 1.0 1.0</color>
+            </reflective>
+            <reflectivity>
+              <float>0.2</float>
+            </reflectivity>
+            <transparent>
+              <color>1.0 1.0 1.0 1.0</color>
+            </transparent>
+            <transparency>
+              <float>1.0</float>
+            </transparency>
+          </phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="Part_3-Effect">
+      <profile_COMMON>
+        <newparam sid="Part_3-diffuse-surface">
+          <surface type="2D">
+            <init_from>Part_3-diffuse-tex</init_from>
+            <format>A8R8G8B8</format>
+          </surface>
+        </newparam>
+        <newparam sid="Part_3-emissive-surface">
+          <surface type="2D">
+            <init_from>Part_3-emissive-tex</init_from>
+            <format>A8R8G8B8</format>
+          </surface>
+        </newparam>
+        <newparam sid="Part_3-diffuse-sampler">
+          <sampler2D>
+            <source>Part_3-diffuse-surface</source>
+            <wrap_s>CLAMP</wrap_s>
+            <wrap_t>CLAMP</wrap_t>
+            <minfilter>NONE</minfilter>
+            <magfilter>NONE</magfilter>
+            <mipfilter>NONE</mipfilter>
+          </sampler2D>
+        </newparam>
+        <newparam sid="Part_3-emissive-sampler">
+          <sampler2D>
+            <source>Part_3-emissive-surface</source>
+            <wrap_s>CLAMP</wrap_s>
+            <wrap_t>CLAMP</wrap_t>
+            <minfilter>NONE</minfilter>
+            <magfilter>NONE</magfilter>
+            <mipfilter>NONE</mipfilter>
+          </sampler2D>
+        </newparam>
+        <technique sid="phong1">
+          <phong>
+            <emission>
+              <texture texcoord="Part_3-tex-bind" texture="Part_3-emissive-sampler"/>
+            </emission>
+            <ambient>
+              <color>1.0 1.0 1.0 1.0</color>
+            </ambient>
+            <diffuse>
+              <texture texcoord="Part_3-tex-bind" texture="Part_3-diffuse-sampler"/>
+            </diffuse>
+            <specular>
+              <color>0.0 0.0 0.0 1.0</color>
+            </specular>
+            <shininess>
+              <float>5.0</float>
+            </shininess>
+            <reflective>
+              <color>1.0 1.0 1.0 1.0</color>
+            </reflective>
+            <reflectivity>
+              <float>0.2</float>
+            </reflectivity>
+            <transparent>
+              <color>1.0 1.0 1.0 1.0</color>
+            </transparent>
+            <transparency>
+              <float>1.0</float>
+            </transparency>
+          </phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="Part_4-Effect">
+      <profile_COMMON>
+        <newparam sid="Part_4-diffuse-surface">
+          <surface type="2D">
+            <init_from>Part_4-diffuse-tex</init_from>
+            <format>A8R8G8B8</format>
+          </surface>
+        </newparam>
+        <newparam sid="Part_4-emissive-surface">
+          <surface type="2D">
+            <init_from>Part_4-emissive-tex</init_from>
+            <format>A8R8G8B8</format>
+          </surface>
+        </newparam>
+        <newparam sid="Part_4-diffuse-sampler">
+          <sampler2D>
+            <source>Part_4-diffuse-surface</source>
+            <wrap_s>CLAMP</wrap_s>
+            <wrap_t>CLAMP</wrap_t>
+            <minfilter>NONE</minfilter>
+            <magfilter>NONE</magfilter>
+            <mipfilter>NONE</mipfilter>
+          </sampler2D>
+        </newparam>
+        <newparam sid="Part_4-emissive-sampler">
+          <sampler2D>
+            <source>Part_4-emissive-surface</source>
+            <wrap_s>CLAMP</wrap_s>
+            <wrap_t>CLAMP</wrap_t>
+            <minfilter>NONE</minfilter>
+            <magfilter>NONE</magfilter>
+            <mipfilter>NONE</mipfilter>
+          </sampler2D>
+        </newparam>
+        <technique sid="phong1">
+          <phong>
+            <emission>
+              <texture texcoord="Part_4-tex-bind" texture="Part_4-emissive-sampler"/>
+            </emission>
+            <ambient>
+              <color>1.0 1.0 1.0 1.0</color>
+            </ambient>
+            <diffuse>
+              <texture texcoord="Part_4-tex-bind" texture="Part_4-diffuse-sampler"/>
+            </diffuse>
+            <specular>
+              <color>0.0 0.0 0.0 1.0</color>
+            </specular>
+            <shininess>
+              <float>5.0</float>
+            </shininess>
+            <reflective>
+              <color>1.0 1.0 1.0 1.0</color>
+            </reflective>
+            <reflectivity>
+              <float>0.2</float>
+            </reflectivity>
+            <transparent>
+              <color>1.0 1.0 1.0 1.0</color>
+            </transparent>
+            <transparency>
+              <float>1.0</float>
+            </transparency>
+          </phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="Part_5-Effect">
+      <profile_COMMON>
+        <newparam sid="Part_5-diffuse-surface">
+          <surface type="2D">
+            <init_from>Part_5-diffuse-tex</init_from>
+            <format>A8R8G8B8</format>
+          </surface>
+        </newparam>
+        <newparam sid="Part_5-emissive-surface">
+          <surface type="2D">
+            <init_from>Part_5-emissive-tex</init_from>
+            <format>A8R8G8B8</format>
+          </surface>
+        </newparam>
+        <newparam sid="Part_5-diffuse-sampler">
+          <sampler2D>
+            <source>Part_5-diffuse-surface</source>
+            <wrap_s>CLAMP</wrap_s>
+            <wrap_t>CLAMP</wrap_t>
+            <minfilter>NONE</minfilter>
+            <magfilter>NONE</magfilter>
+            <mipfilter>NONE</mipfilter>
+          </sampler2D>
+        </newparam>
+        <newparam sid="Part_5-emissive-sampler">
+          <sampler2D>
+            <source>Part_5-emissive-surface</source>
+            <wrap_s>CLAMP</wrap_s>
+            <wrap_t>CLAMP</wrap_t>
+            <minfilter>NONE</minfilter>
+            <magfilter>NONE</magfilter>
+            <mipfilter>NONE</mipfilter>
+          </sampler2D>
+        </newparam>
+        <technique sid="phong1">
+          <phong>
+            <emission>
+              <texture texcoord="Part_5-tex-bind" texture="Part_5-emissive-sampler"/>
+            </emission>
+            <ambient>
+              <color>1.0 1.0 1.0 1.0</color>
+            </ambient>
+            <diffuse>
+              <texture texcoord="Part_5-tex-bind" texture="Part_5-diffuse-sampler"/>
+            </diffuse>
+            <specular>
+              <color>0.0 0.0 0.0 1.0</color>
+            </specular>
+            <shininess>
+              <float>5.0</float>
+            </shininess>
+            <reflective>
+              <color>1.0 1.0 1.0 1.0</color>
+            </reflective>
+            <reflectivity>
+              <float>0.2</float>
+            </reflectivity>
+            <transparent>
+              <color>1.0 1.0 1.0 1.0</color>
+            </transparent>
+            <transparency>
+              <float>1.0</float>
+            </transparency>
+          </phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="Part_6-Effect">
+      <profile_COMMON>
+        <newparam sid="Part_6-diffuse-surface">
+          <surface type="2D">
+            <init_from>Part_6-diffuse-tex</init_from>
+            <format>A8R8G8B8</format>
+          </surface>
+        </newparam>
+        <newparam sid="Part_6-emissive-surface">
+          <surface type="2D">
+            <init_from>Part_6-emissive-tex</init_from>
+            <format>A8R8G8B8</format>
+          </surface>
+        </newparam>
+        <newparam sid="Part_6-diffuse-sampler">
+          <sampler2D>
+            <source>Part_6-diffuse-surface</source>
+            <wrap_s>CLAMP</wrap_s>
+            <wrap_t>CLAMP</wrap_t>
+            <minfilter>NONE</minfilter>
+            <magfilter>NONE</magfilter>
+            <mipfilter>NONE</mipfilter>
+          </sampler2D>
+        </newparam>
+        <newparam sid="Part_6-emissive-sampler">
+          <sampler2D>
+            <source>Part_6-emissive-surface</source>
+            <wrap_s>CLAMP</wrap_s>
+            <wrap_t>CLAMP</wrap_t>
+            <minfilter>NONE</minfilter>
+            <magfilter>NONE</magfilter>
+            <mipfilter>NONE</mipfilter>
+          </sampler2D>
+        </newparam>
+        <technique sid="phong1">
+          <phong>
+            <emission>
+              <texture texcoord="Part_6-tex-bind" texture="Part_6-emissive-sampler"/>
+            </emission>
+            <ambient>
+              <color>1.0 1.0 1.0 1.0</color>
+            </ambient>
+            <diffuse>
+              <texture texcoord="Part_6-tex-bind" texture="Part_6-diffuse-sampler"/>
+            </diffuse>
+            <specular>
+              <color>0.0 0.0 0.0 1.0</color>
+            </specular>
+            <shininess>
+              <float>5.0</float>
+            </shininess>
+            <reflective>
+              <color>1.0 1.0 1.0 1.0</color>
+            </reflective>
+            <reflectivity>
+              <float>0.2</float>
+            </reflectivity>
+            <transparent>
+              <color>1.0 1.0 1.0 1.0</color>
+            </transparent>
+            <transparency>
+              <float>1.0</float>
+            </transparency>
+          </phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_materials>
+    <material id="Part_1-Material">
+      <instance_effect url="#Part_1-Effect"/>
+    </material>
+    <material id="Part_2-Material">
+      <instance_effect url="#Part_2-Effect"/>
+    </material>
+    <material id="Part_3-Material">
+      <instance_effect url="#Part_3-Effect"/>
+    </material>
+    <material id="Part_4-Material">
+      <instance_effect url="#Part_4-Effect"/>
+    </material>
+    <material id="Part_5-Material">
+      <instance_effect url="#Part_5-Effect"/>
+    </material>
+    <material id="Part_6-Material">
+      <instance_effect url="#Part_6-Effect"/>
+    </material>
+  </library_materials>
+  <library_geometries>
+    <geometry id="Part_1-Geom" name="Part_1-Geom">
+      <mesh>
+        <source id="Part_1-Pos">
+          <float_array count="384" id="Part_1-Pos-array">-12.0 -1.5 25.0 -12.0 1.5 25.0 -12.0 1.5 -25.0 -12.0 -1.5 -25.0 10.999999 -1.5 22.0 10.999999 1.5 22.0 10.999999 1.5 -21.0 10.999999 -1.5 -21.0 10.999999 -1.5 -23.0 10.999999 1.5 -23.0 10.999999 1.5 -25.0 10.999999 -1.5 -25.0 10.999999 -1.5 25.0 10.999999 -0.5 25.0 10.999999 -0.5 22.0 10.999999 -1.5 22.0 10.999999 0.5 25.0 10.999999 1.5 25.0 10.999999 1.5 22.0 10.999999 0.5 22.0 10.999999 -1.5 -21.0 10.999999 -0.5 -21.0 10.999999 -0.5 -23.0 10.999999 -1.5 -23.0 10.999999 0.5 -21.0 10.999999 1.5 -21.0 10.999999 1.5 -23.0 10.999999 0.5 -23.0 10.999999 -0.5 25.0 10.999999 0.5 25.0 10.999999 0.5 23.999998 10.999999 -0.5 23.999998 -11.0 -1.5 -21.0 -11.0 1.5 -21.0 -11.0 1.5 22.0 -11.0 -1.5 22.0 -11.0 -1.5 -25.0 -11.0 1.5 -25.0 -11.0 1.5 -23.0 -11.0 -1.5 -23.0 -11.0 -1.5 22.0 -11.0 -0.5 22.0 -11.0 -0.5 25.0 -11.0 -1.5 25.0 -11.0 0.5 22.0 -11.0 1.5 22.0 -11.0 1.5 25.0 -11.0 0.5 25.0 -11.0 -1.5 -23.0 -11.0 -0.5 -23.0 -11.0 -0.5 -21.0 -11.0 -1.5 -21.0 -11.0 0.5 -23.0 -11.0 1.5 -23.0 -11.0 1.5 -21.0 -11.0 0.5 -21.0 -11.0 -0.5 23.999998 -11.0 0.5 23.999998 -11.0 0.5 25.0 -11.0 -0.5 25.0 12.0 -1.5 -25.0 12.0 1.5 -25.0 12.0 1.5 25.0 12.0 -1.5 25.0 -12.0 -1.5 -25.0 -11.0 -1.5 -25.0 -11.0 -1.5 25.0 -12.0 -1.5 25.0 10.999999 -1.5 -25.0 12.0 -1.5 -25.0 12.0 -1.5 25.0 10.999999 -1.5 25.0 -11.0 -0.5 -23.0 10.999999 -0.5 -23.0 10.999999 -0.5 -21.0 -11.0 -0.5 -21.0 -11.0 -0.5 22.0 10.999999 -0.5 22.0 10.999999 -0.5 23.999998 -11.0 -0.5 23.999998 -11.0 0.5 -21.0 10.999999 0.5 -21.0 10.999999 0.5 -23.0 -11.0 0.5 -23.0 -11.0 0.5 23.999998 10.999999 0.5 23.999998 10.999999 0.5 22.0 -11.0 0.5 22.0 -12.0 1.5 25.0 -11.0 1.5 25.0 -11.0 1.5 -25.0 -12.0 1.5 -25.0 10.999999 1.5 25.0 12.0 1.5 25.0 12.0 1.5 -25.0 10.999999 1.5 -25.0 -12.0 1.5 -25.0 -11.0 1.5 -25.0 -11.0 -1.5 -25.0 -12.0 -1.5 -25.0 10.999999 1.5 -25.0 12.0 1.5 -25.0 12.0 -1.5 -25.0 10.999999 -1.5 -25.0 -11.0 0.5 -23.0 10.999999 0.5 -23.0 10.999999 -0.5 -23.0 -11.0 -0.5 -23.0 -11.0 0.5 22.0 10.999999 0.5 22.0 10.999999 -0.5 22.0 -11.0 -0.5 22.0 -11.0 -0.5 -21.0 10.999999 -0.5 -21.0 10.999999 0.5 -21.0 -11.0 0.5 -21.0 -11.0 -0.5 23.999998 10.999999 -0.5 23.999998 10.999999 0.5 23.999998 -11.0 0.5 23.999998 -12.0 -1.5 25.0 -11.0 -1.5 25.0 -11.0 1.5 25.0 -12.0 1.5 25.0 10.999999 -1.5 25.0 12.0 -1.5 25.0 12.0 1.5 25.0 10.999999 1.5 25.0 </float_array>
+          <technique_common>
+            <accessor count="128" source="#Part_1-Pos-array" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Part_1-UV">
+          <float_array count="256" id="Part_1-UV-array">0.1875 0.21875 0.234375 0.21875 0.234375 1.0 0.1875 1.0 0.390625 0.328125 0.4375 0.328125 0.4375 1.0 0.390625 1.0 0.09375 0.25 0.09375 0.296875 0.0625 0.296875 0.0625 0.25 0.015625 0.953125 0.03125 0.953125 0.03125 1.0 0.015625 1.0 0.140625 0.953125 0.15625 0.953125 0.15625 1.0 0.140625 1.0 0.015625 0.96875 0.03125 0.96875 0.03125 1.0 0.015625 1.0 0.140625 0.96875 0.15625 0.96875 0.15625 1.0 0.140625 1.0 0.0 0.984375 0.015625 0.984375 0.015625 1.0 0.0 1.0 0.0625 1.0 0.109375 1.0 0.109375 0.328125 0.0625 0.328125 0.0 0.875 0.0 0.921875 0.03125 0.921875 0.03125 0.875 0.0 1.0 0.015625 1.0 0.015625 0.953125 0.0 0.953125 0.015625 1.0 0.03125 1.0 0.03125 0.953125 0.015625 0.953125 0.015625 1.0 0.03125 1.0 0.03125 0.96875 0.015625 0.96875 0.0 1.0 0.015625 1.0 0.015625 0.96875 0.0 0.96875 0.015625 1.0 0.03125 1.0 0.03125 0.984375 0.015625 0.984375 0.3125 1.0 0.359375 1.0 0.359375 0.21875 0.3125 0.21875 0.1875 1.0 0.203125 1.0 0.203125 0.21875 0.1875 0.21875 0.3125 1.0 0.328125 1.0 0.328125 0.21875 0.3125 0.21875 0.0 0.65625 0.0 1.0 0.03125 1.0 0.03125 0.65625 0.0 0.28125 0.0 0.625 0.03125 0.625 0.03125 0.28125 0.03125 0.65625 0.03125 1.0 0.0 1.0 0.0 0.65625 0.03125 0.28125 0.03125 0.625 0.0 0.625 0.0 0.28125 0.140625 0.21875 0.15625 0.21875 0.15625 1.0 0.140625 1.0 0.265625 0.21875 0.28125 0.21875 0.28125 1.0 0.265625 1.0 0.015625 0.90625 0.03125 0.90625 0.03125 0.953125 0.015625 0.953125 0.0625 0.71875 0.078125 0.71875 0.078125 0.765625 0.0625 0.765625 0.015625 0.65625 0.015625 1.0 0.0 1.0 0.0 0.65625 0.015625 0.28125 0.015625 0.625 0.0 0.625 0.0 0.28125 0.015625 0.65625 0.015625 1.0 0.03125 1.0 0.03125 0.65625 0.015625 0.28125 0.015625 0.625 0.03125 0.625 0.03125 0.28125 0.015625 1.0 0.03125 1.0 0.03125 0.953125 0.015625 0.953125 0.078125 0.984375 0.09375 0.984375 0.09375 0.9375 0.078125 0.9375 </float_array>
+          <technique_common>
+            <accessor count="128" source="#Part_1-UV-array" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Part_1-Normal">
+          <float_array count="18" id="Part_1-Normal-array">-1.0 0.0 0.0 1.0 0.0 0.0 0.0 -1.0 0.0 0.0 1.0 0.0 0.0 0.0 -1.0 0.0 0.0 1.0</float_array>
+          <technique_common>
+            <accessor count="6" source="#Part_1-Normal-array" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="Part_1-Vertices">
+          <input semantic="POSITION" source="#Part_1-Pos"/>
+        </vertices>
+        <polylist count="32" material="Part_1-Material">
+          <input offset="0" semantic="VERTEX" source="#Part_1-Vertices"/>
+          <input offset="1" semantic="TEXCOORD" set="0" source="#Part_1-UV"/>
+          <input offset="2" semantic="NORMAL" source="#Part_1-Normal"/>
+          <vcount>4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 </vcount>
+          <p>0 0 0 1 1 0 2 2 0 3 3 0 4 4 0 5 5 0 6 6 0 7 7 0 8 8 0 9 9 0 10 10 0 11 11 0 12 12 0 13 13 0 14 14 0 15 15 0 16 16 0 17 17 0 18 18 0 19 19 0 20 20 0 21 21 0 22 22 0 23 23 0 24 24 0 25 25 0 26 26 0 27 27 0 28 28 0 29 29 0 30 30 0 31 31 0 32 32 1 33 33 1 34 34 1 35 35 1 36 36 1 37 37 1 38 38 1 39 39 1 40 40 1 41 41 1 42 42 1 43 43 1 44 44 1 45 45 1 46 46 1 47 47 1 48 48 1 49 49 1 50 50 1 51 51 1 52 52 1 53 53 1 54 54 1 55 55 1 56 56 1 57 57 1 58 58 1 59 59 1 60 60 1 61 61 1 62 62 1 63 63 1 64 64 2 65 65 2 66 66 2 67 67 2 68 68 2 69 69 2 70 70 2 71 71 2 72 72 2 73 73 2 74 74 2 75 75 2 76 76 2 77 77 2 78 78 2 79 79 2 80 80 3 81 81 3 82 82 3 83 83 3 84 84 3 85 85 3 86 86 3 87 87 3 88 88 3 89 89 3 90 90 3 91 91 3 92 92 3 93 93 3 94 94 3 95 95 3 96 96 4 97 97 4 98 98 4 99 99 4 100 100 4 101 101 4 102 102 4 103 103 4 104 104 4 105 105 4 106 106 4 107 107 4 108 108 4 109 109 4 110 110 4 111 111 4 112 112 5 113 113 5 114 114 5 115 115 5 116 116 5 117 117 5 118 118 5 119 119 5 120 120 5 121 121 5 122 122 5 123 123 5 124 124 5 125 125 5 126 126 5 127 127 5 </p>
+        </polylist>
+      </mesh>
+    </geometry>
+    <geometry id="Part_2-Geom" name="Part_2-Geom">
+      <mesh>
+        <source id="Part_2-Pos">
+          <float_array count="864" id="Part_2-Pos-array">-11.0 -1.5 22.0 -11.0 1.5 22.0 -11.0 1.5 -3.9999988 -11.0 -1.5 -3.9999988 -11.0 -1.5 -14.0 -11.0 1.5 -14.0 -11.0 1.5 -22.0 -11.0 -1.5 -22.0 -11.0 -1.5 -3.9999988 -11.0 0.5 -3.9999988 -11.0 0.5 -14.0 -11.0 -1.5 -14.0 -11.0 0.5 -10.0 -11.0 1.5 -10.0 -11.0 1.5 -11.999999 -11.0 0.5 -11.999999 -11.0 0.5 -5.9999995 -11.0 1.5 -5.9999995 -11.0 1.5 -8.0 -11.0 0.5 -8.0 10.000001 -1.5 19.0 10.000001 1.5 19.0 10.000001 1.5 -3.9999988 10.000001 -1.5 -3.9999988 10.000001 -1.5 -3.9999988 10.000001 0.5 -3.9999988 10.000001 0.5 -14.0 10.000001 -1.5 -14.0 10.000001 -1.5 -14.0 10.000001 1.5 -14.0 10.000001 1.5 -18.0 10.000001 -1.5 -18.0 10.000001 -1.5 -20.0 10.000001 1.5 -20.0 10.000001 1.5 -22.0 10.000001 -1.5 -22.0 10.000001 -1.5 22.0 10.000001 -0.5 22.0 10.000001 -0.5 19.0 10.000001 -1.5 19.0 10.000001 0.5 22.0 10.000001 1.5 22.0 10.000001 1.5 19.0 10.000001 0.5 19.0 10.000001 -1.5 -18.0 10.000001 -0.5 -18.0 10.000001 -0.5 -20.0 10.000001 -1.5 -20.0 10.000001 0.5 -18.0 10.000001 1.5 -18.0 10.000001 1.5 -20.0 10.000001 0.5 -20.0 10.000001 0.5 -10.0 10.000001 1.5 -10.0 10.000001 1.5 -11.999999 10.000001 0.5 -11.999999 10.000001 0.5 -5.9999995 10.000001 1.5 -5.9999995 10.000001 1.5 -8.0 10.000001 0.5 -8.0 10.000001 -0.5 22.0 10.000001 0.5 22.0 10.000001 0.5 21.0 10.000001 -0.5 21.0 -10.0 -1.5 -3.9999988 -10.0 1.5 -3.9999988 -10.0 1.5 19.0 -10.0 -1.5 19.0 -10.0 -1.5 -14.0 -10.0 0.5 -14.0 -10.0 0.5 -3.9999988 -10.0 -1.5 -3.9999988 -10.0 -1.5 -18.0 -10.0 1.5 -18.0 -10.0 1.5 -14.0 -10.0 -1.5 -14.0 -10.0 -1.5 -22.0 -10.0 1.5 -22.0 -10.0 1.5 -20.0 -10.0 -1.5 -20.0 -10.0 -1.5 19.0 -10.0 -0.5 19.0 -10.0 -0.5 22.0 -10.0 -1.5 22.0 -10.0 0.5 19.0 -10.0 1.5 19.0 -10.0 1.5 22.0 -10.0 0.5 22.0 -10.0 -1.5 -20.0 -10.0 -0.5 -20.0 -10.0 -0.5 -18.0 -10.0 -1.5 -18.0 -10.0 0.5 -20.0 -10.0 1.5 -20.0 -10.0 1.5 -18.0 -10.0 0.5 -18.0 -10.0 0.5 -11.999999 -10.0 1.5 -11.999999 -10.0 1.5 -10.0 -10.0 0.5 -10.0 -10.0 0.5 -8.0 -10.0 1.5 -8.0 -10.0 1.5 -5.9999995 -10.0 0.5 -5.9999995 -10.0 -0.5 21.0 -10.0 0.5 21.0 -10.0 0.5 22.0 -10.0 -0.5 22.0 11.0 -1.5 -3.9999988 11.0 1.5 -3.9999988 11.0 1.5 22.0 11.0 -1.5 22.0 11.0 -1.5 -22.0 11.0 1.5 -22.0 11.0 1.5 -14.0 11.0 -1.5 -14.0 11.0 -1.5 -14.0 11.0 0.5 -14.0 11.0 0.5 -3.9999988 11.0 -1.5 -3.9999988 11.0 0.5 -11.999999 11.0 1.5 -11.999999 11.0 1.5 -10.0 11.0 0.5 -10.0 11.0 0.5 -8.0 11.0 1.5 -8.0 11.0 1.5 -5.9999995 11.0 0.5 -5.9999995 -11.0 -1.5 -22.0 -10.0 -1.5 -22.0 -10.0 -1.5 22.0 -11.0 -1.5 22.0 10.000001 -1.5 -22.0 11.0 -1.5 -22.0 11.0 -1.5 22.0 10.000001 -1.5 22.0 -10.0 -0.5 -20.0 10.000001 -0.5 -20.0 10.000001 -0.5 -18.0 -10.0 -0.5 -18.0 -10.0 -0.5 19.0 10.000001 -0.5 19.0 10.000001 -0.5 21.0 -10.0 -0.5 21.0 -10.0 0.5 -18.0 10.000001 0.5 -18.0 10.000001 0.5 -20.0 -10.0 0.5 -20.0 -10.0 0.5 21.0 10.000001 0.5 21.0 10.000001 0.5 19.0 -10.0 0.5 19.0 -11.0 0.5 -11.999999 -10.0 0.5 -11.999999 -10.0 0.5 -14.0 -11.0 0.5 -14.0 10.000001 0.5 -11.999999 11.0 0.5 -11.999999 11.0 0.5 -14.0 10.000001 0.5 -14.0 -11.0 0.5 -8.0 -10.0 0.5 -8.0 -10.0 0.5 -10.0 -11.0 0.5 -10.0 10.000001 0.5 -8.0 11.0 0.5 -8.0 11.0 0.5 -10.0 10.000001 0.5 -10.0 -11.0 0.5 -3.9999988 -10.0 0.5 -3.9999988 -10.0 0.5 -5.9999995 -11.0 0.5 -5.9999995 10.000001 0.5 -3.9999988 11.0 0.5 -3.9999988 11.0 0.5 -5.9999995 10.000001 0.5 -5.9999995 -11.0 1.5 22.0 -10.0 1.5 22.0 -10.0 1.5 -3.9999988 -11.0 1.5 -3.9999988 10.000001 1.5 22.0 11.0 1.5 22.0 11.0 1.5 -3.9999988 10.000001 1.5 -3.9999988 -11.0 1.5 -14.0 -10.0 1.5 -14.0 -10.0 1.5 -22.0 -11.0 1.5 -22.0 10.000001 1.5 -14.0 11.0 1.5 -14.0 11.0 1.5 -22.0 10.000001 1.5 -22.0 -11.0 1.5 -10.0 -10.0 1.5 -10.0 -10.0 1.5 -11.999999 -11.0 1.5 -11.999999 10.000001 1.5 -10.0 11.0 1.5 -10.0 11.0 1.5 -11.999999 10.000001 1.5 -11.999999 -11.0 1.5 -5.9999995 -10.0 1.5 -5.9999995 -10.0 1.5 -8.0 -11.0 1.5 -8.0 10.000001 1.5 -5.9999995 11.0 1.5 -5.9999995 11.0 1.5 -8.0 10.000001 1.5 -8.0 -11.0 1.5 -22.0 -10.0 1.5 -22.0 -10.0 -1.5 -22.0 -11.0 -1.5 -22.0 10.000001 1.5 -22.0 11.0 1.5 -22.0 11.0 -1.5 -22.0 10.000001 -1.5 -22.0 -10.0 0.5 -20.0 10.000001 0.5 -20.0 10.000001 -0.5 -20.0 -10.0 -0.5 -20.0 -11.0 1.5 -11.999999 -10.0 1.5 -11.999999 -10.0 0.5 -11.999999 -11.0 0.5 -11.999999 10.000001 1.5 -11.999999 11.0 1.5 -11.999999 11.0 0.5 -11.999999 10.000001 0.5 -11.999999 -11.0 1.5 -8.0 -10.0 1.5 -8.0 -10.0 0.5 -8.0 -11.0 0.5 -8.0 10.000001 1.5 -8.0 11.0 1.5 -8.0 11.0 0.5 -8.0 10.000001 0.5 -8.0 -11.0 1.5 -3.9999988 -10.0 1.5 -3.9999988 -10.0 0.5 -3.9999988 -11.0 0.5 -3.9999988 10.000001 1.5 -3.9999988 11.0 1.5 -3.9999988 11.0 0.5 -3.9999988 10.000001 0.5 -3.9999988 -10.0 0.5 19.0 10.000001 0.5 19.0 10.000001 -0.5 19.0 -10.0 -0.5 19.0 -10.0 -0.5 -18.0 10.000001 -0.5 -18.0 10.000001 0.5 -18.0 -10.0 0.5 -18.0 -11.0 0.5 -14.0 -10.0 0.5 -14.0 -10.0 1.5 -14.0 -11.0 1.5 -14.0 10.000001 0.5 -14.0 11.0 0.5 -14.0 11.0 1.5 -14.0 10.000001 1.5 -14.0 -11.0 0.5 -10.0 -10.0 0.5 -10.0 -10.0 1.5 -10.0 -11.0 1.5 -10.0 10.000001 0.5 -10.0 11.0 0.5 -10.0 11.0 1.5 -10.0 10.000001 1.5 -10.0 -11.0 0.5 -5.9999995 -10.0 0.5 -5.9999995 -10.0 1.5 -5.9999995 -11.0 1.5 -5.9999995 10.000001 0.5 -5.9999995 11.0 0.5 -5.9999995 11.0 1.5 -5.9999995 10.000001 1.5 -5.9999995 -10.0 -0.5 21.0 10.000001 -0.5 21.0 10.000001 0.5 21.0 -10.0 0.5 21.0 -11.0 -1.5 22.0 -10.0 -1.5 22.0 -10.0 1.5 22.0 -11.0 1.5 22.0 10.000001 -1.5 22.0 11.0 -1.5 22.0 11.0 1.5 22.0 10.000001 1.5 22.0 </float_array>
+          <technique_common>
+            <accessor count="288" source="#Part_2-Pos-array" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Part_2-UV">
+          <float_array count="576" id="Part_2-UV-array">0.09375 0.59375 0.1171875 0.59375 0.1171875 1.0 0.09375 1.0 0.09375 0.4375 0.1171875 0.4375 0.1171875 0.5625 0.09375 0.5625 0.1328125 0.84375 0.1484375 0.84375 0.1484375 1.0 0.1328125 1.0 0.0 0.484375 0.0078125 0.484375 0.0078125 0.515625 0.0 0.515625 0.140625 0.96875 0.1484375 0.96875 0.1484375 1.0 0.140625 1.0 0.1328125 0.453125 0.15625 0.453125 0.15625 0.8125 0.1328125 0.8125 0.1640625 0.84375 0.1796875 0.84375 0.1796875 1.0 0.1640625 1.0 0.0546875 0.921875 0.078125 0.921875 0.078125 0.984375 0.0546875 0.984375 0.0703125 0.875 0.0703125 0.921875 0.0546875 0.921875 0.0546875 0.875 0.359375 0.953125 0.3671875 0.953125 0.3671875 1.0 0.359375 1.0 0.0 0.953125 0.0078125 0.953125 0.0078125 1.0 0.0 1.0 0.0 0.96875 0.0078125 0.96875 0.0078125 1.0 0.0 1.0 0.0 0.96875 0.0078125 0.96875 0.0078125 1.0 0.0 1.0 0.140625 0.96875 0.1484375 0.96875 0.1484375 1.0 0.140625 1.0 0.0703125 0.96875 0.078125 0.96875 0.078125 1.0 0.0703125 1.0 0.0703125 0.984375 0.078125 0.984375 0.078125 1.0 0.0703125 1.0 0.0546875 1.0 0.078125 1.0 0.078125 0.640625 0.0546875 0.640625 0.0546875 0.609375 0.0703125 0.609375 0.0703125 0.453125 0.0546875 0.453125 0.0546875 0.421875 0.078125 0.421875 0.078125 0.359375 0.0546875 0.359375 0.09375 0.359375 0.09375 0.40625 0.109375 0.40625 0.109375 0.359375 0.0 1.0 0.0078125 1.0 0.0078125 0.953125 0.0 0.953125 0.0 0.390625 0.0078125 0.390625 0.0078125 0.34375 0.0 0.34375 0.0703125 1.0 0.078125 1.0 0.078125 0.96875 0.0703125 0.96875 0.0 1.0 0.0078125 1.0 0.0078125 0.96875 0.0 0.96875 0.1640625 1.0 0.171875 1.0 0.171875 0.96875 0.1640625 0.96875 0.140625 1.0 0.1484375 1.0 0.1484375 0.96875 0.140625 0.96875 0.0703125 1.0 0.078125 1.0 0.078125 0.984375 0.0703125 0.984375 0.1953125 0.8125 0.21875 0.8125 0.21875 0.40625 0.1953125 0.40625 0.21875 1.0 0.2421875 1.0 0.2421875 0.875 0.21875 0.875 0.1640625 1.0 0.1796875 1.0 0.1796875 0.84375 0.1640625 0.84375 0.140625 1.0 0.1484375 1.0 0.1484375 0.96875 0.140625 0.96875 0.0703125 1.0 0.078125 1.0 0.078125 0.96875 0.0703125 0.96875 0.359375 1.0 0.3671875 1.0 0.3671875 0.3125 0.359375 0.3125 0.3828125 1.0 0.390625 1.0 0.390625 0.3125 0.3828125 0.3125 0.0234375 0.6875 0.0234375 1.0 0.0390625 1.0 0.0390625 0.6875 0.0234375 0.34375 0.0234375 0.65625 0.0390625 0.65625 0.0390625 0.34375 0.0390625 0.6875 0.0390625 1.0 0.0234375 1.0 0.0234375 0.6875 0.0390625 0.34375 0.0390625 0.65625 0.0234375 0.65625 0.0234375 0.34375 0.0 0.546875 0.0078125 0.546875 0.0078125 0.578125 0.0 0.578125 0.0703125 0.96875 0.078125 0.96875 0.078125 1.0 0.0703125 1.0 0.0703125 0.96875 0.078125 0.96875 0.078125 1.0 0.0703125 1.0 0.140625 0.96875 0.1484375 0.96875 0.1484375 1.0 0.140625 1.0 0.140625 0.96875 0.1484375 0.96875 0.1484375 1.0 0.140625 1.0 0.0 0.421875 0.0078125 0.421875 0.0078125 0.453125 0.0 0.453125 0.109375 0.59375 0.1171875 0.59375 0.1171875 1.0 0.109375 1.0 0.171875 0.40625 0.1796875 0.40625 0.1796875 0.8125 0.171875 0.8125 0.1953125 0.875 0.203125 0.875 0.203125 1.0 0.1953125 1.0 0.0546875 0.875 0.0625 0.875 0.0625 1.0 0.0546875 1.0 0.1640625 0.96875 0.171875 0.96875 0.171875 1.0 0.1640625 1.0 0.140625 0.96875 0.1484375 0.96875 0.1484375 1.0 0.140625 1.0 0.140625 0.96875 0.1484375 0.96875 0.1484375 1.0 0.140625 1.0 0.0703125 0.96875 0.078125 0.96875 0.078125 1.0 0.0703125 1.0 0.0 0.609375 0.0078125 0.609375 0.0078125 0.65625 0.0 0.65625 0.0703125 0.90625 0.078125 0.90625 0.078125 0.953125 0.0703125 0.953125 0.0078125 0.6875 0.0078125 1.0 0.0 1.0 0.0 0.6875 0.0 0.984375 0.0078125 0.984375 0.0078125 1.0 0.0 1.0 0.0703125 0.984375 0.078125 0.984375 0.078125 1.0 0.0703125 1.0 0.0703125 0.984375 0.078125 0.984375 0.078125 1.0 0.0703125 1.0 0.0703125 0.984375 0.078125 0.984375 0.078125 1.0 0.0703125 1.0 0.0703125 0.984375 0.078125 0.984375 0.078125 1.0 0.0703125 1.0 0.0703125 0.984375 0.078125 0.984375 0.078125 1.0 0.0703125 1.0 0.03125 0.34375 0.03125 0.65625 0.0234375 0.65625 0.0234375 0.34375 0.0 0.6875 0.0 1.0 0.0078125 1.0 0.0078125 0.6875 0.0703125 1.0 0.078125 1.0 0.078125 0.984375 0.0703125 0.984375 0.0703125 1.0 0.078125 1.0 0.078125 0.984375 0.0703125 0.984375 0.0703125 1.0 0.078125 1.0 0.078125 0.984375 0.0703125 0.984375 0.0703125 1.0 0.078125 1.0 0.078125 0.984375 0.0703125 0.984375 0.0703125 1.0 0.078125 1.0 0.078125 0.984375 0.0703125 0.984375 0.0 1.0 0.0078125 1.0 0.0078125 0.984375 0.0 0.984375 0.03125 0.34375 0.03125 0.65625 0.0390625 0.65625 0.0390625 0.34375 0.0703125 0.96875 0.078125 0.96875 0.078125 0.921875 0.0703125 0.921875 0.140625 1.0 0.1484375 1.0 0.1484375 0.953125 0.140625 0.953125 </float_array>
+          <technique_common>
+            <accessor count="288" source="#Part_2-UV-array" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Part_2-Normal">
+          <float_array count="18" id="Part_2-Normal-array">-1.0 0.0 0.0 1.0 0.0 0.0 0.0 -1.0 0.0 0.0 1.0 0.0 0.0 0.0 -1.0 0.0 0.0 1.0</float_array>
+          <technique_common>
+            <accessor count="6" source="#Part_2-Normal-array" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="Part_2-Vertices">
+          <input semantic="POSITION" source="#Part_2-Pos"/>
+        </vertices>
+        <polylist count="72" material="Part_2-Material">
+          <input offset="0" semantic="VERTEX" source="#Part_2-Vertices"/>
+          <input offset="1" semantic="TEXCOORD" set="0" source="#Part_2-UV"/>
+          <input offset="2" semantic="NORMAL" source="#Part_2-Normal"/>
+          <vcount>4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 </vcount>
+          <p>0 0 0 1 1 0 2 2 0 3 3 0 4 4 0 5 5 0 6 6 0 7 7 0 8 8 0 9 9 0 10 10 0 11 11 0 12 12 0 13 13 0 14 14 0 15 15 0 16 16 0 17 17 0 18 18 0 19 19 0 20 20 0 21 21 0 22 22 0 23 23 0 24 24 0 25 25 0 26 26 0 27 27 0 28 28 0 29 29 0 30 30 0 31 31 0 32 32 0 33 33 0 34 34 0 35 35 0 36 36 0 37 37 0 38 38 0 39 39 0 40 40 0 41 41 0 42 42 0 43 43 0 44 44 0 45 45 0 46 46 0 47 47 0 48 48 0 49 49 0 50 50 0 51 51 0 52 52 0 53 53 0 54 54 0 55 55 0 56 56 0 57 57 0 58 58 0 59 59 0 60 60 0 61 61 0 62 62 0 63 63 0 64 64 1 65 65 1 66 66 1 67 67 1 68 68 1 69 69 1 70 70 1 71 71 1 72 72 1 73 73 1 74 74 1 75 75 1 76 76 1 77 77 1 78 78 1 79 79 1 80 80 1 81 81 1 82 82 1 83 83 1 84 84 1 85 85 1 86 86 1 87 87 1 88 88 1 89 89 1 90 90 1 91 91 1 92 92 1 93 93 1 94 94 1 95 95 1 96 96 1 97 97 1 98 98 1 99 99 1 100 100 1 101 101 1 102 102 1 103 103 1 104 104 1 105 105 1 106 106 1 107 107 1 108 108 1 109 109 1 110 110 1 111 111 1 112 112 1 113 113 1 114 114 1 115 115 1 116 116 1 117 117 1 118 118 1 119 119 1 120 120 1 121 121 1 122 122 1 123 123 1 124 124 1 125 125 1 126 126 1 127 127 1 128 128 2 129 129 2 130 130 2 131 131 2 132 132 2 133 133 2 134 134 2 135 135 2 136 136 2 137 137 2 138 138 2 139 139 2 140 140 2 141 141 2 142 142 2 143 143 2 144 144 3 145 145 3 146 146 3 147 147 3 148 148 3 149 149 3 150 150 3 151 151 3 152 152 3 153 153 3 154 154 3 155 155 3 156 156 3 157 157 3 158 158 3 159 159 3 160 160 3 161 161 3 162 162 3 163 163 3 164 164 3 165 165 3 166 166 3 167 167 3 168 168 3 169 169 3 170 170 3 171 171 3 172 172 3 173 173 3 174 174 3 175 175 3 176 176 3 177 177 3 178 178 3 179 179 3 180 180 3 181 181 3 182 182 3 183 183 3 184 184 3 185 185 3 186 186 3 187 187 3 188 188 3 189 189 3 190 190 3 191 191 3 192 192 3 193 193 3 194 194 3 195 195 3 196 196 3 197 197 3 198 198 3 199 199 3 200 200 3 201 201 3 202 202 3 203 203 3 204 204 3 205 205 3 206 206 3 207 207 3 208 208 4 209 209 4 210 210 4 211 211 4 212 212 4 213 213 4 214 214 4 215 215 4 216 216 4 217 217 4 218 218 4 219 219 4 220 220 4 221 221 4 222 222 4 223 223 4 224 224 4 225 225 4 226 226 4 227 227 4 228 228 4 229 229 4 230 230 4 231 231 4 232 232 4 233 233 4 234 234 4 235 235 4 236 236 4 237 237 4 238 238 4 239 239 4 240 240 4 241 241 4 242 242 4 243 243 4 244 244 4 245 245 4 246 246 4 247 247 4 248 248 5 249 249 5 250 250 5 251 251 5 252 252 5 253 253 5 254 254 5 255 255 5 256 256 5 257 257 5 258 258 5 259 259 5 260 260 5 261 261 5 262 262 5 263 263 5 264 264 5 265 265 5 266 266 5 267 267 5 268 268 5 269 269 5 270 270 5 271 271 5 272 272 5 273 273 5 274 274 5 275 275 5 276 276 5 277 277 5 278 278 5 279 279 5 280 280 5 281 281 5 282 282 5 283 283 5 284 284 5 285 285 5 286 286 5 287 287 5 </p>
+        </polylist>
+      </mesh>
+    </geometry>
+    <geometry id="Part_3-Geom" name="Part_3-Geom">
+      <mesh>
+        <source id="Part_3-Pos">
+          <float_array count="264" id="Part_3-Pos-array">-12.999999 -1.4999999 10.999999 -12.999999 1.4999999 10.999999 -12.999999 1.4999999 -10.999999 -12.999999 -1.4999999 -10.999999 12.0 -1.4999999 10.999999 12.0 1.4999999 10.999999 12.0 1.4999999 -7.999999 12.0 -1.4999999 -7.999999 12.0 -1.4999999 -9.999999 12.0 1.4999999 -9.999999 12.0 1.4999999 -10.999999 12.0 -1.4999999 -10.999999 12.0 -1.4999999 -7.999999 12.0 -0.5 -7.999999 12.0 -0.5 -9.999999 12.0 -1.4999999 -9.999999 12.0 0.4999999 -7.999999 12.0 1.4999999 -7.999999 12.0 1.4999999 -9.999999 12.0 0.4999999 -9.999999 -11.999999 -1.4999999 -7.999999 -11.999999 1.4999999 -7.999999 -11.999999 1.4999999 10.999999 -11.999999 -1.4999999 10.999999 -11.999999 -1.4999999 -10.999999 -11.999999 1.4999999 -10.999999 -11.999999 1.4999999 -9.999999 -11.999999 -1.4999999 -9.999999 -11.999999 -1.4999999 -9.999999 -11.999999 -0.5 -9.999999 -11.999999 -0.5 -7.999999 -11.999999 -1.4999999 -7.999999 -11.999999 0.4999999 -9.999999 -11.999999 1.4999999 -9.999999 -11.999999 1.4999999 -7.999999 -11.999999 0.4999999 -7.999999 12.999999 -1.4999999 -10.999999 12.999999 1.4999999 -10.999999 12.999999 1.4999999 10.999999 12.999999 -1.4999999 10.999999 -12.999999 -1.4999999 -10.999999 -11.999999 -1.4999999 -10.999999 -11.999999 -1.4999999 10.999999 -12.999999 -1.4999999 10.999999 12.0 -1.4999999 -10.999999 12.999999 -1.4999999 -10.999999 12.999999 -1.4999999 10.999999 12.0 -1.4999999 10.999999 -11.999999 -0.5 -9.999999 12.0 -0.5 -9.999999 12.0 -0.5 -7.999999 -11.999999 -0.5 -7.999999 -11.999999 0.4999999 -7.999999 12.0 0.4999999 -7.999999 12.0 0.4999999 -9.999999 -11.999999 0.4999999 -9.999999 -12.999999 1.4999999 10.999999 -11.999999 1.4999999 10.999999 -11.999999 1.4999999 -10.999999 -12.999999 1.4999999 -10.999999 12.0 1.4999999 10.999999 12.999999 1.4999999 10.999999 12.999999 1.4999999 -10.999999 12.0 1.4999999 -10.999999 -12.999999 1.4999999 -10.999999 -11.999999 1.4999999 -10.999999 -11.999999 -1.4999999 -10.999999 -12.999999 -1.4999999 -10.999999 12.0 1.4999999 -10.999999 12.999999 1.4999999 -10.999999 12.999999 -1.4999999 -10.999999 12.0 -1.4999999 -10.999999 -11.999999 0.4999999 -9.999999 12.0 0.4999999 -9.999999 12.0 -0.5 -9.999999 -11.999999 -0.5 -9.999999 -11.999999 -0.5 -7.999999 12.0 -0.5 -7.999999 12.0 0.4999999 -7.999999 -11.999999 0.4999999 -7.999999 -12.999999 -1.4999999 10.999999 -11.999999 -1.4999999 10.999999 -11.999999 1.4999999 10.999999 -12.999999 1.4999999 10.999999 12.0 -1.4999999 10.999999 12.999999 -1.4999999 10.999999 12.999999 1.4999999 10.999999 12.0 1.4999999 10.999999 </float_array>
+          <technique_common>
+            <accessor count="88" source="#Part_3-Pos-array" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Part_3-UV">
+          <float_array count="176" id="Part_3-UV-array">0.1875 0.3125 0.234375 0.3125 0.234375 1.0 0.1875 1.0 0.4375 0.3125 0.484375 0.3125 0.484375 0.90625 0.4375 0.90625 0.234375 0.90625 0.234375 1.0 0.21875 1.0 0.21875 0.90625 0.109375 0.9375 0.125 0.9375 0.125 1.0 0.109375 1.0 0.203125 0.9375 0.21875 0.9375 0.21875 1.0 0.203125 1.0 0.109375 1.0 0.15625 1.0 0.15625 0.40625 0.109375 0.40625 0.046875 0.875 0.046875 0.96875 0.0625 0.96875 0.0625 0.875 0.109375 1.0 0.125 1.0 0.125 0.9375 0.109375 0.9375 0.0 0.96875 0.015625 0.96875 0.015625 0.90625 0.0 0.90625 0.4375 1.0 0.484375 1.0 0.484375 0.3125 0.4375 0.3125 0.359375 1.0 0.375 1.0 0.375 0.3125 0.359375 0.3125 0.4375 1.0 0.453125 1.0 0.453125 0.3125 0.4375 0.3125 0.046875 0.25 0.046875 1.0 0.078125 1.0 0.078125 0.25 0.078125 0.25 0.078125 1.0 0.046875 1.0 0.046875 0.25 0.265625 0.3125 0.28125 0.3125 0.28125 1.0 0.265625 1.0 0.3125 0.3125 0.328125 0.3125 0.328125 1.0 0.3125 1.0 0.0 0.71875 0.015625 0.71875 0.015625 0.8125 0.0 0.8125 0.0 0.71875 0.015625 0.71875 0.015625 0.8125 0.0 0.8125 0.0625 0.25 0.0625 1.0 0.046875 1.0 0.046875 0.25 0.0 0.25 0.0 1.0 0.015625 1.0 0.015625 0.25 0.0 0.78125 0.015625 0.78125 0.015625 0.6875 0.0 0.6875 0.109375 0.34375 0.125 0.34375 0.125 0.25 0.109375 0.25 </float_array>
+          <technique_common>
+            <accessor count="88" source="#Part_3-UV-array" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Part_3-Normal">
+          <float_array count="18" id="Part_3-Normal-array">-1.0 0.0 0.0 1.0 0.0 0.0 0.0 -1.0 0.0 0.0 1.0 0.0 0.0 0.0 -1.0 0.0 0.0 1.0</float_array>
+          <technique_common>
+            <accessor count="6" source="#Part_3-Normal-array" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="Part_3-Vertices">
+          <input semantic="POSITION" source="#Part_3-Pos"/>
+        </vertices>
+        <polylist count="22" material="Part_3-Material">
+          <input offset="0" semantic="VERTEX" source="#Part_3-Vertices"/>
+          <input offset="1" semantic="TEXCOORD" set="0" source="#Part_3-UV"/>
+          <input offset="2" semantic="NORMAL" source="#Part_3-Normal"/>
+          <vcount>4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 </vcount>
+          <p>0 0 0 1 1 0 2 2 0 3 3 0 4 4 0 5 5 0 6 6 0 7 7 0 8 8 0 9 9 0 10 10 0 11 11 0 12 12 0 13 13 0 14 14 0 15 15 0 16 16 0 17 17 0 18 18 0 19 19 0 20 20 1 21 21 1 22 22 1 23 23 1 24 24 1 25 25 1 26 26 1 27 27 1 28 28 1 29 29 1 30 30 1 31 31 1 32 32 1 33 33 1 34 34 1 35 35 1 36 36 1 37 37 1 38 38 1 39 39 1 40 40 2 41 41 2 42 42 2 43 43 2 44 44 2 45 45 2 46 46 2 47 47 2 48 48 2 49 49 2 50 50 2 51 51 2 52 52 3 53 53 3 54 54 3 55 55 3 56 56 3 57 57 3 58 58 3 59 59 3 60 60 3 61 61 3 62 62 3 63 63 3 64 64 4 65 65 4 66 66 4 67 67 4 68 68 4 69 69 4 70 70 4 71 71 4 72 72 4 73 73 4 74 74 4 75 75 4 76 76 5 77 77 5 78 78 5 79 79 5 80 80 5 81 81 5 82 82 5 83 83 5 84 84 5 85 85 5 86 86 5 87 87 5 </p>
+        </polylist>
+      </mesh>
+    </geometry>
+    <geometry id="Part_4-Geom" name="Part_4-Geom">
+      <mesh>
+        <source id="Part_4-Pos">
+          <float_array count="72" id="Part_4-Pos-array">-9.0 -0.5 8.0 -9.0 0.5 8.0 -9.0 0.5 -8.0 -9.0 -0.5 -8.0 9.0 -0.5 -8.0 9.0 0.5 -8.0 9.0 0.5 8.0 9.0 -0.5 8.0 -9.0 -0.5 -8.0 9.0 -0.5 -8.0 9.0 -0.5 8.0 -9.0 -0.5 8.0 -9.0 0.5 8.0 9.0 0.5 8.0 9.0 0.5 -8.0 -9.0 0.5 -8.0 -9.0 0.5 -8.0 9.0 0.5 -8.0 9.0 -0.5 -8.0 -9.0 -0.5 -8.0 -9.0 -0.5 8.0 9.0 -0.5 8.0 9.0 0.5 8.0 -9.0 0.5 8.0 </float_array>
+          <technique_common>
+            <accessor count="24" source="#Part_4-Pos-array" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Part_4-UV">
+          <float_array count="48" id="Part_4-UV-array">0.09375 0.5 0.109375 0.5 0.109375 1.0 0.09375 1.0 0.140625 1.0 0.15625 1.0 0.15625 0.5 0.140625 0.5 0.3125 0.4375 0.3125 1.0 0.5625 1.0 0.5625 0.4375 0.5625 0.4375 0.5625 1.0 0.3125 1.0 0.3125 0.4375 0.0625 0.4375 0.0625 1.0 0.046875 1.0 0.046875 0.4375 0.0 0.4375 0.0 1.0 0.015625 1.0 0.015625 0.4375 </float_array>
+          <technique_common>
+            <accessor count="24" source="#Part_4-UV-array" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Part_4-Normal">
+          <float_array count="18" id="Part_4-Normal-array">-1.0 0.0 0.0 1.0 0.0 0.0 0.0 -1.0 0.0 0.0 1.0 0.0 0.0 0.0 -1.0 0.0 0.0 1.0</float_array>
+          <technique_common>
+            <accessor count="6" source="#Part_4-Normal-array" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="Part_4-Vertices">
+          <input semantic="POSITION" source="#Part_4-Pos"/>
+        </vertices>
+        <polylist count="6" material="Part_4-Material">
+          <input offset="0" semantic="VERTEX" source="#Part_4-Vertices"/>
+          <input offset="1" semantic="TEXCOORD" set="0" source="#Part_4-UV"/>
+          <input offset="2" semantic="NORMAL" source="#Part_4-Normal"/>
+          <vcount>4 4 4 4 4 4 </vcount>
+          <p>0 0 0 1 1 0 2 2 0 3 3 0 4 4 1 5 5 1 6 6 1 7 7 1 8 8 2 9 9 2 10 10 2 11 11 2 12 12 3 13 13 3 14 14 3 15 15 3 16 16 4 17 17 4 18 18 4 19 19 4 20 20 5 21 21 5 22 22 5 23 23 5 </p>
+        </polylist>
+      </mesh>
+    </geometry>
+    <geometry id="Part_5-Geom" name="Part_5-Geom">
+      <mesh>
+        <source id="Part_5-Pos">
+          <float_array count="72" id="Part_5-Pos-array">-9.0 -0.5 5.9999995 -9.0 0.5 5.9999995 -9.0 0.5 -5.9999995 -9.0 -0.5 -5.9999995 9.0 -0.5 -5.9999995 9.0 0.5 -5.9999995 9.0 0.5 5.9999995 9.0 -0.5 5.9999995 -9.0 -0.5 -5.9999995 9.0 -0.5 -5.9999995 9.0 -0.5 5.9999995 -9.0 -0.5 5.9999995 -9.0 0.5 5.9999995 9.0 0.5 5.9999995 9.0 0.5 -5.9999995 -9.0 0.5 -5.9999995 -9.0 0.5 -5.9999995 9.0 0.5 -5.9999995 9.0 -0.5 -5.9999995 -9.0 -0.5 -5.9999995 -9.0 -0.5 5.9999995 9.0 -0.5 5.9999995 9.0 0.5 5.9999995 -9.0 0.5 5.9999995 </float_array>
+          <technique_common>
+            <accessor count="24" source="#Part_5-Pos-array" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Part_5-UV">
+          <float_array count="48" id="Part_5-UV-array">0.359375 0.625 0.375 0.625 0.375 1.0 0.359375 1.0 0.3125 1.0 0.328125 1.0 0.328125 0.625 0.3125 0.625 0.09375 0.4375 0.09375 1.0 0.28125 1.0 0.28125 0.4375 0.28125 0.4375 0.28125 1.0 0.09375 1.0 0.09375 0.4375 0.0625 0.4375 0.0625 1.0 0.046875 1.0 0.046875 0.4375 0.0 0.4375 0.0 1.0 0.015625 1.0 0.015625 0.4375 </float_array>
+          <technique_common>
+            <accessor count="24" source="#Part_5-UV-array" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Part_5-Normal">
+          <float_array count="18" id="Part_5-Normal-array">-1.0 0.0 0.0 1.0 0.0 0.0 0.0 -1.0 0.0 0.0 1.0 0.0 0.0 0.0 -1.0 0.0 0.0 1.0</float_array>
+          <technique_common>
+            <accessor count="6" source="#Part_5-Normal-array" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="Part_5-Vertices">
+          <input semantic="POSITION" source="#Part_5-Pos"/>
+        </vertices>
+        <polylist count="6" material="Part_5-Material">
+          <input offset="0" semantic="VERTEX" source="#Part_5-Vertices"/>
+          <input offset="1" semantic="TEXCOORD" set="0" source="#Part_5-UV"/>
+          <input offset="2" semantic="NORMAL" source="#Part_5-Normal"/>
+          <vcount>4 4 4 4 4 4 </vcount>
+          <p>0 0 0 1 1 0 2 2 0 3 3 0 4 4 1 5 5 1 6 6 1 7 7 1 8 8 2 9 9 2 10 10 2 11 11 2 12 12 3 13 13 3 14 14 3 15 15 3 16 16 4 17 17 4 18 18 4 19 19 4 20 20 5 21 21 5 22 22 5 23 23 5 </p>
+        </polylist>
+      </mesh>
+    </geometry>
+    <geometry id="Part_6-Geom" name="Part_6-Geom">
+      <mesh>
+        <source id="Part_6-Pos">
+          <float_array count="72" id="Part_6-Pos-array">-9.0 -0.5 7.5 -9.0 0.5 7.5 -9.0 0.5 -7.5 -9.0 -0.5 -7.5 9.0 -0.5 -7.5 9.0 0.5 -7.5 9.0 0.5 7.5 9.0 -0.5 7.5 -9.0 -0.5 -7.5 9.0 -0.5 -7.5 9.0 -0.5 7.5 -9.0 -0.5 7.5 -9.0 0.5 7.5 9.0 0.5 7.5 9.0 0.5 -7.5 -9.0 0.5 -7.5 -9.0 0.5 -7.5 9.0 0.5 -7.5 9.0 -0.5 -7.5 -9.0 -0.5 -7.5 -9.0 -0.5 7.5 9.0 -0.5 7.5 9.0 0.5 7.5 -9.0 0.5 7.5 </float_array>
+          <technique_common>
+            <accessor count="24" source="#Part_6-Pos-array" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Part_6-UV">
+          <float_array count="48" id="Part_6-UV-array">0.09375 0.53125 0.109375 0.53125 0.109375 1.0 0.09375 1.0 0.046875 1.0 0.0625 1.0 0.0625 0.53125 0.046875 0.53125 0.3125 0.4375 0.3125 1.0 0.546875 1.0 0.546875 0.4375 0.546875 0.4375 0.546875 1.0 0.3125 1.0 0.3125 0.4375 0.15625 0.4375 0.15625 1.0 0.140625 1.0 0.140625 0.4375 0.0 0.4375 0.0 1.0 0.015625 1.0 0.015625 0.4375 </float_array>
+          <technique_common>
+            <accessor count="24" source="#Part_6-UV-array" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Part_6-Normal">
+          <float_array count="18" id="Part_6-Normal-array">-1.0 0.0 0.0 1.0 0.0 0.0 0.0 -1.0 0.0 0.0 1.0 0.0 0.0 0.0 -1.0 0.0 0.0 1.0</float_array>
+          <technique_common>
+            <accessor count="6" source="#Part_6-Normal-array" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="Part_6-Vertices">
+          <input semantic="POSITION" source="#Part_6-Pos"/>
+        </vertices>
+        <polylist count="6" material="Part_6-Material">
+          <input offset="0" semantic="VERTEX" source="#Part_6-Vertices"/>
+          <input offset="1" semantic="TEXCOORD" set="0" source="#Part_6-UV"/>
+          <input offset="2" semantic="NORMAL" source="#Part_6-Normal"/>
+          <vcount>4 4 4 4 4 4 </vcount>
+          <p>0 0 0 1 1 0 2 2 0 3 3 0 4 4 1 5 5 1 6 6 1 7 7 1 8 8 2 9 9 2 10 10 2 11 11 2 12 12 3 13 13 3 14 14 3 15 15 3 16 16 4 17 17 4 18 18 4 19 19 4 20 20 5 21 21 5 22 22 5 23 23 5 </p>
+        </polylist>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_animations/>
+  <library_visual_scenes>
+    <visual_scene id="DefaultScene">
+      <node id="Root-global" name="Root-global" sid="Root-global">
+        <matrix sid="matrix">1.0 0.0 -8.742278E-8 0.0 0.0 1.0 0.0 0.0 -8.742278E-8 0.0 -1.0 0.0 0.0 0.0 0.0 1.0 </matrix>
+        <node id="Controller-global" name="Controller-global" sid="Controller-global">
+          <matrix sid="matrix">1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 </matrix>
+          <node id="Part_1-global" name="Part_1-global" sid="Part_1-global">
+            <matrix sid="matrix">1.0 0.0 0.0 0.0 0.0 -0.7071069 0.7071067 2.861023E-6 0.0 -0.7071067 -0.7071069 20.5061 0.0 0.0 0.0 1.0 </matrix>
+            <node id="Part_1-local" name="Part_1-local" sid="Part_1-local">
+              <matrix sid="matrix">1.0 0.0 0.0 -0.017639637 0.0 1.0 0.0 0.03605935 0.0 0.0 1.0 24.993366 0.0 0.0 0.0 1.0 </matrix>
+              <instance_geometry url="#Part_1-Geom">
+                <bind_material>
+                  <technique_common>
+                    <instance_material symbol="Part_1-Material" target="#Part_1-Material">
+                      <bind_vertex_input input_semantic="TEXCOORD" input_set="0" semantic="Part_1-tex-bind"/>
+                    </instance_material>
+                  </technique_common>
+                </bind_material>
+              </instance_geometry>
+            </node>
+            <node id="Part_2-global" name="Part_2-global" sid="Part_2-global">
+              <matrix sid="matrix">1.0000001 0.0 0.0 1.5258789E-5 0.0 -0.422714 -0.90626323 0.039492607 0.0 0.90626323 -0.422714 16.465359 0.0 0.0 0.0 1.0 </matrix>
+              <node id="Part_2-local" name="Part_2-local" sid="Part_2-local">
+                <matrix sid="matrix">1.0 0.0 0.0 -0.017639637 0.0 1.0 0.0 0.03605935 0.0 0.0 1.0 -9.533398 0.0 0.0 0.0 1.0 </matrix>
+                <instance_geometry url="#Part_2-Geom">
+                  <bind_material>
+                    <technique_common>
+                      <instance_material symbol="Part_2-Material" target="#Part_2-Material">
+                        <bind_vertex_input input_semantic="TEXCOORD" input_set="0" semantic="Part_2-tex-bind"/>
+                      </instance_material>
+                    </technique_common>
+                  </bind_material>
+                </instance_geometry>
+              </node>
+            </node>
+            <node id="Part_3-global" name="Part_3-global" sid="Part_3-global">
+              <matrix sid="matrix">1.0 0.0 0.0 0.0 0.0 0.47715876 -0.87881714 0.0 0.0 0.87881714 0.47715876 34.51892 0.0 0.0 0.0 1.0 </matrix>
+              <node id="Part_3-local" name="Part_3-local" sid="Part_3-local">
+                <matrix sid="matrix">1.0 0.0 0.0 0.011453986 0.0 1.0 0.0 0.03605935 0.0 0.0 1.0 -9.479868 0.0 0.0 0.0 1.0 </matrix>
+                <instance_geometry url="#Part_3-Geom">
+                  <bind_material>
+                    <technique_common>
+                      <instance_material symbol="Part_3-Material" target="#Part_3-Material">
+                        <bind_vertex_input input_semantic="TEXCOORD" input_set="0" semantic="Part_3-tex-bind"/>
+                      </instance_material>
+                    </technique_common>
+                  </bind_material>
+                </instance_geometry>
+              </node>
+            </node>
+            <node id="Part_4-global" name="Part_4-global" sid="Part_4-global">
+              <matrix sid="matrix">0.99999994 0.0 0.0 0.0 0.0 -0.93969256 0.34202015 -0.4600525 0.0 -0.34202015 -0.93969256 46.999992 0.0 0.0 0.0 1.0 </matrix>
+              <node id="Part_4-local" name="Part_4-local" sid="Part_4-local">
+                <matrix sid="matrix">1.0 0.0 0.0 -0.01763928 0.0 1.0 0.0 -0.4601128 0.0 0.0 1.0 7.993366 0.0 0.0 0.0 1.0 </matrix>
+                <instance_geometry url="#Part_4-Geom">
+                  <bind_material>
+                    <technique_common>
+                      <instance_material symbol="Part_4-Material" target="#Part_4-Material">
+                        <bind_vertex_input input_semantic="TEXCOORD" input_set="0" semantic="Part_4-tex-bind"/>
+                      </instance_material>
+                    </technique_common>
+                  </bind_material>
+                </instance_geometry>
+              </node>
+              <node id="Part_5-global" name="Part_5-global" sid="Part_5-global">
+                <matrix sid="matrix">-1.0 7.505061E-8 -4.4834678E-8 8.7423274E-8 -8.742278E-8 -0.8584789 0.512849 -1.0 0.0 0.512849 0.8584789 16.051945 0.0 0.0 0.0 1.0 </matrix>
+                <node id="Part_5-local" name="Part_5-local" sid="Part_5-local">
+                  <matrix sid="matrix">1.0 0.0 0.0 -0.01763928 0.0 1.0 0.0 -0.4601128 0.0 0.0 1.0 5.9933662 0.0 0.0 0.0 1.0 </matrix>
+                  <instance_geometry url="#Part_5-Geom">
+                    <bind_material>
+                      <technique_common>
+                        <instance_material symbol="Part_5-Material" target="#Part_5-Material">
+                          <bind_vertex_input input_semantic="TEXCOORD" input_set="0" semantic="Part_5-tex-bind"/>
+                        </instance_material>
+                      </technique_common>
+                    </bind_material>
+                  </instance_geometry>
+                </node>
+                <node id="Part_6-global" name="Part_6-global" sid="Part_6-global">
+                  <matrix sid="matrix">1.0 0.0 0.0 4.5474735E-13 0.0 0.70743793 -0.70677555 3.8146973E-6 0.0 0.70677555 0.70743793 12.076216 0.0 0.0 0.0 1.0 </matrix>
+                  <node id="Part_6-local" name="Part_6-local" sid="Part_6-local">
+                    <matrix sid="matrix">1.0 0.0 0.0 -0.01763928 0.0 1.0 0.0 -0.4601128 0.0 0.0 1.0 7.4933662 0.0 0.0 0.0 1.0 </matrix>
+                    <instance_geometry url="#Part_6-Geom">
+                      <bind_material>
+                        <technique_common>
+                          <instance_material symbol="Part_6-Material" target="#Part_6-Material">
+                            <bind_vertex_input input_semantic="TEXCOORD" input_set="0" semantic="Part_6-tex-bind"/>
+                          </instance_material>
+                        </technique_common>
+                      </bind_material>
+                    </instance_geometry>
+                  </node>
+                </node>
+              </node>
+            </node>
+          </node>
+        </node>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#DefaultScene"/>
+  </scene>
+</COLLADA>

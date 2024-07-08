@@ -35,7 +35,7 @@ public class ReceptionManager : MonoBehaviour
    }
    private void AssignRoomToCustomer()
    {
-      if (roomManager.HasAvailableRooms())
+      if (roomManager.HasAvailableRooms() && WaitingCustomerObj != null)
       {
          customer c = WaitingCustomerObj.GetComponent<customer>();
          if (c.RoomAllotted && c == null)
@@ -62,9 +62,9 @@ public class ReceptionManager : MonoBehaviour
          }
 
       }
-      else
+      else if (!roomManager.HasAvailableRooms())
       {
-         Debug.LogError("NO ROOM AVAILABLE!");
+         Debug.LogWarning("NO ROOM AVAILABLE!");
 
       }
    }

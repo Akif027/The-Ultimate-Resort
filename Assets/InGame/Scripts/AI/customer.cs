@@ -1,4 +1,4 @@
-using System.Collections;
+using System.Linq;
 using System;
 using UnityEngine;
 using UnityEngine.AI;
@@ -9,26 +9,22 @@ public class customer : MonoBehaviour
    public string customerId; // Unique identifier for each custome
    public bool RoomAllotted = false;
    public bool ToiletAllocated = false;
+
    [SerializeField] Animation animator;
    [SerializeField] float Sleepingtime = 5f;
-
-
-   [SerializeField]
-   private float probExitingRoom = 0.2f; // Adjusted to half since there are only two states
-   [SerializeField]
-   private float probGoingToilet = 0.9f; // Adjusted to half since there are only two states
-   [SerializeField]
-   private float totalProbability = 1.0f; // Sum of the two probabilities
-
-
    [SerializeField] CustomerState currentState = CustomerState.waiting;
+
    private NavMeshAgent agent; // Reference to the NavMeshAgent component
    private RoomData roomData;
    private QueueManager queueManager;
    public Transform NextDestination = null;
 
 
-
+   public Animation Animator
+   {
+      get { return animator; }
+      private set { animator = value; }
+   }
 
    #region Unity
    void Start()
@@ -47,16 +43,17 @@ public class customer : MonoBehaviour
       {
          if (currentState == CustomerState.GoingToilet)
          {
-            animator.AnimationPlay("Walktoilet", true);
-            animator.AnimationPlay("ToiletIdle", false);
+            //  animator.AnimationPlay("Walktoilet", true);
+            //   animator.AnimationPlay("ToiletIdle", false);
 
 
          }
          else
          {
-            animator.AnimationPlay("ToiletIdle", false);
-            animator.AnimationPlay("Walktoilet", false);
-            animator.AnimationPlay("isWalking", true);
+            //  animator.AnimationPlay("ToiletIdle", false);
+            //  animator.AnimationPlay("Walktoilet", false);
+            //  animator.AnimationPlay("isWalking", true);
+            animator.ChangeState(AnimationState.Walk);
          }
 
 
@@ -66,14 +63,15 @@ public class customer : MonoBehaviour
          if (currentState == CustomerState.GoingToilet)
          {
 
-            animator.AnimationPlay("ToiletIdle", true);
-            animator.AnimationPlay("Walktoilet", false);
+            // animator.AnimationPlay("ToiletIdle", true);
+            //   animator.AnimationPlay("Walktoilet", false);
 
          }
          else
          {
 
-            animator.AnimationPlay("isWalking", false);
+            //   animator.AnimationPlay("isWalking", false);
+            animator.ChangeState(AnimationState.Idle);
          }
 
 
@@ -94,11 +92,15 @@ public class customer : MonoBehaviour
          case CustomerState.Sleeping:
             Sleep();
             break;
-         case CustomerState.Exiting:
-            ExitRoom();
-            break;
+
          case CustomerState.GoingToilet:
             GoToilet();
+            break;
+         case CustomerState.SwimingPool:
+            GoSwimming();
+            break;
+         case CustomerState.Exiting:
+            ExitRoom();
             break;
       }
    }
@@ -147,8 +149,9 @@ public class customer : MonoBehaviour
 
       roomData.room.SleepOver(gameObject);
       // animator.AnimationPlay("Idle", true);
-      ChangeState(CustomerState.GoingToilet);
-      // RandomizeState();
+      ChangeState(CustomerState.SwimingPool);
+
+      //   SetRandomCustomerState(CustomerState.MovingToRoom, CustomerState.waiting);
    }
    private void ExitRoom()
    {
@@ -159,37 +162,43 @@ public class customer : MonoBehaviour
    private bool hasBeenAddedToToiletQueue = false;
    private void GoToilet()
    {
-
-
       if (!hasBeenAddedToToiletQueue)
       {
          queueManager.AddCustomerToToiletQueueAndList(gameObject);
          RequestToilet();
          hasBeenAddedToToiletQueue = true; // Set the flag to true after adding the customer to the queue
       }
-
-
-
+   }
+   private bool hasBeenAddedToPoolQueue = false;
+   private void GoSwimming()
+   {
+      if (!hasBeenAddedToPoolQueue)
+      {
+         queueManager.AddCustomerToSwimmingPoolQueueAndList(gameObject);
+         Requestpool();
+         hasBeenAddedToPoolQueue = true; // Set the flag to true after adding the customer to the queue
+      }
    }
 
-   private bool hasRandomizedState = false;
-   public void RandomizeState()
+   public void SetRandomCustomerState(params CustomerState[] excludeStates)
    {
-      if (hasRandomizedState)
+      Array values = Enum.GetValues(typeof(CustomerState));
+      CustomerState[] filteredValues = values.Cast<CustomerState>()
+                                              .Where(state => !excludeStates.Contains(state))
+                                              .ToArray();
+
+      if (filteredValues.Length == 0)
       {
-         // Prevent re-entry
+         Debug.LogError("No valid states available after exclusion.");
          return;
       }
 
-      // For example:
-      float randomValue = UnityEngine.Random.value * totalProbability;
-
-      if (randomValue <= probExitingRoom) ChangeState(CustomerState.Exiting);
-      else ChangeState(CustomerState.GoingToilet);
-
-      // Mark as done
-      hasRandomizedState = true;
+      System.Random random = new System.Random();
+      CustomerState randomState = filteredValues[random.Next(filteredValues.Length)];
+      currentState = randomState;
+      Debug.Log("Random Customer State: " + currentState);
    }
+
 
 
    public void ChangeState(CustomerState newState)
@@ -203,6 +212,10 @@ public class customer : MonoBehaviour
    void RequestToilet()
    {
       EventManager.InvokeToiletRequested(this);
+   }
+   void Requestpool()
+   {
+      EventManager.InvokeSwimmingPoolRequested(this);
    }
 
    #endregion
@@ -233,5 +246,7 @@ public enum CustomerState
    MovingToRoom,
    Sleeping,
    Exiting,
-   GoingToilet
+   GoingToilet,
+   SwimingPool,
+
 }

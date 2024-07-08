@@ -74,5 +74,6 @@ public class ToiletManager : MonoBehaviour
     void OnDestroy()
     {
         EventManager.UnsubscribeToiletRequest(HandleToiletRequest);
+
     }
 }
