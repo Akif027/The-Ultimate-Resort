@@ -15,12 +15,12 @@ public class AnimationHolder
     }
     public void CleanAnimation()
     {
-        cleanAnim.PlayAnimation("Clean");
+        // cleanAnim.PlayAnimation();
     }
 
     public void DirtyAnimation()
     {
-        cleanAnim.PlayAnimation("Dirty");
+        cleanAnim.PlayDirtyBed();
     }
 }
 

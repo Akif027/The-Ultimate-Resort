@@ -1,77 +1,76 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using DG.Tweening;
+using Unity.VisualScripting;
+using UnityEngine.UIElements;
+
 public class CleanAnim : MonoBehaviour
 {
-    Animator _Anim;
     public string furnitureName;
-    [SerializeField] UnityEvent OnCleanedEvent;
-    public bool IsCleaningComplete { get; private set; } = false;
-    [SerializeField] Room room;
-    [SerializeField] float cleaningTime;
-    [SerializeField] Transform ProgressSignPos;
-    [SerializeField] RadialProgressBar circularProgressBar;
-    [SerializeField] GameObject energizedEffect = null;
-    [SerializeField] bool isThisRoom, isThisAcitivity;
+    public UnityEvent OnCleanedEvent;
+    public bool IsCleaningComplete { get; private set; }
 
+    [SerializeField] private Room room;
+    [SerializeField] private float cleaningTime;
+    [SerializeField] private Transform progressSignPos;
+    [SerializeField] private RadialProgressBar circularProgressBar;
+    [SerializeField] private GameObject energizedEffect;
+    [SerializeField] private bool isThisRoom;
+    [SerializeField] private bool isThisActivity;
+
+    [SerializeField] private GameObject pillow1;
+    [SerializeField] private GameObject pillow2;
+
+    public bool ShowSign = false;
 
 
     void Start()
     {
-        _Anim = GetComponent<Animator>();
-
-    }
-
-    public void PlayAnimation(string animName)
-    {
-        // Get the current state index of the base layer
-        int currentStateIndex = _Anim.GetCurrentAnimatorStateInfo(0).shortNameHash;
-
-        // Check if the current state matches the animation we want to play
-        if (_Anim.GetCurrentAnimatorStateInfo(0).IsName(animName))
+#if UNITY_EDITOR
+        if (ShowSign) //for testing only 
         {
-            //  Debug.Log("Animation is already playing.");
-            return; // Do nothing if the animation is already playing
+            PlaceCleaningSign();
+            TimerManager.Instance.ScheduleAction(5, () => ObjectPool.Instance.ReturnObjectToPool(energizedEffect, "CleaningProgress"));
+            ShowSign = false;
         }
+#endif
 
-        // Set the trigger for the animation
-        _Anim.SetTrigger(animName);
-
-        Debug.Log("Playing " + animName);
+    }
+    public void PlayDirtyBed()
+    {
+        DoTweenManager.MoveTo(pillow1.transform, new Vector3(0.32f, 0.275f, -0.024f), 1f, Ease.Linear);
+        DoTweenManager.MoveTo(pillow2.transform, new Vector3(-0.42f, 0.24f, 0.29f), 1f, Ease.Linear);
     }
 
-
+    public void PlayClean()
+    {
+        DoTweenManager.MoveTo(pillow2.transform, new Vector3(-0.67f, 0.27f, 0.35f), 1f, Ease.Linear);
+        DoTweenManager.MoveTo(pillow1.transform, new Vector3(-0.7427292f, 0.2375813f, -0.3049469f), 1f, Ease.Linear);
+    }
 
     private void StartCleaning()
     {
-
         if (circularProgressBar.isActive) return;
 
-
         ExecuteCleaningProgressSignEffect();
-        //  TimerManager.Instance.ScheduleAction(cleaningTime, OnCleaned);
-
-
-
     }
 
     public void PlaceCleaningSign()
     {
         energizedEffect = ObjectPool.Instance.GetPooledObject("CleaningProgress");
         circularProgressBar = energizedEffect.GetComponent<RadialProgressBar>();
-        energizedEffect.transform.SetPositionAndRotation(ProgressSignPos.position, ProgressSignPos.rotation);
-
+        energizedEffect.transform.SetPositionAndRotation(progressSignPos.position, progressSignPos.rotation);
     }
+
     private void ExecuteCleaningProgressSignEffect()
     {
-
         circularProgressBar.ActivateCountDown(cleaningTime);
     }
+
     private void OnCleanedForRoom()
     {
-        PlayAnimation("Clean");
+        PlayClean();
         RoomData roomData = RoomManager.instance.FindRoomData(room.RoomNumber);
         if (roomData != null)
         {
@@ -79,7 +78,7 @@ public class CleanAnim : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Room not found in cleanAnim Script");
+            Debug.LogError("Room not found in CleanAnim script");
         }
 
         CompleteCleaning();
@@ -88,33 +87,28 @@ public class CleanAnim : MonoBehaviour
 
     private void OnCleanedForActivity()
     {
-
         CompleteCleaning();
         OnCleanedEvent?.Invoke();
     }
+
     public void CompleteCleaning()
     {
         IsCleaningComplete = true;
     }
-    void OnTriggerEnter(Collider other)
+
+    private void OnTriggerEnter(Collider other)
     {
-        // Check if the collider belongs to the player
-        if (other.gameObject.CompareTag("Player"))
-        {
-            StartCleaning();
-            circularProgressBar?.ResumeCountdown();
-            circularProgressBar.OnComplete.AddListener(isThisRoom ? OnCleanedForRoom : OnCleanedForActivity);
-        }
+        if (!other.CompareTag("Player")) return;
+
+        StartCleaning();
+        circularProgressBar?.ResumeCountdown();
+        circularProgressBar.OnComplete.AddListener(isThisRoom ? OnCleanedForRoom : OnCleanedForActivity);
     }
 
-    void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider other)
     {
-        // Check if the collider belongs to the player
-        if (other.gameObject.CompareTag("Player"))
-        {
+        if (!other.CompareTag("Player")) return;
 
-            circularProgressBar?.PauseCountdown();
-
-        }
+        circularProgressBar?.PauseCountdown();
     }
 }

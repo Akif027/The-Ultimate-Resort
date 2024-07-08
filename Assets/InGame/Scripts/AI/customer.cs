@@ -143,9 +143,9 @@ public class customer : MonoBehaviour
 
       roomData.room.SleepOver(gameObject);
       // animator.AnimationPlay("Idle", true);
-      ChangeState(CustomerState.SwimingPool);
+      //ChangeState(CustomerState.SwimingPool);
 
-      //   SetRandomCustomerState(CustomerState.MovingToRoom, CustomerState.waiting);
+      SetRandomCustomerState(CustomerState.MovingToRoom, CustomerState.waiting);
    }
    private void ExitRoom()
    {
