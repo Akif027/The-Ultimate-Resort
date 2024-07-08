@@ -43,16 +43,14 @@ public class customer : MonoBehaviour
       {
          if (currentState == CustomerState.GoingToilet)
          {
-            //  animator.AnimationPlay("Walktoilet", true);
-            //   animator.AnimationPlay("ToiletIdle", false);
 
+
+            animator.ChangeState(AnimationState.ToiletWalk);
 
          }
-         else
+         else if (animator.CurrentState != AnimationState.Swim && animator.CurrentState != AnimationState.Sit)
          {
-            //  animator.AnimationPlay("ToiletIdle", false);
-            //  animator.AnimationPlay("Walktoilet", false);
-            //  animator.AnimationPlay("isWalking", true);
+
             animator.ChangeState(AnimationState.Walk);
          }
 
@@ -60,14 +58,12 @@ public class customer : MonoBehaviour
       }
       else
       {
-         if (currentState == CustomerState.GoingToilet)
+         if (currentState == CustomerState.GoingToilet && animator.CurrentState != AnimationState.Swim)
          {
 
-            // animator.AnimationPlay("ToiletIdle", true);
-            //   animator.AnimationPlay("Walktoilet", false);
-
+            animator.ChangeState(AnimationState.ToiletIdle);
          }
-         else
+         else if (animator.CurrentState != AnimationState.Swim && animator.CurrentState != AnimationState.Sit)
          {
 
             //   animator.AnimationPlay("isWalking", false);
@@ -138,9 +134,7 @@ public class customer : MonoBehaviour
    private void Sleep()
    {
       roomData.room.SleepIn(gameObject);
-      animator.AnimationPlay("Sleeping");
-      animator.AnimationPlay("isWalking", false);
-
+      animator.ChangeState(AnimationState.Sleeping);
       TimerManager.Instance?.ScheduleAction(Sleepingtime, WakeUp);
    }
 

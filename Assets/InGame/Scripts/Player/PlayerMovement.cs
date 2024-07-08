@@ -103,14 +103,12 @@ public class PlayerMovement : MonoBehaviour
         if (moveDirection.magnitude > 0)
         {
             //  Debug.Log("Playing Walking Animation");
-            animator.AnimationPlay("isWalking", true);
-            animator.AnimationPlay("Idle", false);
+            animator.ChangeState(AnimationState.Walk);
         }
         else
         {
             //  Debug.Log("Playing Idle Animation");
-            animator.AnimationPlay("isWalking", false);
-            animator.AnimationPlay("Idle", true);
+            animator.ChangeState(AnimationState.Idle);
 
         }
     }

@@ -36,8 +36,7 @@ public class PoolPlay : MonoBehaviour
         if (customer == null) return;
         IsOccupied = false;
         customer.ChangeState(CustomerState.Exiting);
-
-        customer.Animator.AnimationPlay("Idle", true);
+        customer.Animator.ChangeState(AnimationState.Idle);
         customer = null;
         StopCoroutine(SwimAround()); // Stop the swimming routine when vacated
 
@@ -57,7 +56,7 @@ public class PoolPlay : MonoBehaviour
     IEnumerator SwimAround()
     {
         NavMeshAgent agent = customer.GetComponent<NavMeshAgent>();
-        customer.Animator.AnimationPlay("Swim");
+        customer.Animator.ChangeState(AnimationState.Swim);
         while (IsOccupied)
         {
             SetRandomDestination(agent);
