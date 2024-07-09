@@ -58,21 +58,19 @@ public class Room : MonoBehaviour
 
 
     }
-    bool CallOnce = false;
+
     public void RoomCheckOut()
     {
-        if (!CallOnce)
+
+
+        RoomState = RoomDescript.RoomEmpty;
+        foreach (CleanAnim c in cleanAnim)
         {
-
-            RoomState = RoomDescript.RoomEmpty;
-            foreach (CleanAnim c in cleanAnim)
-            {
-                c.PlaceCleaningSign();
-            }
-            roomData.PlayAllDirtyAnimation();
-            //  CallOnce = true;
-
+            c.PlaceCleaningSign();
         }
+        roomData.PlayAllDirtyAnimation();
+        //  CallOnce = true;
+
 
 
     }
