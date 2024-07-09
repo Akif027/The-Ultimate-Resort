@@ -55,7 +55,7 @@ public class ToiletManager : MonoBehaviour
     {
         foreach (var toilet in toilets)
         {
-            if (!toilet.IsOccupied)
+            if (!toilet.IsOccupied & toilet.countToiletUseage <= 2)
             {
                 //  toilet.Occupy();
                 return toilet;
