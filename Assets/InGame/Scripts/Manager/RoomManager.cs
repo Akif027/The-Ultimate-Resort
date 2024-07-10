@@ -12,8 +12,6 @@ public class RoomManager : Manager
     public List<RoomData> roomData = new List<RoomData>();
 
 
-
-
     public static RoomManager Instance
     {
         get
@@ -55,7 +53,20 @@ public class RoomManager : Manager
         // ToggleRoom(1, true);
         ToggleMultipleRooms(UpgradeManager.Instance.UpgradeDataValues().Rooms, true);
     }
-
+    // public void InstantiateHouseAtPositions()
+    // {
+    //     if (UpgradeManager.Instance.UpgradeDataValues() == null) return;
+    //     foreach (Transform position in HouseplacePosition)
+    //     {
+    //         // Instantiate the prefab at the position with the specified rotation
+    //         GameObject instance = Instantiate(UpgradeManager.Instance.UpgradeDataValues().RoomHouseObj);
+    //         instance.transform.SetParent(position);
+    //         instance.transform.SetPositionAndRotation(position.position, position.rotation);
+    //         room.Add(instance.GetComponent<Room>());
+    //         // Optional: Set the parent of the instantiated object to this transform
+    //         // instance.transform.SetParent(this.transform, false);
+    //     }
+    // }
 
     private void InitializeRooms()
     {

@@ -23,9 +23,13 @@ MonoBehaviour:
   - _level: 0
     upgradeName: 
     cost: 0
+    RoomHouseObj: {fileID: 6938432180157691104, guid: 14878253b78163e46b95060cf5e1b98b,
+      type: 3}
     Rooms: 2
   - _level: 1
     upgradeName: 
     cost: 50
+    RoomHouseObj: {fileID: 6938432180157691104, guid: 14878253b78163e46b95060cf5e1b98b,
+      type: 3}
     Rooms: 4
   botDatas: []

@@ -8,7 +8,7 @@ public class customer : MonoBehaviour
 
    public string customerId; // Unique identifier for each custome
    public bool RoomAllotted = false;
-   public bool ToiletAllocated = false;
+
 
    [SerializeField] Animation animator;
    [SerializeField] float Sleepingtime = 5f;

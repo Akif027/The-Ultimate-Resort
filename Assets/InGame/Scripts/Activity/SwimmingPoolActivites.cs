@@ -18,6 +18,8 @@ public class SwimmingPoolActivites : MonoBehaviour
     public static int CoustomerPlayCount;
 
     private bool isDirty = false;
+
+    private bool notHandlingRequest = false;
     void Start()
     {
         CoustomerPlayCount = 0;
@@ -30,6 +32,10 @@ public class SwimmingPoolActivites : MonoBehaviour
 
         if (queueManager.customersPoolList.Count > 0)
         {
+            if (CoustomerPlayCount >= 3)
+            {
+                return;
+            }
             foreach (GameObject c in queueManager.customersPoolList)
             {
                 customer C_instance = c.GetComponent<customer>();
@@ -52,10 +58,11 @@ public class SwimmingPoolActivites : MonoBehaviour
     }
     public void DirtyPool() { ChangeColor(Dirty); }
 
-    public void CleanPool() { ChangeColor(Clean); }
+    public void CleanPool() { ChangeColor(Clean); CoustomerPlayCount = 0; }
     void HandleRequest(customer customerInstance)
     {
-        if (CoustomerPlayCount > 3)
+
+        if (CoustomerPlayCount >= 3)
         {
             return;
         }

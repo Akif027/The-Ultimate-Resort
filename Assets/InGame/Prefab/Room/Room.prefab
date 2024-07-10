@@ -72,6 +72,7 @@ Transform:
   - {fileID: 5276583009255652901}
   - {fileID: 8827039267478305774}
   - {fileID: 1592448958586761036}
+  - {fileID: 7453505025508249003}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0.852, y: 168.732, z: -1.444}
 --- !u!114 &5150957325954020941
@@ -477,6 +478,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.6, y: 1, z: 1.15}
   m_Center: {x: -0.47, y: 0.67, z: 0.23}
+--- !u!1 &693961313162423457
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7719560968807170876}
+  m_Layer: 6
+  m_Name: p1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7719560968807170876
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693961313162423457}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.156, y: 0, z: -0.392}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4254361712503829038}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &790809519519485135
 GameObject:
   m_ObjectHideFlags: 0
@@ -667,6 +699,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &1516195211053031526
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 336019817269648052}
+  m_Layer: 6
+  m_Name: p2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &336019817269648052
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1516195211053031526}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: -0, z: 0.407}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4254361712503829038}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1920680044362017121
 GameObject:
   m_ObjectHideFlags: 0
@@ -3173,7 +3236,7 @@ GameObject:
   - component: {fileID: 7696659327919764338}
   - component: {fileID: 2661847777924741930}
   - component: {fileID: 2004133644906102213}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: WallDoor2mSkirting
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3267,6 +3330,37 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -4844589791426667652, guid: 071cd515c6307f647b9b65b7a81a61e8, type: 3}
+--- !u!1 &5625173312368131301
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7453505025508249003}
+  m_Layer: 6
+  m_Name: SleepIN
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2
+  m_IsActive: 1
+--- !u!4 &7453505025508249003
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5625173312368131301}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.923, y: 0.579, z: 10.138}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4473978247597938716}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5674762960560330084
 GameObject:
   m_ObjectHideFlags: 0
@@ -3974,14 +4068,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7784413585019971615}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.053363167, y: -0.7304456, z: 0.04961012, w: 0.6790732}
-  m_LocalPosition: {x: 4.160083, y: 2.0020046, z: 10.05809}
+  m_LocalRotation: {x: -5.820766e-10, y: 0.1999198, z: 9.313226e-10, w: 0.97981226}
+  m_LocalPosition: {x: 4.16, y: 2.0019996, z: 10.057987}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4752703849267507764}
   m_Father: {fileID: 4473978247597938716}
-  m_LocalEulerAnglesHint: {x: 0, y: -94.175, z: 8.357}
+  m_LocalEulerAnglesHint: {x: 0, y: 23.065, z: 8.357}
 --- !u!1 &7806280472278583479
 GameObject:
   m_ObjectHideFlags: 0
@@ -4006,13 +4100,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7806280472278583479}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.055771664, y: -0.91297203, z: -0.20328829, w: 0.34935012}
-  m_LocalPosition: {x: -0.021892942, y: 0.34701136, z: 0.0013751388}
+  m_LocalRotation: {x: 0.08326432, y: -0.83558387, z: -0.10325762, w: -0.5331085}
+  m_LocalPosition: {x: -0.021896334, y: 0.34701157, z: 0.0013672087}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1592448958586761036}
-  m_LocalEulerAnglesHint: {x: -24.215, y: -137.579, z: -2.526}
+  m_LocalEulerAnglesHint: {x: -15.15, y: -244.847, z: -1.725}
 --- !u!1 &7877013602181879171
 GameObject:
   m_ObjectHideFlags: 0
@@ -4159,6 +4253,8 @@ Transform:
   - {fileID: 8692414468435446870}
   - {fileID: 5895066632752540513}
   - {fileID: 2050102746080521315}
+  - {fileID: 7719560968807170876}
+  - {fileID: 336019817269648052}
   m_Father: {fileID: 2643306526432911170}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3103601661131691793
@@ -4239,7 +4335,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  room: {fileID: 5150957325954020941}
   cleaningTime: 5
   progressSignPos: {fileID: 4752703849267507764}
   circularProgressBar: {fileID: 0}
@@ -4248,6 +4343,11 @@ MonoBehaviour:
   isThisActivity: 0
   pillow1: {fileID: 1304264880498009233}
   pillow2: {fileID: 2017126856078026789}
+  room: {fileID: 5150957325954020941}
+  TargetPosPillow1: {fileID: 7719560968807170876}
+  TargetPosPillow2: {fileID: 336019817269648052}
+  moveDuration: 1
+  ShowSign: 0
 --- !u!65 &5843324045854601962
 BoxCollider:
   m_ObjectHideFlags: 0

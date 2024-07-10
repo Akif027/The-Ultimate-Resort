@@ -63,14 +63,15 @@ public class Room : MonoBehaviour
     {
 
 
-        RoomState = RoomDescript.RoomEmpty;
+
         foreach (CleanAnim c in cleanAnim)
         {
             c.PlaceCleaningSign();
+
         }
         roomData.PlayAllDirtyAnimation();
         //  CallOnce = true;
-
+        RoomState = RoomDescript.RoomEmpty;
 
 
     }
@@ -78,7 +79,7 @@ public class Room : MonoBehaviour
     {
         // C.transform.SetParent(SleepInPosition);
 
-        C.transform.SetPositionAndRotation(SleepInPosition.position, SleepInPosition.rotation);
+
         NavMeshAgent agent = C.GetComponent<NavMeshAgent>();
         Rooflayer.SetActive(true);
         if (agent == null)
@@ -89,6 +90,7 @@ public class Room : MonoBehaviour
 
         // Warp the agent to the desired position smoothly
         agent.Warp(SleepInPosition.position);
+        C.transform.rotation = SleepInPosition.rotation;
     }
     public void SleepOver(GameObject C) // call this function and set the customer Ontop of bed
     {
@@ -101,12 +103,16 @@ public class Room : MonoBehaviour
             Debug.LogError("Customer GameObject must have a NavMeshAgent component.");
             return;
         }
-
-        // Warp the agent to the desired position smoothly
         agent.Warp(Exit.position);
-        RoomState = RoomDescript.CheckOut;
-    }
+        // Warp the agent to the desired position smoothly
 
+
+    }
+    public void ChangeStateTOCheckOut()
+    {
+
+        ChangeState(RoomDescript.CheckOut);
+    }
     public void FreeRoomToEmtyOnclean()
     {
         if (IsEverythingCleaned())

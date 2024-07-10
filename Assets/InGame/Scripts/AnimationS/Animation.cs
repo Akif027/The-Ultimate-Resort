@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,12 +35,64 @@ public class Animation : MonoBehaviour
         // Example of setting an initial state
         currentState = AnimationState.Idle;
     }
+    public void SetFloat(string name, float value)
+    {
+        if (anim == null)
+        {
+            return;
+        }
+
+        anim.SetFloat(name, value);
+    }
+
+
+    public int GetInt(string name)
+    {
+        if (anim == null)
+        {
+            return -1;
+        }
+
+        return anim.GetInteger(name);
+    }
+
+    public void SetInt(string name, int value)
+    {
+        if (anim == null)
+        {
+            return;
+        }
+
+        anim.SetInteger(name, value);
+    }
+    public void ActiveMove()
+    {
+        SetInt("State", 0);
+    }
+
+    public virtual void ActiveIdle()
+    {
+        SetInt("State", 1);
+    }
+
+    public void AnimationPlay(String value, bool _isTrue)
+    {
+        anim.SetBool(value, _isTrue);
+    }
 
     void Update()
     {
         PlayCurrentStateAnimation();
     }
+    public void SetBlendIdle(float value)
+    {
+        SetFloat("Idle_Blend", value);
+    }
 
+    public void SetBlendMove(float value)
+    {
+        SetFloat("Move_Blend", value);
+    }
     private void PlayCurrentStateAnimation()
     {
         if (animationMap.TryGetValue(CurrentState, out string animationName))

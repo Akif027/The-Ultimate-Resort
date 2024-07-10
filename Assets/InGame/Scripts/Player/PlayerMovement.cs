@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 touchStartPosition;
     private Vector3 touchEndPosition;
     [SerializeField] Animation animator;
-
+    public SortSlot sortSlot;
 
     void Start()
     {
@@ -103,13 +103,21 @@ public class PlayerMovement : MonoBehaviour
         if (moveDirection.magnitude > 0)
         {
             //  Debug.Log("Playing Walking Animation");
+
             animator.ChangeState(AnimationState.Walk);
+            // animator.AnimationPlay("isWalk", true);
+
+
         }
         else
         {
-            //  Debug.Log("Playing Idle Animation");
             animator.ChangeState(AnimationState.Idle);
+            //  animator.ActiveIdle();
+            //  animator.AnimationPlay("isWalk", false);
+            // animator.ActiveIdle();
 
         }
+        animator.SetBlendIdle(sortSlot.SortObjects.Count > 0 ? 1 : 0);
+        animator.SetBlendMove(sortSlot.SortObjects.Count > 0 ? 1 : 0);
     }
 }

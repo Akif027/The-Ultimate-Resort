@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(fileName = "RoomData", menuName = "Room Data", order = 1)]
+[CreateAssetMenu(fileName = "GameData", menuName = "Resource", order = 1)]
 
 public class GameData : ScriptableObject
 {
@@ -78,6 +78,7 @@ public class UpgradeData
 
     public string upgradeName;
     public int cost;
+    //public GameObject RoomHouseObj;// not used 
     public int Rooms;
     // Constructor
     private UpgradeData() { }
