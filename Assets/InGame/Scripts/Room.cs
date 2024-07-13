@@ -141,6 +141,7 @@ public class Room : MonoBehaviour
 public enum RoomDescript
 {
     RoomEmpty,
+
     CheckIn,
     CheckOut
 

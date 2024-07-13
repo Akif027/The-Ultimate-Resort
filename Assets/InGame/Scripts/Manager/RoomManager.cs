@@ -127,7 +127,7 @@ public class RoomManager : Manager
     {
         foreach (var roomData in roomData)
         {
-            if (!roomData.isAllot && roomData.isClean)
+            if (!roomData.isAllot && roomData.isClean && roomData.isAvailable)
             {
                 return true;
             }
@@ -172,6 +172,7 @@ public class RoomManager : Manager
                 if (RoomContainer.TryGetValue(roomData.RoomNumber, out Room room))
                 {
                     room.gameObject.SetActive(enable);
+                    roomData.isAvailable = true;
                     enabledRooms++;
 
                     // Break the loop if the target number of rooms has been enabled/disabled
@@ -195,6 +196,7 @@ public class RoomData
     public string RoomName;
     public int RoomNumber;
     public Room room;
+    public bool isAvailable;
     public bool isClean;
     public bool isAllot;
 
@@ -203,6 +205,7 @@ public class RoomData
     public RoomData(int Rno, Room _room)
     {
         RoomNumber = Rno;
+        isAvailable = false;
         isAllot = false;
         isClean = true;
         room = _room;

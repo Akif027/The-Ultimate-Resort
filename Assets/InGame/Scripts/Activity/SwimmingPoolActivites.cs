@@ -19,7 +19,7 @@ public class SwimmingPoolActivites : MonoBehaviour
 
     private bool isDirty = false;
 
-    private bool notHandlingRequest = false;
+
     void Start()
     {
         CoustomerPlayCount = 0;
