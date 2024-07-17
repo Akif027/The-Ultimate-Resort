@@ -27,21 +27,21 @@ public class MoneyEffect : MonoBehaviour
 
         while (true)
         {
-            if (target != null)
+            if (target != null && Game.Instance.gameData.money > 0)
             {
                 GameObject g = Instantiate(moneyPrefab);
                 g.transform.position = target.position + offset;
 
                 AnimationCurve animationCurve = target.position.y < transform.position.y ? acYUp : acYDown;
 
-                g.transform.DOMoveX(transform.position.x, timeMove);
-                g.transform.DOMoveY(transform.position.y, timeMove).SetEase(animationCurve);
-                g.transform.DOMoveZ(transform.position.z, timeMove);
+                g.transform.DOMoveX(transform.position.x, timeMove).SetAutoKill(false);
+                g.transform.DOMoveY(transform.position.y, timeMove).SetEase(animationCurve).SetAutoKill(false);
+                g.transform.DOMoveZ(transform.position.z, timeMove).SetAutoKill(false);
 
                 Destroy(g, timeMove);
 
                 g.transform.eulerAngles = new Vector3(Random.RandomRange(0, 360), Random.RandomRange(0, 360), Random.RandomRange(0, 360));
-                g.transform.DOLocalRotate(Vector3.zero, timeMove);
+                g.transform.DOLocalRotate(Vector3.zero, timeMove).SetAutoKill(false);
 
                 yield return new WaitForSeconds(timeGenRate);
                 transform.DOScale(scaleFirst * 1.2f, 0.1f).onComplete += () =>
@@ -76,5 +76,6 @@ public class MoneyEffect : MonoBehaviour
     public void StopSpend()
     {
         StopAllCoroutines();
+        gameObject.SetActive(false);
     }
 }

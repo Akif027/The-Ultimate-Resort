@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -51,7 +52,7 @@ public class RoomManager : Manager
         InitializeRooms();
 
         // ToggleRoom(1, true);
-        ToggleMultipleRooms(UpgradeManager.Instance.UpgradeDataValues().Rooms, true);
+        ToggleMultipleRooms(UpgradeManager.Instance.GetLevelDataValues().rooms, true);
     }
     // public void InstantiateHouseAtPositions()
     // {
@@ -92,21 +93,17 @@ public class RoomManager : Manager
     }
 
 
-    public void ToggleRoom(int roomNumber, bool activate)
+    public void ToggleRoom(int roomNumber)
     {
         if (RoomContainer.ContainsKey(roomNumber))
         {
             Room roomToToggle = RoomContainer[roomNumber];
-            if (activate)
-            {
-                // Assuming your Room class has an Activate method
-                roomToToggle.gameObject.SetActive(true);
-            }
-            else
-            {
-                // Assuming your Room class has a Deactivate method
-                roomToToggle.gameObject.SetActive(false);
-            }
+
+            // Assuming your Room class has an Activate method
+            roomToToggle.gameObject.SetActive(true);
+            FindRoomData(roomNumber).isAvailable = true;
+            UpgradeManager.Instance.UpgradeRoom(roomToToggle.gameObject.transform, roomToToggle.SleepingRoofPos);
+
         }
         else
         {
@@ -114,6 +111,32 @@ public class RoomManager : Manager
         }
     }
 
+    public void ToggleNextRoom()
+    {
+        foreach (var roomData in roomData)
+        {
+            // Check if the room is not active
+            if (!roomData.isAvailable)
+            {
+                // Find the corresponding Room object in RoomContainer using RoomNumber
+                if (RoomContainer.TryGetValue(roomData.RoomNumber, out Room room))
+                {
+                    room.gameObject.SetActive(true);
+                    roomData.isAvailable = true;
+                    UpgradeManager.Instance.UpgradeRoom(roomData.room.transform, roomData.room.SleepingRoofPos);
+                    Debug.Log($"Activated room number {roomData.RoomNumber}.");
+                    break; // Exit the loop once a room has been activated
+                }
+            }
+        }
+
+        // Check if no rooms were found to activate
+        bool roomActivated = roomData.Any(r => r.isAvailable);
+        if (!roomActivated)
+        {
+            Debug.LogError("All rooms are already active or none found.");
+        }
+    }
     public RoomData FindRoomData(int roomNumber)
     {
         foreach (var data in roomData)
@@ -157,7 +180,7 @@ public class RoomManager : Manager
             roomData_.isClean = true; // Assuming the room becomes dirty after use
         }
     }
-    public void ToggleMultipleRooms(int numberOfRooms, bool enable)
+    public void ToggleMultipleRooms(int numberOfRooms, bool enable = false)
     {
         int enabledRooms = 0; // Counter for tracking the number of rooms enabled/disabled
 

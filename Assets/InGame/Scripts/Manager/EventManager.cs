@@ -12,12 +12,16 @@ public static class EventManager
 
     public delegate void SwimmingPoolRequestEventHandler(customer customer);
     private static event SwimmingPoolRequestEventHandler onSwimmingPoolRequested;
-
+    public delegate void CoinChangedDelegate();
+    public static event CoinChangedDelegate OnCoinChanged;
     public static void SubscribeRoomRequest(RoomRequestEventHandler handler)
     {
         onRoomRequested += handler;
     }
-
+    public static void RaiseOnCoinChanged()
+    {
+        OnCoinChanged?.Invoke();
+    }
     public static void UnsubscribeRoomRequest(RoomRequestEventHandler handler)
     {
         onRoomRequested -= handler;

@@ -12,24 +12,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a27b66d3a4a7bc49b9f1f59007732f8, type: 3}
   m_Name: GameData
   m_EditorClassIdentifier: 
-  upgradeEffect: {fileID: 0}
+  money:
+    encryptedValue: 527483899657795070
+    key: 5159895712268760574
+  upgradeEffect: {fileID: 1292211345376930, guid: c4997d50d0e45f1478084b6628b4cba5,
+    type: 3}
   textEffect: {fileID: 0}
-  customerPrefab: {fileID: 0}
+  customerPrefab: {fileID: 6534824338324418642, guid: b6e57af25c7689c44992c14f78bc4be5,
+    type: 3}
+  levels:
+  - level: 0
+    rooms: 2
   characterDatas:
   - type: 1
     model:
     - {fileID: 6534824338324418642, guid: b6e57af25c7689c44992c14f78bc4be5, type: 3}
   upgrades:
-  - _level: 0
-    upgradeName: 
-    cost: 0
-    RoomHouseObj: {fileID: 6938432180157691104, guid: 14878253b78163e46b95060cf5e1b98b,
-      type: 3}
-    Rooms: 2
-  - _level: 1
-    upgradeName: 
-    cost: 50
-    RoomHouseObj: {fileID: 6938432180157691104, guid: 14878253b78163e46b95060cf5e1b98b,
-      type: 3}
-    Rooms: 4
+  - type: 0
+    level: 0
+    cost:
+      encryptedValue: 546030401388826290
+      key: 5173197543535300274
+    isUpgraded: 0
+  - type: 1
+    level: 0
+    cost:
+      encryptedValue: 4641240890982006784
+      key: 0
+    isUpgraded: 0
   botDatas: []
