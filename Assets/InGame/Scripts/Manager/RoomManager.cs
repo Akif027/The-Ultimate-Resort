@@ -52,7 +52,7 @@ public class RoomManager : Manager
         InitializeRooms();
 
         // ToggleRoom(1, true);
-        ToggleMultipleRooms(UpgradeManager.Instance.GetLevelDataValues().rooms, true);
+        ToggleMultipleRooms(UpgradeManager.Instance.GetLevelData().rooms, true);
     }
     // public void InstantiateHouseAtPositions()
     // {
@@ -75,7 +75,7 @@ public class RoomManager : Manager
         int roomNumber = 1;
         foreach (Room r in room)
         {
-            r.gameObject.SetActive(false);
+            //  r.gameObject.SetActive(false);
             r.RoomNumber = roomNumber; // Assign the current room number
             roomData.Add(new RoomData(roomNumber, r));
             CleanAnim[] anim = r.GetComponentsInChildren<CleanAnim>();
@@ -102,7 +102,12 @@ public class RoomManager : Manager
             // Assuming your Room class has an Activate method
             roomToToggle.gameObject.SetActive(true);
             FindRoomData(roomNumber).isAvailable = true;
-            UpgradeManager.Instance.UpgradeRoom(roomToToggle.gameObject.transform, roomToToggle.SleepingRoofPos);
+            //  Effect.Instance.PlayUpgradeEffect(roomToToggle.SleepingRoofPos);
+            PlayEffect playEffect = roomToToggle.gameObject.GetComponent<PlayEffect>();
+            if (playEffect != null)
+            {
+                playEffect.PlayOnUpgrade();
+            }
 
         }
         else
@@ -123,7 +128,8 @@ public class RoomManager : Manager
                 {
                     room.gameObject.SetActive(true);
                     roomData.isAvailable = true;
-                    UpgradeManager.Instance.UpgradeRoom(roomData.room.transform, roomData.room.SleepingRoofPos);
+                    // Effect.Instance.PlayUpgradeEffect(roomData.room.SleepingRoofPos);
+                    //   UpgradeManager.Instance.UpgradeRoom(roomData.room.transform);
                     Debug.Log($"Activated room number {roomData.RoomNumber}.");
                     break; // Exit the loop once a room has been activated
                 }
@@ -195,6 +201,7 @@ public class RoomManager : Manager
                 if (RoomContainer.TryGetValue(roomData.RoomNumber, out Room room))
                 {
                     room.gameObject.SetActive(enable);
+
                     roomData.isAvailable = true;
                     enabledRooms++;
 

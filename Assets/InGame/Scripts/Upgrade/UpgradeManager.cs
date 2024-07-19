@@ -1,48 +1,83 @@
 using System.Collections.Generic;
 using UnityEngine;
-// Include this line if UpgradeManager is outside the Enums namespace
 
 public class UpgradeManager : Singleton<UpgradeManager>
 {
-    public Level LevelOn = Level.Level_1; // Correctly references the external Level enum
+    [SerializeField] private Level levelOn = Level.Level_1; // Correctly references the external Level enum
+    [SerializeField] private GameData gameData; // Reference to the GameData ScriptableObject
+    [SerializeField] private List<Status> statusObjects = new List<Status>(); // List to store all Status objects
 
-    public GameData gameData; // Reference to the GameData ScriptableObject
-    public float scaleUpDuration = 0.5f;
-    public float scaleDownDuration = 0.5f;
-    public float scaleMultiplier = 1.5f;
-    public Color upgradeColor = Color.yellow;
-
-
-    //based on the level and what the player has already upgraded we will enable those in this Script <--
-
-    public UpgradeData UpgradeDataValues()
+    private void Awake()
     {
-        UpgradeData upgrade = gameData.GetUpgradeData(LevelOn);
-
-        return upgrade;
-
+        InitializeStatusObjects();
+        UpdateUpgradeSlots();
     }
 
-
-
-    public UpgradeData UpgradeDataValues(UpgradeData.Type type)
+    private void InitializeStatusObjects()
     {
-        UpgradeData upgrade = gameData.GetUpgradeData(LevelOn, type);
-
-        return upgrade;
-
+        Status[] allStatusObjects = FindObjectsOfType<Status>();
+        statusObjects.AddRange(allStatusObjects);
     }
 
-    public LevelData GetLevelDataValues()
+    public void ChangeLevel(Level level)
     {
-        LevelData levelD = gameData.GetLevelData(LevelOn);
-
-        return levelD;
-
+        levelOn = level;
+        UpdateUpgradeSlots();
     }
-    public void UpgradeRoom(Transform t, Transform Effectpos)
+
+    public UpgradeData GetUpgradeData()
     {
-        AllPurposeCamera.Instance.FocusOnTarget(t);
-        DoTweenManager.PlayUpgradeAnimation(t, scaleUpDuration, scaleDownDuration, scaleMultiplier, upgradeColor, gameData.upgradeEffect, Effectpos);
+        return gameData.GetUpgradeData(levelOn);
+    }
+
+    public UpgradeData GetUpgradeData(UpgradeData.Type type)
+    {
+        return gameData.GetUpgradeData(levelOn, type);
+    }
+
+    public UpgradeData GetUpgradeDataWithType(UpgradeData.Type type)
+    {
+        return gameData.GetUpgradeData(type);
+    }
+
+    public LevelData GetLevelData()
+    {
+        return gameData.GetLevelData(levelOn);
+    }
+
+    public bool IsPoolUpgraded()
+    {
+        UpgradeData poolUpgradeData = GetUpgradeData(UpgradeData.Type.pool);
+        return poolUpgradeData != null && poolUpgradeData.isUpgraded;
+    }
+
+    private void UpdateUpgradeSlots()
+    {
+        foreach (var statusObject in statusObjects)
+        {
+            UpdateStatusObject(statusObject);
+        }
+    }
+
+    private void UpdateStatusObject(Status statusObject)
+    {
+        UpgradeData upgradeData = GetUpgradeDataWithType(statusObject.getUpgradedataType());
+        statusObject.Inizilizedata = upgradeData;
+
+        if (upgradeData != null)
+        {
+            GameObject upgradeObject = statusObject.UpgradeGameObj;
+            upgradeObject.SetActive(upgradeData.isUpgraded);
+
+            if (ShouldUnlock(upgradeData))
+            {
+                statusObject.Unlock();
+            }
+        }
+    }
+
+    private bool ShouldUnlock(UpgradeData upgradeData)
+    {
+        return upgradeData.level <= levelOn && !upgradeData.isUpgraded;
     }
 }

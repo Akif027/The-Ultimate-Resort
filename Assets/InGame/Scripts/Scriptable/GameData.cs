@@ -61,7 +61,10 @@ public class GameData : ScriptableObject
     {
         return upgrades.Find(upgrade => upgrade.level == level && upgrade.type == type);
     }
-
+    public UpgradeData GetUpgradeData(UpgradeData.Type type)
+    {
+        return upgrades.Find(upgrade => upgrade.type == type);
+    }
     public LevelData GetLevelData(Level type)
     {
         foreach (var le in levels)
@@ -137,7 +140,7 @@ public class LevelData
 [System.Serializable]
 public class UpgradeData
 {
-    public enum Type { Room, Room2 }
+    public enum Type { Room, Room2, pool }
     public Type type;
     public Level level;
     public SecuredDouble cost;

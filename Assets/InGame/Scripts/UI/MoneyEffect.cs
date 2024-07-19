@@ -76,6 +76,6 @@ public class MoneyEffect : MonoBehaviour
     public void StopSpend()
     {
         StopAllCoroutines();
-        gameObject.SetActive(false);
+
     }
 }

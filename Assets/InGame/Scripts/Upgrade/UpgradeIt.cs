@@ -6,8 +6,9 @@ using DG.Tweening;
 
 public class UpgradeIt : MonoBehaviour
 {
-    [SerializeField] UpgradeData.Type type;
+
     [SerializeField] UpgradeData upgradeData;
+    private Status status;
     public float spendTime = 10;
     public SecuredDouble SpendValue { get; set; }
     public SecuredDouble Cost { get; set; }
@@ -19,20 +20,25 @@ public class UpgradeIt : MonoBehaviour
 
     void Start()
     {
-        upgradeData = UpgradeManager.Instance.UpgradeDataValues(type);
+        status = GetComponentInParent<Status>();
+        upgradeData = status.getUpgradedata();
         Cost = upgradeData.cost;
 
-        if (upgradeData.isUpgraded)
-        {
-            gameObject.SetActive(false);
-        }
-        else
-        {
-            gameObject.SetActive(true);
-        }
+        // if (upgradeData.isUpgraded)
+        // {
+        //     gameObject.SetActive(false);
+        // }
+        // else
+        // {
+        //     gameObject.SetActive(true);
+        // }
 
 
 
+    }
+    public void initilizeupgradeData(UpgradeData data)
+    {
+        upgradeData = data;
     }
 
     public virtual void SpendMoney()
@@ -57,8 +63,9 @@ public class UpgradeIt : MonoBehaviour
         }
 
         Debug.Log("Upgraded");
-        OnUpgrade?.Invoke();
         upgradeData.isUpgraded = true;
+        OnUpgrade?.Invoke();
+
 
     }
 

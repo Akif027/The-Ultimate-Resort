@@ -173,13 +173,12 @@ public class customer : MonoBehaviour
          hasBeenAddedToPoolQueue = true; // Set the flag to true after adding the customer to the queue
       }
    }
-
    public void SetRandomCustomerState(params CustomerState[] excludeStates)
    {
       Array values = Enum.GetValues(typeof(CustomerState));
       CustomerState[] filteredValues = values.Cast<CustomerState>()
-                                              .Where(state => !excludeStates.Contains(state))
-                                              .ToArray();
+                                             .Where(state => !excludeStates.Contains(state))
+                                             .ToArray();
 
       if (filteredValues.Length == 0)
       {
@@ -189,14 +188,29 @@ public class customer : MonoBehaviour
 
       System.Random random = new System.Random();
       CustomerState randomState = filteredValues[random.Next(filteredValues.Length)];
-      currentState = randomState;
+
+      // Ensure the pool state is only set if the pool is upgraded
+      if (randomState == CustomerState.SwimingPool && !UpgradeManager.Instance.IsPoolUpgraded())
+      {
+         SetRandomCustomerState(excludeStates.Append(CustomerState.SwimingPool).ToArray());
+      }
+      else
+      {
+         ChangeState(randomState);
+      }
+
       Debug.Log("Random Customer State: " + currentState);
    }
 
-
-
    public void ChangeState(CustomerState newState)
    {
+      // Ensure the pool state is only set if the pool is upgraded
+      if (newState == CustomerState.SwimingPool && !UpgradeManager.Instance.IsPoolUpgraded())
+      {
+         Debug.LogWarning("Cannot change to swimming pool state because the pool is not upgraded.");
+         return;
+      }
+
       currentState = newState;
    }
    void RequestRoom()

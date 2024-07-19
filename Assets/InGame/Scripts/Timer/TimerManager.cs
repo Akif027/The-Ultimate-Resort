@@ -20,7 +20,7 @@ public class TimerManager : Singleton<TimerManager>
 
     void Update()
     {
-        if (_applicationIsQuitting) return;
+        if (ApplicationIsQuitting) return;
 
         for (int i = activeCallbacks.Count - 1; i >= 0; i--)
         {

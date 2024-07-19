@@ -4,8 +4,13 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
     private static T _instance;
     private static readonly object _lock = new object();
-    protected static bool _applicationIsQuitting = false;
+    private static bool _applicationIsQuitting = false;
 
+
+    public bool ApplicationIsQuitting
+    {
+        get { return _applicationIsQuitting; }
+    }
     public static T Instance
     {
         get
@@ -22,12 +27,12 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
                 if (_instance == null)
                 {
                     _instance = FindObjectOfType<T>();
+
                     if (_instance == null)
                     {
                         GameObject singleton = new GameObject();
                         _instance = singleton.AddComponent<T>();
                         singleton.name = "(singleton) " + typeof(T).ToString();
-
                         DontDestroyOnLoad(singleton);
 
                         Debug.Log("[Singleton] An instance of " + typeof(T) +
@@ -38,7 +43,8 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
                     {
                         Debug.LogError("[Singleton] More than one instance of " + typeof(T) +
                             " found. There should never be more than one singleton!");
-                        return _instance;
+                        DestroyImmediate(_instance.gameObject); // Ensure only one instance remains
+                        return null;
                     }
                 }
 
@@ -66,7 +72,6 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     //     {
     //         _instance = null;
     //     }
-
     //     _applicationIsQuitting = true;
     // }
 }

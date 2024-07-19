@@ -18,10 +18,11 @@ public class SwimmingPoolActivites : MonoBehaviour
     public static int CoustomerPlayCount;
 
     private bool isDirty = false;
-
+    public Status Up_status;
 
     void Start()
     {
+
         CoustomerPlayCount = 0;
         ChangeColor(Clean);
         queueManager = GameManager.Instance.GetManager<QueueManager>() as QueueManager;
