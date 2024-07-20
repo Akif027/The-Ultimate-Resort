@@ -22,6 +22,10 @@ public struct SecuredDouble
         set => encryptedValue = Encrypt(value, key);
     }
 
+    public SecuredDouble Round()
+    {
+        return new SecuredDouble(System.Math.Round(Value));
+    }
     // Encrypt the value using XOR operation with the key
     private static long Encrypt(double value, long key)
     {

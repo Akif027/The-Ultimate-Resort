@@ -28,7 +28,7 @@ public class AllPurposeCamera : Singleton<AllPurposeCamera>
 
     public void FocusOnTarget(Transform targetTransform)
     {
-        StartPos = mainCamera.transform.position;
+        StartPos = target.position;
         // Calculate the target position directly above the targetTransform
         targetPosition = targetTransform.position + Vector3.up * heightOffset;
 

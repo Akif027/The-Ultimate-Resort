@@ -27,7 +27,7 @@ public class MoneyEffect : MonoBehaviour
 
         while (true)
         {
-            if (target != null && Game.Instance.gameData.money > 0)
+            if (target != null && Game.Instance.gameData.money.Round() > 0)
             {
                 GameObject g = Instantiate(moneyPrefab);
                 g.transform.position = target.position + offset;

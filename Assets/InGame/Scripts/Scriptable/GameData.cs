@@ -25,20 +25,16 @@ public class GameData : ScriptableObject
             upgradeDictionary[upgrade.level] = upgrade;
         }
     }
-    void Start()
-    {
 
-
-    }
     public void AddMoney(SecuredDouble value)
     {
-        money += value;
+        money += value.Round();
         EventManager.RaiseOnCoinChanged();
     }
 
     public void SpendMoney(SecuredDouble value)
     {
-        money -= value;
+        money -= value.Round();
         EventManager.RaiseOnCoinChanged();
     }
 
@@ -46,7 +42,7 @@ public class GameData : ScriptableObject
     {
         if (money >= value)
         {
-            money -= value;
+            money -= value.Round();
             EventManager.RaiseOnCoinChanged();
             return true;
         }

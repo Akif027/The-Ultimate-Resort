@@ -13,6 +13,8 @@ public class ReceptionManager : MonoBehaviour
    [SerializeField] UIManager uIManager;
    [SerializeField] GameObject WaitingCustomerObj;
 
+   [SerializeField] MoneyPlace moneyPlace;
+
    public Button AcceptCustomerB;
    void Start()
    {
@@ -56,7 +58,7 @@ public class ReceptionManager : MonoBehaviour
                c.ChangeState(CustomerState.MovingToRoom);
                queueManager.RemoveCustomerFromQueue(WaitingCustomerObj);
                WaitingCustomerObj = null;
-
+               moneyPlace.PlaceMoney();
             }
 
          }
