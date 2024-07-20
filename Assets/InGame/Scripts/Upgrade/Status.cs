@@ -41,7 +41,7 @@ public class Status : MonoBehaviour
     {
         if (upgradeSlot != null)
         {
-            // upgradeSlot.SetActive(status == SlotStatus.Unlocked);
+            upgradeSlot.SetActive(status == SlotStatus.Unlocked);
 
         }
     }

@@ -1,5 +1,5 @@
 // Toony Colors Pro+Mobile 2
-// (c) 2014-2018 Jean Moreno
+// (c) 2014-2023 Jean Moreno
 #NAME=Water
 #INFO=Water Template  Use this template to generate stylized water shaders.
 #CONFIG=water
@@ -125,7 +125,7 @@ warning	msgType=info		lbl=Use Shader Target 2.5 for maximum compatibility across
 dd_end
 dd_start	lbl= SURFACE SHADER FLAGS
 ---
-#flag	lbl=Add Shadow Passes			kw=addshadow													tt=Force the shader to have the Shadow Caster and Collector passes.\nCan help if shadows don't work properly with the shader
+flag	lbl=Add Shadow Passes			kw=addshadow													tt=Force the shader to have the Shadow Caster and Collector passes.\nCan help if shadows don't work properly with the shader\n(note: shadows aren't compatible with depth buffer effects!)
 flag	lbl=Full Forward Shadows		kw=fullforwardshadows											tt=Enable support for all shadow types in Forward rendering path
 #flag	lbl=Disable Shadows				kw=noshadow														tt=Disables all shadow receiving support in this shader
 flag	lbl=Disable Fog					kw=nofog														tt=Disables Unity Fog support.\nCan help if you run out of vertex interpolators and don't need fog.
@@ -672,9 +672,9 @@ Shader "@%SHADER_NAME%@"
 		struct Input
 		{
 /// IF SECOND_TEX
-			half4 texcoord;
+			float4 texcoord;
 /// ELSE
-			half2 texcoord;
+			float2 texcoord;
 ///
 /// IF UVMASK1
 			half2 uv_Mask1;
@@ -707,9 +707,9 @@ Shader "@%SHADER_NAME%@"
 ///
 /// IF UV_SIN_WAVES && !VERTEX_USW
 	/// IF SECOND_TEX && USW_SECOND_TEX
-			half4 sinAnim;
+			float4 sinAnim;
 	/// ELSE
-			half2 sinAnim;
+			float2 sinAnim;
 	///
 ///
 /// IF (REFLECTION_PROBES && !NORMAL_MAP) || CUBE_AMBIENT

@@ -135,7 +135,7 @@ Material:
       second: 0.5
     - first:
         name: _RampThreshold
-      second: 0.5
+      second: 0.3
     - first:
         name: _RampThresholdOtherLights
       second: 0.5

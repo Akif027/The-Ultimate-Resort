@@ -129,13 +129,13 @@ Material:
       second: 0.02
     - first:
         name: _RampSmooth
-      second: 0.6
+      second: 0.04
     - first:
         name: _RampSmoothOtherLights
       second: 0.8
     - first:
         name: _RampThreshold
-      second: 0.5
+      second: 0.78
     - first:
         name: _RampThresholdOtherLights
       second: 0.65

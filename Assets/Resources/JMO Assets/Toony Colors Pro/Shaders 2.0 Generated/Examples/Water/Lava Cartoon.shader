@@ -1,7 +1,5 @@
-﻿// Upgrade NOTE: upgraded instancing buffer 'Props' to new syntax.
-
-// Toony Colors Pro+Mobile 2
-// (c) 2014-2018 Jean Moreno
+﻿// Toony Colors Pro+Mobile 2
+// (c) 2014-2019 Jean Moreno
 
 Shader "Toony Colors Pro 2/Examples/Water/Lava Cartoon"
 {
@@ -103,11 +101,11 @@ Shader "Toony Colors Pro 2/Examples/Water/Lava Cartoon"
 
 		struct Input
 		{
-			half2 texcoord;
+			float2 texcoord;
 			half2 uv_Mask2;
 			half2 foam_texcoord;
 			half3 viewDir;
-			half2 sinAnim;
+			float2 sinAnim;
 			float4 sPos;
 		};
 

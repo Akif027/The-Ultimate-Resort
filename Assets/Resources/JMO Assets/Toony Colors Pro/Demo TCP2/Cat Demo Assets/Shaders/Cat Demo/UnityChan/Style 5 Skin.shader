@@ -1,7 +1,5 @@
-﻿// Upgrade NOTE: upgraded instancing buffer 'Props' to new syntax.
-
-// Toony Colors Pro+Mobile 2
-// (c) 2014-2018 Jean Moreno
+﻿// Toony Colors Pro+Mobile 2
+// (c) 2014-2019 Jean Moreno
 
 Shader "Toony Colors Pro 2/Examples/Cat Demo/UnityChan/Style 5 Skin"
 {
@@ -12,7 +10,7 @@ Shader "Toony Colors Pro 2/Examples/Cat Demo/UnityChan/Style 5 Skin"
 		_Color ("Color", Color) = (1,1,1,1)
 		_HColor ("Highlight Color", Color) = (0.785,0.785,0.785,1.0)
 		_SColor ("Shadow Color", Color) = (0.195,0.195,0.195,1.0)
-		_STexture ("Shadow Color Texture", 2D) = "white" {}
+		[NoScaleOffset] _STexture ("Shadow Color Texture", 2D) = "white" {}
 
 		//DIFFUSE
 		_MainTex ("Main Texture", 2D) = "white" {}
@@ -28,12 +26,6 @@ Shader "Toony Colors Pro 2/Examples/Cat Demo/UnityChan/Style 5 Skin"
 		_RampThresholdOtherLights ("Threshold", Range(0,1)) = 0.5
 		_RampSmoothOtherLights ("Smoothing", Range(0.001,1)) = 0.5
 		[Space]
-	[TCP2Separator]
-
-	[TCP2HeaderHelp(NORMAL MAPPING, Normal Bump Map)]
-		//BUMP
-		_BumpMap ("Normal map (RGB)", 2D) = "bump" {}
-		_BumpScale ("Scale", Float) = 1.0
 	[TCP2Separator]
 
 	[TCP2HeaderHelp(RIM, Rim)]
@@ -222,8 +214,6 @@ Shader "Toony Colors Pro 2/Examples/Cat Demo/UnityChan/Style 5 Skin"
 		sampler2D _MainTex;
 		sampler2D _STexture;
 		fixed _SketchSpeed;
-		sampler2D _BumpMap;
-		half _BumpScale;
 		fixed4 _RimColor;
 		fixed _RimMin;
 		fixed _RimMax;
@@ -235,7 +225,6 @@ Shader "Toony Colors Pro 2/Examples/Cat Demo/UnityChan/Style 5 Skin"
 		struct Input
 		{
 			half2 uv_MainTex;
-			half2 uv_BumpMap;
 			float3 viewDir;
 			half4 sketchUv;
 		};
@@ -374,7 +363,9 @@ Shader "Toony Colors Pro 2/Examples/Cat Demo/UnityChan/Style 5 Skin"
 			float4 texcoord : TEXCOORD0;
 			float4 texcoord1 : TEXCOORD1;
 			float4 texcoord2 : TEXCOORD2;
+		#if defined(LIGHTMAP_ON) && defined(DIRLIGHTMAP_COMBINED)
 			float4 tangent : TANGENT;
+		#endif
 	#if UNITY_VERSION >= 550
 			UNITY_VERTEX_INPUT_INSTANCE_ID
 	#endif
@@ -415,10 +406,6 @@ Shader "Toony Colors Pro 2/Examples/Cat Demo/UnityChan/Style 5 Skin"
 			_Random.y = -round(_Time.z * _SketchSpeed) / _SketchSpeed;
 			screenUV.xy += frac(_Random.xy);
 			o.ScreenUVs = screenUV;
-
-			//Normal map
-			half4 normalMap = tex2D(_BumpMap, IN.uv_BumpMap.xy);
-			o.Normal = UnpackScaleNormal(normalMap, _BumpScale);
 
 			//Rim
 			float3 viewDir = normalize(IN.viewDir);

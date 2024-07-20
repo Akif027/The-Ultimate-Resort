@@ -1,11 +1,13 @@
 // Toony Colors Pro+Mobile 2
-// (c) 2014-2018 Jean Moreno
+// (c) 2014-2023 Jean Moreno
 
 using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
+using ToonyColorsPro.Utilities;
+using ToonyColorsPro.Legacy;
 
 internal class TCP2_MaterialInspector_SurfacePBS_SG : ShaderGUI
 {
@@ -476,33 +478,41 @@ internal class TCP2_MaterialInspector_SurfacePBS_SG : ShaderGUI
 		}
 	}
 
-	void DoEmissionArea( Material material )
+	void DoEmissionArea(Material material)
 	{
+#if UNITY_5_6_OR_NEWER
+		// Emission for GI?
+		if (m_MaterialEditor.EmissionEnabledProperty())
+		{
+			bool hadEmissionTexture = emissionMap.textureValue != null;
+
+			// Texture and HDR color controls
+	#if UNITY_2018_1_OR_NEWER
+			m_MaterialEditor.TexturePropertyWithHDRColor(Styles.emissionText, emissionMap, emissionColorForRendering, false);
+	#else
+			m_MaterialEditor.TexturePropertyWithHDRColor(Styles.emissionText, emissionMap, emissionColorForRendering, m_ColorPickerHDRConfig, false);
+	#endif
+
+			// If texture was assigned and color was black set color to white
+			float brightness = emissionColorForRendering.colorValue.maxColorComponent;
+			if (emissionMap.textureValue != null && !hadEmissionTexture && brightness <= 0f)
+				emissionColorForRendering.colorValue = Color.white;
+
+			// change the GI flag and fix it up with emissive as black if necessary
+			m_MaterialEditor.LightmapEmissionFlagsProperty(MaterialEditor.kMiniTextureFieldLabelIndentLevel, true);
+		}
+#else
 		var showHelpBox = !HasValidEmissiveKeyword(material);
 
-		var hadEmissionTexture = emissionMap != null && emissionMap.textureValue != null;
+		var hadEmissionTexture = emissionMap.textureValue != null;
 
-		if(emissionMap != null && emissionColorForRendering != null)
-		{
-			// Texture and HDR color controls
-#if !UNITY_2018_1_OR_NEWER
-			m_MaterialEditor.TexturePropertyWithHDRColor(Styles.emissionText, emissionMap, emissionColorForRendering, m_ColorPickerHDRConfig, false);
-#else
-			m_MaterialEditor.TexturePropertyWithHDRColor(Styles.emissionText, emissionMap, emissionColorForRendering, false);
-#endif
-		}
-		else if(emissionColorForRendering != null)
-		{
-			m_MaterialEditor.ShaderProperty(emissionColorForRendering, Styles.emissionText);
-		}
+		// Texture and HDR color controls
+		m_MaterialEditor.TexturePropertyWithHDRColor(Styles.emissionText, emissionMap, emissionColorForRendering, m_ColorPickerHDRConfig, false);
 
-		if(emissionMap != null && emissionColorForRendering != null)
-		{
-			// If texture was assigned and color was black set color to white
-			var brightness = emissionColorForRendering.colorValue.maxColorComponent;
-			if(emissionMap.textureValue != null && !hadEmissionTexture && brightness <= 0f)
-				emissionColorForRendering.colorValue = Color.white;
-		}
+		// If texture was assigned and color was black set color to white
+		var brightness = emissionColorForRendering.colorValue.maxColorComponent;
+		if (emissionMap.textureValue != null && !hadEmissionTexture && brightness <= 0f)
+			emissionColorForRendering.colorValue = Color.white;
 
 		// Emission for GI?
 		m_MaterialEditor.LightmapEmissionProperty(MaterialEditor.kMiniTextureFieldLabelIndentLevel + 0);
@@ -511,6 +521,7 @@ internal class TCP2_MaterialInspector_SurfacePBS_SG : ShaderGUI
 		{
 			EditorGUILayout.HelpBox(Styles.emissiveWarning.text, MessageType.Warning);
 		}
+#endif
 	}
 
 	void DoSpecularMetallicArea()
@@ -638,11 +649,23 @@ internal class TCP2_MaterialInspector_SurfacePBS_SG : ShaderGUI
 			SetKeyword (material, "_METALLICGLOSSMAP", material.GetTexture ("_MetallicGlossMap"));
 		SetKeyword (material, "_PARALLAXMAP", material.GetTexture ("_ParallaxMap"));
 		SetKeyword (material, "_DETAIL_MULX2", material.GetTexture ("_DetailAlbedoMap") || material.GetTexture ("_DetailNormalMap"));
-
-		bool shouldEmissionBeEnabled = material.HasProperty("_EmissionColor") && ShouldEmissionBeEnabled (material, material.GetColor("_EmissionColor"));
-		SetKeyword (material, "_EMISSION", shouldEmissionBeEnabled);
 		*/
 
+#if UNITY_5_6_OR_NEWER
+		// A material's GI flag internally keeps track of whether emission is enabled at all, it's enabled but has no effect
+		// or is enabled and may be modified at runtime. This state depends on the values of the current flag and emissive color.
+		// The fixup routine makes sure that the material is in the correct state if/when changes are made to the mode or color.
+		if (material.HasProperty("_EmissionColor"))
+		{
+			MaterialEditor.FixupEmissiveFlag(material);
+			bool shouldEmissionBeEnabled = material.HasProperty("_EmissionColor") && (material.globalIlluminationFlags & MaterialGlobalIlluminationFlags.EmissiveIsBlack) == 0;
+			SetKeyword(material, "_EMISSION", shouldEmissionBeEnabled);
+		}
+		else if(material.IsKeywordEnabled("_EMISSION"))
+		{
+			SetKeyword(material, "_EMISSION", false);
+		}
+#else
 		// Setup lightmap emissive flags
 		var shouldEmissionBeEnabled = material.HasProperty("_EmissionColor") && ShouldEmissionBeEnabled(material, material.GetColor("_EmissionColor"));
 		var flags = material.globalIlluminationFlags;
@@ -654,6 +677,7 @@ internal class TCP2_MaterialInspector_SurfacePBS_SG : ShaderGUI
 
 			material.globalIlluminationFlags = flags;
 		}
+#endif
 	}
 
 	bool HasValidEmissiveKeyword (Material material)

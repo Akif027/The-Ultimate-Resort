@@ -1,5 +1,5 @@
 // Toony Colors Pro+Mobile 2
-// (c) 2014-2018 Jean Moreno
+// (c) 2014-2023 Jean Moreno
 # TCP2_ShaderTemplate_PBS (Unity 5.5)
 #NAME=Legacy/Standard PBS
 #CONFIG=PBS
@@ -545,6 +545,8 @@ Shader "@%SHADER_NAME%@"
 	///
 			#pragma multi_compile_instancing
 
+			#pragma multi_compile EXCLUDE_TCP2_MAIN_PASS
+
 			#pragma target @%SHADER_TARGET%@
 
 			ENDCG
@@ -711,6 +713,7 @@ Shader "@%SHADER_NAME%@"
 	///
 			#pragma multi_compile_instancing
 
+			#pragma multi_compile EXCLUDE_TCP2_MAIN_PASS
 
 			#pragma target @%SHADER_TARGET%@
 
@@ -749,6 +752,8 @@ Shader "@%SHADER_NAME%@"
 			//#pragma multi_compile TCP2_NONE TCP2_OUTLINE_TEXTURED		//Not needed for depth
 			#pragma multi_compile_instancing
 
+			#pragma multi_compile EXCLUDE_TCP2_MAIN_PASS
+
 			#pragma target @%SHADER_TARGET%@
 
 			ENDCG
@@ -778,7 +783,7 @@ Shader "@%SHADER_NAME%@"
 			#pragma multi_compile TCP2_NONE TCP2_COLORS_AS_NORMALS TCP2_TANGENT_AS_NORMALS TCP2_UV2_AS_NORMALS
 	///
 
-			#pragma multi_compile TCP2_SHADOW_PASS
+			#pragma multi_compile EXCLUDE_TCP2_MAIN_PASS
 
 			half4		_Color;
 			half		_Cutoff;
@@ -930,7 +935,7 @@ Shader "@%SHADER_NAME%@"
 	CGINCLUDE
 
 	//Make sure that we don't have cross-definitions between UnityStandardShadow.cginc and this CGINCLUDE
-	#if !defined(TCP2_SHADOW_PASS) && !defined(TCP2_OUTLINE_TEXTURED)
+	#if !defined(EXCLUDE_TCP2_MAIN_PASS)
 	
 /// IF PBS_SPECULAR
 		#define UNITY_SETUP_BRDF_INPUT SpecularSetup

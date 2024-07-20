@@ -1,5 +1,5 @@
 ﻿// Toony Colors Pro+Mobile 2
-// (c) 2014-2018 Jean Moreno
+// (c) 2014-2019 Jean Moreno
 
 
 Shader "Toony Colors Pro 2/Examples/PBS/Outline Behind"
@@ -170,7 +170,7 @@ Shader "Toony Colors Pro 2/Examples/PBS/Outline Behind"
 
 	#ifdef TCP2_OUTLINE_CONST_SIZE
 			//Camera-independent outline size
-			float dist = distance(_WorldSpaceCameraPos, mul(unity_ObjectToWorld, v.vertex));
+			float dist = distance(mul(unity_WorldToObject, float4(_WorldSpaceCameraPos, 0)).xyz, v.vertex.xyz);
 			#define SIZE	dist
 	#else
 			#define SIZE	1.0
@@ -324,6 +324,7 @@ Shader "Toony Colors Pro 2/Examples/PBS/Outline Behind"
 			#pragma multi_compile TCP2_NONE TCP2_OUTLINE_TEXTURED			
 			#pragma multi_compile_instancing
 
+			#pragma multi_compile EXCLUDE_TCP2_MAIN_PASS
 
 			#pragma target 3.0
 
@@ -333,7 +334,7 @@ Shader "Toony Colors Pro 2/Examples/PBS/Outline Behind"
 
 	CGINCLUDE
 
-	#if !defined(TCP2_SHADOW_PASS)
+	#if !defined(EXCLUDE_TCP2_MAIN_PASS)
 		#include "Lighting.cginc"
 
 		//================================================================================================================================

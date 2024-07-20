@@ -1,7 +1,5 @@
-﻿// Upgrade NOTE: upgraded instancing buffer 'Props' to new syntax.
-
-// Toony Colors Pro+Mobile 2
-// (c) 2014-2018 Jean Moreno
+﻿// Toony Colors Pro+Mobile 2
+// (c) 2014-2019 Jean Moreno
 
 Shader "Toony Colors Pro 2/Examples/Cat Demo/Cat/Style 1"
 {
@@ -38,7 +36,7 @@ Shader "Toony Colors Pro 2/Examples/Cat Demo/Cat/Style 1"
 	[TCP2HeaderHelp(SPECULAR, Specular)]
 		//SPECULAR
 		_SpecColor ("Specular Color", Color) = (0.5, 0.5, 0.5, 1)
-		_Smoothness ("Smoothness", Float) = 0.2
+		_Smoothness ("Size", Float) = 0.2
 	[TCP2Separator]
 
 	[TCP2HeaderHelp(RIM, Rim)]

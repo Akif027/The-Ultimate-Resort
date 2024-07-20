@@ -1,7 +1,5 @@
-﻿// Upgrade NOTE: upgraded instancing buffer 'Props' to new syntax.
-
-// Toony Colors Pro+Mobile 2
-// (c) 2014-2018 Jean Moreno
+﻿// Toony Colors Pro+Mobile 2
+// (c) 2014-2019 Jean Moreno
 
 Shader "Toony Colors Pro 2/Examples/Cat Demo/Ground"
 {
@@ -26,8 +24,8 @@ Shader "Toony Colors Pro 2/Examples/Cat Demo/Ground"
 		_BlendTex1 ("Texture 1 (r)", 2D) = "white" {}
 		_BlendTex2 ("Texture 2 (g)", 2D) = "white" {}
 		[Header(Height Blending Parameters)]
-		[TCP2Vector4Floats(Height Smoothing,R,G,B,A,0.001,2,0.001,2,0.001,2,0.001,2)] _VColorBlendSmooth ("Smooth", Vector) = (0.25,0.25,0.25,0.25)
-		[TCP2Vector4Floats(Height Offset,R,G,B,A)] _VColorBlendOffset ("Height Offset", Vector) = (0,0,0,0)
+		[TCP2Vector4Floats(R,G,B,A,0.001,2,0.001,2,0.001,2,0.001,2)] _VColorBlendSmooth ("Height Smoothing", Vector) = (0.25,0.25,0.25,0.25)
+		[TCP2Vector4Floats(R,G,B,A)] _VColorBlendOffset ("Height Offset", Vector) = (0,0,0,0)
 		[TCP2HelpBox(Info,Height will be taken from each texture alpha channel.  No alpha in the texture will result in linear blending.)]
 	[TCP2Separator]
 
@@ -228,7 +226,10 @@ Shader "Toony Colors Pro 2/Examples/Cat Demo/Ground"
 			float3 albedoHsv = rgb2hsv(s.Albedo.rgb);
 			albedoHsv += float3(_Shadow_HSV_H/360,_Shadow_HSV_S,_Shadow_HSV_V);
 			s.Albedo = lerp(hsv2rgb(albedoHsv), s.Albedo, ramp);
-		#if !defined(UNITY_PASS_FORWARDBASE)
+		// Note: we consider that a directional light with a cookie is supposed to be the main one (even though Unity renders it as an additional light).
+		// Thus when using a main directional light AND another directional light with a cookie, then the shadow color might be applied twice.
+		// You can remove the DIRECTIONAL_COOKIE check below the prevent that.
+		#if !defined(UNITY_PASS_FORWARDBASE) && !defined(DIRECTIONAL_COOKIE)
 			_SColor = fixed4(0,0,0,1);
 		#endif
 			_SColor = lerp(_HColor, _SColor, _SColor.a);	//Shadows intensity through alpha

@@ -129,13 +129,13 @@ Material:
       second: 0.02
     - first:
         name: _RampSmooth
-      second: 0.05
+      second: 0.001
     - first:
         name: _RampSmoothOtherLights
       second: 0.2
     - first:
         name: _RampThreshold
-      second: 0.5
+      second: 0.78
     - first:
         name: _RampThresholdOtherLights
       second: 0.65
@@ -184,7 +184,7 @@ Material:
       second: {r: 1, g: 0.86764705, b: 0.86764705, a: 1}
     - first:
         name: _DiffTint
-      second: {r: 0.99264705, g: 0.8112322, b: 0.74448526, a: 1}
+      second: {r: 1, g: 0.8172414, b: 0.75, a: 1}
     - first:
         name: _EmissionColor
       second: {r: 0, g: 0, b: 0, a: 1}

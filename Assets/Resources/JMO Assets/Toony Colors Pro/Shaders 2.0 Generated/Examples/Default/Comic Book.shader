@@ -1,7 +1,5 @@
-﻿// Upgrade NOTE: upgraded instancing buffer 'Props' to new syntax.
-
-// Toony Colors Pro+Mobile 2
-// (c) 2014-2018 Jean Moreno
+﻿// Toony Colors Pro+Mobile 2
+// (c) 2014-2019 Jean Moreno
 
 Shader "Toony Colors Pro 2/Examples/Default/Comic Book"
 {
@@ -27,7 +25,7 @@ Shader "Toony Colors Pro 2/Examples/Default/Comic Book"
 	[TCP2HeaderHelp(SPECULAR, Specular)]
 		//SPECULAR
 		_SpecColor ("Specular Color", Color) = (0.5, 0.5, 0.5, 1)
-		_Smoothness ("Smoothness", Float) = 0.2
+		_Smoothness ("Size", Float) = 0.2
 		_SpecSmooth ("Smoothness", Range(0,1)) = 0.05
 	[TCP2Separator]
 
@@ -168,7 +166,7 @@ Shader "Toony Colors Pro 2/Examples/Default/Comic Book"
 
 	#ifdef TCP2_OUTLINE_CONST_SIZE
 			//Camera-independent outline size
-			float dist = distance(_WorldSpaceCameraPos, mul(unity_ObjectToWorld, v.vertex));
+			float dist = distance(mul(unity_WorldToObject, float4(_WorldSpaceCameraPos, 0)).xyz, v.vertex.xyz);
 			#define SIZE	dist
 	#else
 			#define SIZE	1.0

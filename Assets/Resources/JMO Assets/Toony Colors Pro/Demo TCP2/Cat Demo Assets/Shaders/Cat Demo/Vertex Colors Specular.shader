@@ -1,7 +1,5 @@
-﻿// Upgrade NOTE: upgraded instancing buffer 'Props' to new syntax.
-
-// Toony Colors Pro+Mobile 2
-// (c) 2014-2018 Jean Moreno
+﻿// Toony Colors Pro+Mobile 2
+// (c) 2014-2019 Jean Moreno
 
 Shader "Toony Colors Pro 2/Examples/Cat Demo/Vertex Colors Specular"
 {
@@ -31,7 +29,7 @@ Shader "Toony Colors Pro 2/Examples/Cat Demo/Vertex Colors Specular"
 	[TCP2HeaderHelp(SPECULAR, Specular)]
 		//SPECULAR
 		_SpecColor ("Specular Color", Color) = (0.5, 0.5, 0.5, 1)
-		_Smoothness ("Smoothness", Range(0,1)) = 0.5
+		_Smoothness ("Roughness", Range(0,1)) = 0.5
 	[TCP2Separator]
 
 	[TCP2HeaderHelp(RIM, Rim)]
@@ -164,7 +162,7 @@ Shader "Toony Colors Pro 2/Examples/Cat Demo/Vertex Colors Specular"
 			half3 halfDir = SafeNormalize(lightDir + viewDir);
 			half roughness = s.Specular*s.Specular;
 			half nh = saturate(dot(IN_NORMAL, halfDir));
-			half spec = NDFBlinnPhong(nh, PercRoughnessToSpecPower(roughness));
+			half spec = NDFBlinnPhong(nh, PercRoughnessToSpecPower(roughness)) * s.Gloss;
 			spec *= atten;
 			fixed4 c;
 			c.rgb = s.Albedo * lightColor.rgb * ramp;

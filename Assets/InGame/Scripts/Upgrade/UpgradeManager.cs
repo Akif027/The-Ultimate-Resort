@@ -71,6 +71,7 @@ public class UpgradeManager : Singleton<UpgradeManager>
 
             if (ShouldUnlock(upgradeData))
             {
+
                 statusObject.Unlock();
             }
         }

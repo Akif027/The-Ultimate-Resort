@@ -1,5 +1,5 @@
 ﻿// Toony Colors Pro+Mobile 2
-// (c) 2014-2018 Jean Moreno
+// (c) 2014-2019 Jean Moreno
 
 
 Shader "Toony Colors Pro 2/Examples/PBS/Hand Painted"
@@ -152,7 +152,7 @@ Shader "Toony Colors Pro 2/Examples/PBS/Hand Painted"
 
 	CGINCLUDE
 
-	#if !defined(TCP2_SHADOW_PASS)
+	#if !defined(EXCLUDE_TCP2_MAIN_PASS)
 		#include "Lighting.cginc"
 
 		//================================================================================================================================

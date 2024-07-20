@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using DG.Tweening;
+using TMPro;
+using UnityEngine.UI;
 
 public class UpgradeIt : MonoBehaviour
 {
@@ -15,15 +17,18 @@ public class UpgradeIt : MonoBehaviour
 
     public UnityEvent OnUpgrade;
 
+    public string UpgradeName;
+    public TMP_Text NameTxt;
 
-
+    public TMP_Text PriceTxt;
 
     void Start()
     {
         status = GetComponentInParent<Status>();
         upgradeData = status.getUpgradedata();
         Cost = upgradeData.cost;
-
+        PriceTxt.text = Cost.ToString();
+        NameTxt.text = UpgradeName;
         // if (upgradeData.isUpgraded)
         // {
         //     gameObject.SetActive(false);

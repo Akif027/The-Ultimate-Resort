@@ -1,7 +1,5 @@
-﻿// Upgrade NOTE: upgraded instancing buffer 'Props' to new syntax.
-
-// Toony Colors Pro+Mobile 2
-// (c) 2014-2018 Jean Moreno
+﻿// Toony Colors Pro+Mobile 2
+// (c) 2014-2019 Jean Moreno
 
 Shader "Toony Colors Pro 2/Examples/Cat Demo/UnityChan/Style 3 Skin"
 {
@@ -35,12 +33,6 @@ Shader "Toony Colors Pro 2/Examples/Cat Demo/UnityChan/Style 3 Skin"
 		[Space]
 	[TCP2Separator]
 
-	[TCP2HeaderHelp(NORMAL MAPPING, Normal Bump Map)]
-		//BUMP
-		_BumpMap ("Normal map (RGB)", 2D) = "bump" {}
-		_BumpScale ("Scale", Float) = 1.0
-	[TCP2Separator]
-
 	[TCP2HeaderHelp(RIM, Rim)]
 		//RIM LIGHT
 		_RimColor ("Rim Color", Color) = (0.8,0.8,0.8,0.6)
@@ -71,8 +63,6 @@ Shader "Toony Colors Pro 2/Examples/Cat Demo/UnityChan/Style 3 Skin"
 		float _Shadow_HSV_H;
 		float _Shadow_HSV_S;
 		float _Shadow_HSV_V;
-		sampler2D _BumpMap;
-		half _BumpScale;
 		fixed4 _RimColor;
 		fixed _RimMin;
 		fixed _RimMax;
@@ -83,7 +73,6 @@ Shader "Toony Colors Pro 2/Examples/Cat Demo/UnityChan/Style 3 Skin"
 		struct Input
 		{
 			half2 uv_MainTex;
-			half2 uv_BumpMap;
 			float3 viewDir;
 		};
 
@@ -206,10 +195,6 @@ Shader "Toony Colors Pro 2/Examples/Cat Demo/UnityChan/Style 3 Skin"
 			fixed4 mainTex = tex2D(_MainTex, IN.UV_MAINTEX);
 			o.Albedo = mainTex.rgb * _Color.rgb;
 			o.Alpha = mainTex.a * _Color.a;
-
-			//Normal map
-			half4 normalMap = tex2D(_BumpMap, IN.uv_BumpMap.xy);
-			o.Normal = UnpackScaleNormal(normalMap, _BumpScale);
 
 			//Rim
 			float3 viewDir = normalize(IN.viewDir);

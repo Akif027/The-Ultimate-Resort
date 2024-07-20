@@ -1,7 +1,5 @@
-﻿// Upgrade NOTE: upgraded instancing buffer 'Props' to new syntax.
-
-// Toony Colors Pro+Mobile 2
-// (c) 2014-2018 Jean Moreno
+﻿// Toony Colors Pro+Mobile 2
+// (c) 2014-2019 Jean Moreno
 
 Shader "Toony Colors Pro 2/Examples/Cat Demo/UnityChan/Style 4"
 {
@@ -12,7 +10,7 @@ Shader "Toony Colors Pro 2/Examples/Cat Demo/UnityChan/Style 4"
 		_Color ("Color", Color) = (1,1,1,1)
 		_HColor ("Highlight Color", Color) = (0.785,0.785,0.785,1.0)
 		_SColor ("Shadow Color", Color) = (0.195,0.195,0.195,1.0)
-		_STexture ("Shadow Color Texture", 2D) = "white" {}
+		[NoScaleOffset] _STexture ("Shadow Color Texture", 2D) = "white" {}
 
 		//DIFFUSE
 		_MainTex ("Main Texture", 2D) = "white" {}
@@ -22,12 +20,6 @@ Shader "Toony Colors Pro 2/Examples/Cat Demo/UnityChan/Style 4"
 		[TCP2Header(RAMP SETTINGS)]
 
 		[TCP2Gradient] _Ramp			("Toon Ramp (RGB)", 2D) = "gray" {}
-	[TCP2Separator]
-
-	[TCP2HeaderHelp(NORMAL MAPPING, Normal Bump Map)]
-		//BUMP
-		_BumpMap ("Normal map (RGB)", 2D) = "bump" {}
-		_BumpScale ("Scale", Float) = 1.0
 	[TCP2Separator]
 
 	[TCP2HeaderHelp(OUTLINE, Outline)]
@@ -202,15 +194,12 @@ Shader "Toony Colors Pro 2/Examples/Cat Demo/UnityChan/Style 4"
 		fixed4 _Color;
 		sampler2D _MainTex;
 		sampler2D _STexture;
-		sampler2D _BumpMap;
-		half _BumpScale;
 
 		#define UV_MAINTEX uv_MainTex
 
 		struct Input
 		{
 			half2 uv_MainTex;
-			half2 uv_BumpMap;
 			float vFace : VFACE;
 		};
 
@@ -306,10 +295,6 @@ Shader "Toony Colors Pro 2/Examples/Cat Demo/UnityChan/Style 4"
 			o.ShadowColorTex = shadowTex.rgb;
 			o.Albedo = mainTex.rgb * _Color.rgb;
 			o.Alpha = mainTex.a * _Color.a;
-
-			//Normal map
-			half4 normalMap = tex2D(_BumpMap, IN.uv_BumpMap.xy);
-			o.Normal = UnpackScaleNormal(normalMap, _BumpScale);
 
 			//VFace Register (backface lighting)
 			o.vFace = IN.vFace;

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: GameData
   m_EditorClassIdentifier: 
   money:
-    encryptedValue: 476784594370522772
-    key: 5053778821918322324
+    encryptedValue: 137036417339912162
+    key: 4710032820609118178
   upgradeEffect: {fileID: 1292211345376930, guid: c4997d50d0e45f1478084b6628b4cba5,
     type: 3}
   textEffect: {fileID: 0}

@@ -11,6 +11,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 touchEndPosition;
     [SerializeField] Animation animator;
     public SortSlot sortSlot;
+    public LayerMask groundLayer;
+    public float raycastDistance = 1f;
 
     void Start()
     {
@@ -27,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         MovePlayer();
+        KeepPlayerGrounded();
     }
 
     private void HandleTouchInput()
@@ -53,8 +56,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 GetWorldPositionFromTouch(Touch touch)
     {
         Ray ray = Camera.main.ScreenPointToRay(touch.position);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out RaycastHit hit))
         {
             return hit.point;
         }
@@ -86,7 +88,6 @@ public class PlayerMovement : MonoBehaviour
         moveDirection = (verticalInput * cameraForward + horizontalInput * cameraRight).normalized;
     }
 
-
     private void MovePlayer()
     {
         // Move the player in the calculated direction at the specified speed
@@ -100,24 +101,28 @@ public class PlayerMovement : MonoBehaviour
             Quaternion targetRotation = Quaternion.LookRotation(newForward);
             rb.rotation = Quaternion.Slerp(rb.rotation, targetRotation, Time.fixedDeltaTime * 5f);
         }
+
+        // Handle animations
         if (moveDirection.magnitude > 0)
         {
-            //  Debug.Log("Playing Walking Animation");
-
             animator.ChangeState(AnimationState.Walk);
-            // animator.AnimationPlay("isWalk", true);
-
-
         }
         else
         {
             animator.ChangeState(AnimationState.Idle);
-            //  animator.ActiveIdle();
-            //  animator.AnimationPlay("isWalk", false);
-            // animator.ActiveIdle();
-
         }
         animator.SetBlendIdle(sortSlot.SortObjects.Count > 0 ? 1 : 0);
         animator.SetBlendMove(sortSlot.SortObjects.Count > 0 ? 1 : 0);
+    }
+
+    private void KeepPlayerGrounded()
+    {
+        Ray ray = new Ray(transform.position, Vector3.down);
+        if (Physics.Raycast(ray, out RaycastHit hit, raycastDistance, groundLayer))
+        {
+            Vector3 position = rb.position;
+            position.y = hit.point.y;
+            rb.position = position;
+        }
     }
 }
