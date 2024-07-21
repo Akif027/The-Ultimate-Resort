@@ -102,6 +102,7 @@ public class RoomManager : Manager
             // Assuming your Room class has an Activate method
             roomToToggle.gameObject.SetActive(true);
             FindRoomData(roomNumber).isAvailable = true;
+            FindRoomData(roomNumber).isClean = true;
             //  Effect.Instance.PlayUpgradeEffect(roomToToggle.SleepingRoofPos);
             PlayEffect playEffect = roomToToggle.gameObject.GetComponent<PlayEffect>();
             if (playEffect != null)
