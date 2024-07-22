@@ -13,19 +13,14 @@ MonoBehaviour:
   m_Name: GameData
   m_EditorClassIdentifier: 
   money:
-    encryptedValue: 1152880721695853414
-    key: 5706349798455757670
+    encryptedValue: 949066358788186338
+    key: 5613128713116311778
   upgradeEffect: {fileID: 1292211345376930, guid: c4997d50d0e45f1478084b6628b4cba5,
     type: 3}
   textEffect: {fileID: 8594966643835156441, guid: f8f8384bd86bf4670b7173a7b7ca03de,
     type: 3}
   customerPrefab: {fileID: 6534824338324418642, guid: b6e57af25c7689c44992c14f78bc4be5,
     type: 3}
-  levels:
-  - level: 0
-    rooms: 2
-  - level: 1
-    rooms: 2
   characterDatas:
   - type: 1
     model:

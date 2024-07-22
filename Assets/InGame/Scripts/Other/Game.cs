@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 public class Game : Manager
@@ -20,11 +21,30 @@ public class Game : Manager
   }
 
   public GameData gameData;
+
+
+
+  // public override void Init()
+  // {
+  //   if (Settings.GameData == null)
+  //   {
+  //     Settings.GameData = gameData;
+  //   }
+  //   gameData = Settings.GameData;
+  // }
   void Start()
   {
 
     GameManager.Instance.StartGame();
+
   }
+
+  public void Save()
+  {
+    Settings.GameData = gameData;
+  }
+
+
 }
 
 

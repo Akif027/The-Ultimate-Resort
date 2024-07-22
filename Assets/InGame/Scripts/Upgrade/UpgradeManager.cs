@@ -40,10 +40,6 @@ public class UpgradeManager : Singleton<UpgradeManager>
         return gameData.GetUpgradeData(type);
     }
 
-    public LevelData GetLevelData()
-    {
-        return gameData.GetLevelData(levelOn);
-    }
 
     public bool IsPoolUpgraded()
     {

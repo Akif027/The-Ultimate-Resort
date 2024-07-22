@@ -52,7 +52,7 @@ public class RoomManager : Manager
         InitializeRooms();
 
         // ToggleRoom(1, true);
-        ToggleMultipleRooms(UpgradeManager.Instance.GetLevelData().rooms, true);
+        //ToggleMultipleRooms(UpgradeManager.Instance.GetLevelData().rooms, true);
     }
     // public void InstantiateHouseAtPositions()
     // {
@@ -144,6 +144,20 @@ public class RoomManager : Manager
             Debug.LogError("All rooms are already active or none found.");
         }
     }
+
+    public int GetAvailableRoomCount()
+    {
+        int count = 0;
+        foreach (var roomData in roomData)
+        {
+            if (roomData.isAvailable)
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+
     public RoomData FindRoomData(int roomNumber)
     {
         foreach (var data in roomData)
@@ -224,7 +238,7 @@ public class RoomManager : Manager
 [System.Serializable]
 public class RoomData
 {
-    public string RoomName;
+
     public int RoomNumber;
     public Room room;
     public bool isAvailable;

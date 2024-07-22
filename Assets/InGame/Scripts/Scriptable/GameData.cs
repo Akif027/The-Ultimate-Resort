@@ -8,7 +8,6 @@ public class GameData : ScriptableObject
     public GameObject upgradeEffect;
     public GameObject textEffect;
     public GameObject customerPrefab;
-    public List<LevelData> levels = new List<LevelData>();
     public List<CharacterData> characterDatas = new List<CharacterData>();
     public List<UpgradeData> upgrades = new List<UpgradeData>();
     public List<BotResource> botDatas = new List<BotResource>();
@@ -60,17 +59,6 @@ public class GameData : ScriptableObject
     public UpgradeData GetUpgradeData(UpgradeData.Type type)
     {
         return upgrades.Find(upgrade => upgrade.type == type);
-    }
-    public LevelData GetLevelData(Level type)
-    {
-        foreach (var le in levels)
-        {
-            if (le.level == type)
-            {
-                return le;
-            }
-        }
-        return null; // Return null if no upgrade matches the specified type
     }
 
 
@@ -126,12 +114,7 @@ public enum BotType
     Cleaner
 }
 
-[System.Serializable]
-public class LevelData
-{
-    public Level level;
-    public int rooms;
-}
+
 
 [System.Serializable]
 public class UpgradeData

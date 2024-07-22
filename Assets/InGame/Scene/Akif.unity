@@ -7216,7 +7216,7 @@ MonoBehaviour:
   OntriggerEvent:
     m_PersistentCalls:
       m_Calls: []
-  canDestroy: 1
+  _CustomerReturnToPool: 1
 --- !u!65 &278232484
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8791,7 +8791,13 @@ MonoBehaviour:
     prefab: {fileID: 583550769914349525, guid: 42564a078d27f0e459610452d5c0798c, type: 3}
     parent: {fileID: 861125924}
     initialSize: 8
-    maxSize: 7
+    maxSize: 10
+  - name: Customer
+    prefab: {fileID: 6534824338324418642, guid: b6e57af25c7689c44992c14f78bc4be5,
+      type: 3}
+    parent: {fileID: 1614710739}
+    initialSize: 8
+    maxSize: 10
 --- !u!4 &331482252
 Transform:
   m_ObjectHideFlags: 0
@@ -38223,7 +38229,7 @@ PrefabInstance:
     - target: {fileID: 1286626307522590475, guid: b6e57af25c7689c44992c14f78bc4be5,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.43
+      value: 28.38
       objectReference: {fileID: 0}
     - target: {fileID: 1286626307522590475, guid: b6e57af25c7689c44992c14f78bc4be5,
         type: 3}

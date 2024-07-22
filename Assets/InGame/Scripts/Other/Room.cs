@@ -25,13 +25,14 @@ public class Room : MonoBehaviour
 
     void Start()
     {
+
         roomManager = GetComponentInParent<RoomManager>();
         roomData = roomManager.FindRoomData(RoomNumber);
         uIManager = GameManager.Instance.GetManager<UIManager>() as UIManager;
         Rooflayer = uIManager.GetUIElement<GameObject>("roomRoof" + RoomNumber);
         Rooflayer.transform.SetPositionAndRotation(SleepingRoofPos.position, SleepingRoofPos.rotation);
         Rooflayer.SetActive(false);
-
+        roomData.isAvailable = true;
     }
 
 
@@ -72,6 +73,7 @@ public class Room : MonoBehaviour
         roomData.PlayAllDirtyAnimation();
         //  CallOnce = true;
         RoomState = RoomDescript.RoomEmpty;
+
 
 
     }
