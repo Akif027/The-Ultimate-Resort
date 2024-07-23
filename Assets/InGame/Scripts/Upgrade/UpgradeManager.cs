@@ -7,12 +7,30 @@ public class UpgradeManager : Singleton<UpgradeManager>
     [SerializeField] private GameData gameData; // Reference to the GameData ScriptableObject
     [SerializeField] private List<Status> statusObjects = new List<Status>(); // List to store all Status objects
 
+    [SerializeField] ReceptionManager ReceptionManager;
+
+
     private void Awake()
     {
         InitializeStatusObjects();
         UpdateUpgradeSlots();
-    }
 
+
+    }
+    void Update()
+    {
+        #region HandleLevelLogic
+        if (ReceptionManager.numberOfCustomerAssigned >= 10) //after 10 customer change the level
+        {
+            ChangeLevel(Level.Level_2);
+        }
+        else if (ReceptionManager.numberOfCustomerAssigned >= 20)
+        {
+            ChangeLevel(Level.Level_3);
+
+        }
+        #endregion
+    }
     private void InitializeStatusObjects()
     {
         Status[] allStatusObjects = FindObjectsOfType<Status>();
@@ -25,6 +43,10 @@ public class UpgradeManager : Singleton<UpgradeManager>
         UpdateUpgradeSlots();
     }
 
+    public Level CurrentLevel()
+    {
+        return levelOn;
+    }
     public UpgradeData GetUpgradeData()
     {
         return gameData.GetUpgradeData(levelOn);

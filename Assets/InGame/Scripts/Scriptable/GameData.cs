@@ -5,6 +5,8 @@ using UnityEngine;
 public class GameData : ScriptableObject
 {
     public SecuredDouble money;
+
+    public SecuredDouble ResortFee = 10;
     public GameObject upgradeEffect;
     public GameObject textEffect;
     public GameObject customerPrefab;
@@ -25,6 +27,11 @@ public class GameData : ScriptableObject
         }
     }
 
+    public SecuredDouble GetResortFee()
+    {
+
+        return ResortFee.IncreaseChargesByLevel(UpgradeManager.Instance.CurrentLevel());
+    }
     public void AddMoney(SecuredDouble value)
     {
         money += value.Round();
@@ -134,5 +141,5 @@ public class UpgradeData
     }
 }
 
-public enum Level { Level_1, Level_2, Level_3 }
+public enum Level { Level_1 = 1, Level_2 = 2, Level_3 = 3 }
 public enum IngredientType { ToiletPaper }

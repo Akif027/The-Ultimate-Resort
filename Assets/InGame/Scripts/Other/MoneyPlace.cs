@@ -13,7 +13,15 @@ public class MoneyPlace : MonoBehaviour
     public GameObject moneyPrefab;
     public int count = 6;
 
-    [SerializeField] SecuredDouble ResortCharges = 100;
+    [SerializeField] SecuredDouble ResortCharges = 10;
+
+
+    void Start()
+    {
+
+        ResortCharges = Game.Instance.gameData.GetResortFee();
+
+    }
     public void Add(SortObject so)
     {
         sortSlot.AddObject(so);

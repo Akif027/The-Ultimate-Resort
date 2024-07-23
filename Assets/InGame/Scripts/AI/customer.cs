@@ -120,7 +120,16 @@ public class customer : MonoBehaviour
       //    RequestToilet();
       // }
    }
+   void OnDisable()
+   {
+      // Reset the customer state to waiting
+      currentState = CustomerState.waiting;
 
+      // Reset RoomAllotted flag
+      RoomAllotted = false;
+      NextDestination = null;
+      // Reset any other variables or flags as needed
+   }
    #endregion
 
    #region Customer Behaviour logic

@@ -21,7 +21,23 @@ public struct SecuredDouble
         get => Decrypt(encryptedValue, key);
         set => encryptedValue = Encrypt(value, key);
     }
+    public SecuredDouble IncreaseChargesByLevel(Level level)
+    {
+        int levelValue = (int)level; // Cast the enum to int to get its numeric value
 
+        // Check if the level is greater than 1 before applying the increase
+        if (levelValue > 1)
+        {
+            double increaseFactor = 1 + ((levelValue - 1) * 0.05); // Calculate the total increase factor, adjusted for level > 1
+            double increasedValue = Value * increaseFactor; // Apply the increase to the current value
+            return new SecuredDouble(increasedValue); // Return a new SecuredDouble with the increased value
+        }
+        else
+        {
+            // If level is 1, return the current value without any increase
+            return this;
+        }
+    }
     public SecuredDouble Round()
     {
         return new SecuredDouble(System.Math.Round(Value));
