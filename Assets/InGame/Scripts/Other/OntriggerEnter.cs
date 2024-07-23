@@ -6,19 +6,41 @@ public class OntriggerEnter : MonoBehaviour
 {
     public UnityEvent OntriggerEvent;
 
+
     public bool _CustomerReturnToPool = false;
+
+    public bool _TriggerPlayer = false;
     private void OnTriggerEnter(Collider other)
     {
-        // Check if the entering object is the player
-        if (other.gameObject.CompareTag("Customer"))
+        if (_CustomerReturnToPool)
         {
-            OntriggerEvent?.Invoke();
-            if (_CustomerReturnToPool)
+
+            // Check if the entering object is the player
+            if (other.gameObject.CompareTag("Customer"))
             {
-                ObjectPool.Instance.ReturnObjectToPool(other.gameObject, "Customer");
+                OntriggerEvent?.Invoke();
+                if (_CustomerReturnToPool)
+                {
+                    ObjectPool.Instance.ReturnObjectToPool(other.gameObject, "Customer");
+                }
             }
         }
+
+
+        if (_TriggerPlayer)
+        {
+            if (other.gameObject.CompareTag("Player"))
+            {
+                OntriggerEvent?.Invoke();
+
+            }
+
+
+        }
     }
+
+
+
     public void Destroyobj(GameObject g)
     {
 

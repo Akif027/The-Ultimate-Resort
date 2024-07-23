@@ -208,7 +208,91 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  canDestroy: 0
+  _CustomerReturnToPool: 0
+  _TriggerPlayer: 0
+--- !u!1 &2705030614145082114
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5001407623709852102}
+  - component: {fileID: 4633700864826096090}
+  - component: {fileID: 6522820277646637788}
+  m_Layer: 6
+  m_Name: TriggerFocus (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5001407623709852102
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2705030614145082114}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.57708997, y: -0.045375336, z: 0.021677911, w: 0.81513083}
+  m_LocalPosition: {x: 0.1866163, y: -1.9603198, z: 5.643345}
+  m_LocalScale: {x: 1.3904003, y: 1, z: 0.26422882}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 463211719149516960}
+  m_LocalEulerAnglesHint: {x: 0, y: 0.467, z: 0}
+--- !u!65 &4633700864826096090
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2705030614145082114}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6522820277646637788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2705030614145082114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e098d51e8f514dd44b2117ccbf8c316c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OntriggerEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2170419990169014778}
+        m_TargetAssemblyTypeName: RoomFocus, Assembly-CSharp
+        m_MethodName: ResetRoomFocus
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _CustomerReturnToPool: 0
+  _TriggerPlayer: 1
 --- !u!1 &3859917570682810634
 GameObject:
   m_ObjectHideFlags: 0
@@ -541,6 +625,53 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6150042015788647997}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6598137381224642338
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 463211719149516960}
+  - component: {fileID: 2170419990169014778}
+  m_Layer: 6
+  m_Name: CameraAngle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &463211719149516960
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6598137381224642338}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.57699674, y: 0.048700117, z: -0.024031859, w: 0.814939}
+  m_LocalPosition: {x: -1.95, y: 9.18, z: -4.04}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7887277819473723578}
+  - {fileID: 5001407623709852102}
+  m_Father: {fileID: 216796502036937764}
+  m_LocalEulerAnglesHint: {x: 109.47699, y: -171.09, z: -177.072}
+--- !u!114 &2170419990169014778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6598137381224642338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4935cdcb25838cf4f9233e4b71e1be07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RoomAngle: {fileID: 463211719149516960}
 --- !u!1 &6938432180157691104
 GameObject:
   m_ObjectHideFlags: 0
@@ -585,6 +716,7 @@ Transform:
   - {fileID: 6907570593641217622}
   - {fileID: 3137005750992166802}
   - {fileID: 1297791075464340039}
+  - {fileID: 463211719149516960}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3321154963630324417
@@ -609,6 +741,89 @@ MonoBehaviour:
   cleanAnim:
   - {fileID: 3255613062195413052}
   RoomState: 0
+--- !u!1 &7086780645307371804
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7887277819473723578}
+  - component: {fileID: 5338572389307671330}
+  - component: {fileID: 5129902260543217720}
+  m_Layer: 6
+  m_Name: TriggerFocus
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7887277819473723578
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7086780645307371804}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.57708997, y: -0.045375336, z: 0.021677911, w: 0.81513083}
+  m_LocalPosition: {x: 0.09801775, y: -1.0963206, z: 5.946915}
+  m_LocalScale: {x: 1.3904003, y: 1, z: 0.11869297}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 463211719149516960}
+  m_LocalEulerAnglesHint: {x: 0, y: 0.467, z: 0}
+--- !u!65 &5338572389307671330
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7086780645307371804}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5129902260543217720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7086780645307371804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e098d51e8f514dd44b2117ccbf8c316c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OntriggerEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2170419990169014778}
+        m_TargetAssemblyTypeName: RoomFocus, Assembly-CSharp
+        m_MethodName: FocusRoom
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _CustomerReturnToPool: 0
+  _TriggerPlayer: 1
 --- !u!1 &7725967601040482934
 GameObject:
   m_ObjectHideFlags: 0

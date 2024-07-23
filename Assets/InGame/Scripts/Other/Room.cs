@@ -77,6 +77,13 @@ public class Room : MonoBehaviour
 
 
     }
+
+    public void FocusRoom(Transform a)
+    {
+
+        AllPurposeCamera.Instance.ActivateCameraAtPosition(a);
+
+    }
     public void SleepIn(GameObject C) // Assuming C has a NavMeshAgent component
     {
         // C.transform.SetParent(SleepInPosition);

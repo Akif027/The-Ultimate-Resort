@@ -40,6 +40,13 @@ public class AllPurposeCamera : Singleton<AllPurposeCamera>
         isMoving = true;
         TimerManager.Instance.ScheduleAction(2, ResetCamera);
     }
+    public void ActivateCameraAtPosition(Transform targetTransform)
+    {
+        topDownCamera.transform.position = targetTransform.position;
+        topDownCamera.transform.rotation = targetTransform.rotation;
+        topDownCamera.gameObject.SetActive(true);
+        mainCamera.gameObject.SetActive(false);
+    }
 
     private void MoveCamera()
     {
