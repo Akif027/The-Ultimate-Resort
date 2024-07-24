@@ -8,6 +8,13 @@ public static class DoTweenManager
     {
         return target.DOLocalMove(position, duration).SetEase(easeType);
     }
+    public static Tween MoveTo(Transform target, Vector3 position, Quaternion targetRotation, float duration, Ease easeType = Ease.Linear)
+    {
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(target.DOLocalMove(position, duration).SetEase(easeType));
+        sequence.Join(target.DOLocalRotateQuaternion(targetRotation, duration).SetEase(easeType));
+        return sequence;
+    }
 
     // Method to scale an object
     public static Tween ScaleTo(Transform target, Vector3 scale, float duration, Ease easeType = Ease.Linear)

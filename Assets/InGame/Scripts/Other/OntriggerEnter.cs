@@ -12,7 +12,19 @@ public class OntriggerEnter : MonoBehaviour
     public bool _TriggerPlayer = false;
     private void OnTriggerEnter(Collider other)
     {
-        if (_CustomerReturnToPool)
+
+
+        if (_TriggerPlayer)
+        {
+            if (other.gameObject.CompareTag("Player"))
+            {
+                OntriggerEvent?.Invoke();
+
+            }
+
+
+        }
+        else
         {
 
             // Check if the entering object is the player
@@ -23,16 +35,6 @@ public class OntriggerEnter : MonoBehaviour
                 {
                     ObjectPool.Instance.ReturnObjectToPool(other.gameObject, "Customer");
                 }
-            }
-        }
-
-
-        if (_TriggerPlayer)
-        {
-            if (other.gameObject.CompareTag("Player"))
-            {
-                OntriggerEvent?.Invoke();
-
             }
 
 

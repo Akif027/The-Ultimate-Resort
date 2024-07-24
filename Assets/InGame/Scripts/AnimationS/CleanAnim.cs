@@ -52,12 +52,20 @@ public class CleanAnim : MonoBehaviour
         // Uncomment or modify these lines as needed
         // DoTweenManager.MoveTo(pillow1.transform, new Vector3(0.32f, 0.275f, -0.024f), 1f, Ease.Linear);
         // DoTweenManager.MoveTo(pillow2.transform, new Vector3(-0.42f, 0.24f, 0.29f), 1f, Ease.Linear);
+
     }
 
-    public void PlayDirtyBed()
+    public void PlayDirty()
     {
-        DoTweenManager.MoveTo(pillow1.transform, TargetPosPillow1.localPosition, moveDuration, Ease.Linear);
+
+        DoTweenManager.MoveTo(pillow1.transform, TargetPosPillow1.localPosition, TargetPosPillow1.rotation, moveDuration, Ease.Linear);
+
+
         DoTweenManager.MoveTo(pillow2.transform, TargetPosPillow2.localPosition, moveDuration, Ease.Linear);
+
+
+
+
     }
 
     public void PlayClean()

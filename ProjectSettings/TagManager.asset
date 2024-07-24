@@ -12,6 +12,7 @@ TagManager:
   - ToBed
   - Toilet
   - Customer
+  - AllPurposeCamera
   layers:
   - Default
   - TransparentFX

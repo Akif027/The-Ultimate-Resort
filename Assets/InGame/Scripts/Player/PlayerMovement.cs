@@ -14,6 +14,9 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundLayer;
     public float raycastDistance = 1f;
 
+    public Camera mainCamera;
+    public Camera allPurposeCamera;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -23,7 +26,10 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         HandleTouchInput();
+
+#if UNITY_EDITOR
         HandleKeyboardInput();
+#endif
     }
 
     void FixedUpdate()
@@ -75,18 +81,39 @@ public class PlayerMovement : MonoBehaviour
         moveDirection = Vector3.zero; // Stop the movement
     }
 
-    private void HandleKeyboardInput()
+#if UNITY_EDITOR
+    void HandleKeyboardInput()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
-        // Get the camera's forward and right vectors, ignoring the y component
-        Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
-        Vector3 cameraRight = Camera.main.transform.right;
+        Camera activeCamera = null;
 
-        // Calculate the move direction based on keyboard input and camera orientation
-        moveDirection = (verticalInput * cameraForward + horizontalInput * cameraRight).normalized;
+        // Determine which camera is active
+        if (allPurposeCamera != null && allPurposeCamera.gameObject.activeInHierarchy)
+        {
+            activeCamera = allPurposeCamera;
+        }
+        else if (mainCamera != null && mainCamera.gameObject.activeInHierarchy)
+        {
+            activeCamera = mainCamera;
+        }
+
+        if (activeCamera != null)
+        {
+            // Get the camera's forward and right vectors, ignoring the y component
+            Vector3 cameraForward = Vector3.Scale(activeCamera.transform.forward, new Vector3(1, 0, 1)).normalized;
+            Vector3 cameraRight = activeCamera.transform.right;
+
+            // Calculate the move direction based on keyboard input and camera orientation
+            moveDirection = (verticalInput * cameraForward + horizontalInput * cameraRight).normalized;
+        }
+        else
+        {
+            Debug.LogError("No active camera found. Ensure there are cameras tagged as 'MainCamera' and 'AllPurposeCamera' in the scene.");
+        }
     }
+#endif
 
     private void MovePlayer()
     {

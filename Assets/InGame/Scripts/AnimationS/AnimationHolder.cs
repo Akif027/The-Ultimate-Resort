@@ -20,7 +20,8 @@ public class AnimationHolder
 
     public void DirtyAnimation()
     {
-        cleanAnim.PlayDirtyBed();
+
+        cleanAnim.PlayDirty();
     }
 }
 
