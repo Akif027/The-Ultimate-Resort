@@ -16,8 +16,10 @@ public class MoneyEffect : MonoBehaviour
 
     private Vector3 scaleFirst;
 
+    UpgradeIt upgradeIt;
     private void Start()
     {
+        upgradeIt = GetComponentInParent<UpgradeIt>();
         scaleFirst = transform.localScale;
     }
 
@@ -27,7 +29,7 @@ public class MoneyEffect : MonoBehaviour
 
         while (true)
         {
-            if (target != null && Game.Instance.gameData.money.Round() > 0)
+            if (target != null && Game.Instance.gameData.money.Round() >= upgradeIt.Cost)//later change it to spend money gradually  
             {
                 GameObject g = Instantiate(moneyPrefab);
                 g.transform.position = target.position + offset;

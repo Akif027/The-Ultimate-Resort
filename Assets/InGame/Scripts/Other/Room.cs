@@ -123,6 +123,7 @@ public class Room : MonoBehaviour
         if (IsEverythingCleaned())
         {
             roomManager.FreeRoom(RoomNumber);
+            MakeCleanedFlagFalse(); //its just a reset
         }
     }
     public bool IsEverythingCleaned()
@@ -135,6 +136,15 @@ public class Room : MonoBehaviour
             }
         }
         return true; // Everything is cleaned
+    }
+
+    public void MakeCleanedFlagFalse()
+    {
+        foreach (var cleanAnim in cleanAnim)
+        {
+            cleanAnim.IsCleaningComplete = false;
+        }
+
     }
     public void ChangeState(RoomDescript newState)
     {

@@ -9,7 +9,8 @@ public class CleanAnim : MonoBehaviour
 {
     public string furnitureName;
     public UnityEvent OnCleanedEvent;
-    public bool IsCleaningComplete { get; private set; }
+    public bool IsCleaningComplete { get; set; }
+
 
     [SerializeField] private float cleaningTime;
     [SerializeField] private Transform progressSignPos;
@@ -102,16 +103,7 @@ public class CleanAnim : MonoBehaviour
     private void OnCleanedForRoom()
     {
         PlayClean();
-        RoomData roomData = RoomManager.instance.FindRoomData(room.RoomNumber);
-        if (roomData != null)
-        {
-            roomData.isClean = true;
-        }
-        else
-        {
-            Debug.LogError("Room not found in CleanAnim script");
-        }
-
+        //   Debug.LogError("is it cleaned");
         CompleteCleaning();
         OnCleanedEvent?.Invoke();
     }
@@ -128,6 +120,7 @@ public class CleanAnim : MonoBehaviour
         isSignPlaced = false;
         energizedEffect = null;
         circularProgressBar = null;
+        // circularProgressBar.OnComplete.RemoveAllListeners();
     }
 
     private void OnTriggerEnter(Collider other)

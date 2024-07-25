@@ -46,7 +46,7 @@ public class FacetoCamera : MonoBehaviour
             Vector3 directionToFace = activeCamera.transform.position - transform.position;
 
             // Apply rotation to face the camera
-            Quaternion targetRotation = Quaternion.LookRotation(directionToFace);
+            Quaternion targetRotation = Quaternion.LookRotation(-directionToFace);
             transform.rotation = targetRotation;
         }
     }

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: GameData
   m_EditorClassIdentifier: 
   money:
-    encryptedValue: 773985502498545957
-    key: 5396649045017649445
+    encryptedValue: 902376132625241419
+    key: 5479722203893929291
   ResortFee:
     encryptedValue: 735745942795911169
     key: 5332795262434344961
@@ -32,17 +32,17 @@ MonoBehaviour:
   - type: 0
     level: 0
     cost:
-      encryptedValue: 524004984461217458
+      encryptedValue: 546030401388826290
       key: 5173197543535300274
     isUpgraded: 1
   - type: 1
-    level: 1
+    level: 2
     cost:
       encryptedValue: 4641240890982006784
       key: 0
-    isUpgraded: 1
+    isUpgraded: 0
   - type: 2
-    level: 0
+    level: 2
     cost:
       encryptedValue: 4647503709213818880
       key: 0
