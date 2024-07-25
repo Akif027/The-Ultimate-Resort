@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -21,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animation>();
+        // animator.ChangeState(AnimationState.Clean);
     }
 
     void Update()
@@ -128,18 +130,23 @@ public class PlayerMovement : MonoBehaviour
             Quaternion targetRotation = Quaternion.LookRotation(newForward);
             rb.rotation = Quaternion.Slerp(rb.rotation, targetRotation, Time.fixedDeltaTime * 5f);
         }
+        if (animator.CurrentState != AnimationState.Clean)
+        {
 
-        // Handle animations
-        if (moveDirection.magnitude > 0)
-        {
-            animator.ChangeState(AnimationState.Walk);
+
+            // Handle animations
+            if (moveDirection.magnitude > 0)
+            {
+                animator.ChangeState(AnimationState.Walk);
+            }
+            else
+            {
+                animator.ChangeState(AnimationState.Idle);
+            }
+            animator.SetBlendIdle(sortSlot.SortObjects.Count > 0 ? 1 : 0);
+            animator.SetBlendMove(sortSlot.SortObjects.Count > 0 ? 1 : 0);
         }
-        else
-        {
-            animator.ChangeState(AnimationState.Idle);
-        }
-        animator.SetBlendIdle(sortSlot.SortObjects.Count > 0 ? 1 : 0);
-        animator.SetBlendMove(sortSlot.SortObjects.Count > 0 ? 1 : 0);
+
     }
 
     private void KeepPlayerGrounded()

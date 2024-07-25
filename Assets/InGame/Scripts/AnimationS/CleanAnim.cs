@@ -34,7 +34,7 @@ public class CleanAnim : MonoBehaviour
     private Vector3 initialPositionPillow2;
     private bool isSignPlaced = false; // Add this flag
     public bool ShowSign = false;
-
+    Animation Playeranimation;
     void Start()
     {
 #if UNITY_EDITOR
@@ -82,7 +82,11 @@ public class CleanAnim : MonoBehaviour
 
         ExecuteCleaningProgressSignEffect();
     }
+    void Update()
+    {
 
+
+    }
     public void PlaceCleaningSign()
     {
         if (isSignPlaced) return; // Check the flag
@@ -116,10 +120,12 @@ public class CleanAnim : MonoBehaviour
 
     public void CompleteCleaning()
     {
+
         IsCleaningComplete = true;
         isSignPlaced = false;
         energizedEffect = null;
         circularProgressBar = null;
+        Playeranimation.ChangeState(AnimationState.Idle);
         // circularProgressBar.OnComplete.RemoveAllListeners();
     }
 
@@ -127,6 +133,8 @@ public class CleanAnim : MonoBehaviour
     {
         if (!other.CompareTag("Player")) return;
 
+        Playeranimation = other.gameObject.GetComponent<Animation>();
+        if (!IsCleaningComplete && isSignPlaced) Playeranimation.ChangeState(AnimationState.Clean);
         StartCleaning();
         circularProgressBar?.ResumeCountdown();
         circularProgressBar.OnComplete.AddListener(isThisRoom ? OnCleanedForRoom : OnCleanedForActivity);
@@ -136,6 +144,7 @@ public class CleanAnim : MonoBehaviour
     {
         if (!other.CompareTag("Player")) return;
 
+        Playeranimation.ChangeState(AnimationState.Idle);
         circularProgressBar?.PauseCountdown();
     }
 }

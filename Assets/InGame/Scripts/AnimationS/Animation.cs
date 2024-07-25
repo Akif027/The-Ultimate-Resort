@@ -29,6 +29,7 @@ public class Animation : MonoBehaviour
             { AnimationState.ToiletWalk, "ToiletWalk" },
             { AnimationState.Sit, "Sit" },
             { AnimationState.Swim, "Swim" },
+                  { AnimationState.Clean, "Clean" },
             // Add mappings for other states as needed
         };
 
@@ -127,6 +128,7 @@ public enum AnimationState
     ToiletIdle,
     ToiletWalk,
     Sit,
-    Swim
+    Swim,
+    Clean
     // Add other states as needed
 }
