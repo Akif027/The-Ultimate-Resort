@@ -33,26 +33,17 @@ public class CleanAnim : MonoBehaviour
     private Vector3 initialPositionPillow1;
     private Vector3 initialPositionPillow2;
     private bool isSignPlaced = false; // Add this flag
-    public bool ShowSign = false;
+
     Animation Playeranimation;
     void Start()
     {
-#if UNITY_EDITOR
-        if (ShowSign) //for testing only 
-        {
-            PlaceCleaningSign();
-            TimerManager.Instance.ScheduleAction(5, () => ObjectPool.Instance.ReturnObjectToPool(energizedEffect, "CleaningProgress"));
-            ShowSign = false;
-        }
-#endif
+
         if (TargetPosPillow1 != null && TargetPosPillow2 != null)
         {
             initialPositionPillow1 = pillow1.transform.localPosition;
             initialPositionPillow2 = pillow2.transform.localPosition;
         }
-        // Uncomment or modify these lines as needed
-        // DoTweenManager.MoveTo(pillow1.transform, new Vector3(0.32f, 0.275f, -0.024f), 1f, Ease.Linear);
-        // DoTweenManager.MoveTo(pillow2.transform, new Vector3(-0.42f, 0.24f, 0.29f), 1f, Ease.Linear);
+
 
     }
 
@@ -60,12 +51,7 @@ public class CleanAnim : MonoBehaviour
     {
 
         DoTweenManager.MoveTo(pillow1.transform, TargetPosPillow1.localPosition, TargetPosPillow1.rotation, moveDuration, Ease.Linear);
-
-
         DoTweenManager.MoveTo(pillow2.transform, TargetPosPillow2.localPosition, moveDuration, Ease.Linear);
-
-
-
 
     }
 
@@ -79,17 +65,14 @@ public class CleanAnim : MonoBehaviour
     private void StartCleaning()
     {
         if (circularProgressBar.isActive) return;
-
+        circularProgressBar?.OnComplete.RemoveAllListeners();
+        circularProgressBar?.OnComplete.AddListener(isThisRoom ? OnCleanedForRoom : OnCleanedForActivity);
         ExecuteCleaningProgressSignEffect();
     }
-    void Update()
-    {
 
-
-    }
     public void PlaceCleaningSign()
     {
-        if (isSignPlaced) return; // Check the flag
+        if (energizedEffect != null) return; // Check the flag
 
 
         energizedEffect = ObjectPool.Instance.GetPooledObject("CleaningProgress");
@@ -126,20 +109,25 @@ public class CleanAnim : MonoBehaviour
         energizedEffect = null;
         circularProgressBar = null;
         Playeranimation.ChangeState(AnimationState.Idle);
-        // circularProgressBar.OnComplete.RemoveAllListeners();
+
     }
+
 
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
-
-        Playeranimation = other.gameObject.GetComponent<Animation>();
-        if (!IsCleaningComplete && isSignPlaced) Playeranimation.ChangeState(AnimationState.Clean);
         StartCleaning();
         circularProgressBar?.ResumeCountdown();
-        circularProgressBar.OnComplete.AddListener(isThisRoom ? OnCleanedForRoom : OnCleanedForActivity);
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+
+        if (!other.CompareTag("Player")) return;
+        Playeranimation = other.gameObject.GetComponent<Animation>();
+        if (!IsCleaningComplete && isSignPlaced) Playeranimation?.ChangeState(AnimationState.Clean);
+
+    }
     private void OnTriggerExit(Collider other)
     {
         if (!other.CompareTag("Player")) return;

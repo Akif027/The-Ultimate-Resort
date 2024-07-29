@@ -20,6 +20,6 @@ public class MoneyView : MonoBehaviour
 
     private void OnMoneyChanged()
     {
-        value.text = Game.Instance.gameData.money.Round().ToString();
+        value.text = Game.Instance.gameData.money.Round().FormattedString;
     }
 }

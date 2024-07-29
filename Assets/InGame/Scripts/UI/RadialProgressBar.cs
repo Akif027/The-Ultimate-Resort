@@ -26,7 +26,7 @@ public class RadialProgressBar : MonoBehaviour
             if (indicatorTimer <= 0)
             {
                 StopCountdown();
-                OnComplete?.Invoke();
+
             }
         }
     }
@@ -50,9 +50,10 @@ public class RadialProgressBar : MonoBehaviour
 
     public void StopCountdown()
     {
-
+        OnComplete?.Invoke();
         isActive = false;
         ObjectPool.Instance.ReturnObjectToPool(gameObject, "CleaningProgress");
+
 
     }
 
