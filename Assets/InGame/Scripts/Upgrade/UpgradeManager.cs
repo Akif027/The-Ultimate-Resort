@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class UpgradeManager : Singleton<UpgradeManager>
 {
-    [SerializeField] private Level levelOn = Level.Level_1; // Correctly references the external Level enum
+    [SerializeField] private Level levelOn; // Correctly references the external Level enum
     [SerializeField] private GameData gameData; // Reference to the GameData ScriptableObject
     [SerializeField] private List<Status> statusObjects = new List<Status>(); // List to store all Status objects
 
@@ -12,6 +12,8 @@ public class UpgradeManager : Singleton<UpgradeManager>
 
     private void Awake()
     {
+        levelOn = gameData.GetCurretLevel();
+
         InitializeStatusObjects();
         UpdateUpgradeSlots();
 
@@ -20,15 +22,11 @@ public class UpgradeManager : Singleton<UpgradeManager>
     void Update()
     {
         #region HandleLevelLogic
-        if (ReceptionManager.numberOfCustomerAssigned >= 10) //after 10 customer change the level
+        if (ReceptionManager.CustomerHandled == (int)levelOn * 10) //after Level(1,2,3) * 10
         {
-            ChangeLevel(Level.Level_2);
+            IncreseLevel();
         }
-        else if (ReceptionManager.numberOfCustomerAssigned >= 20)
-        {
-            ChangeLevel(Level.Level_3);
 
-        }
         #endregion
     }
     private void InitializeStatusObjects()
@@ -41,6 +39,22 @@ public class UpgradeManager : Singleton<UpgradeManager>
     {
         levelOn = level;
         UpdateUpgradeSlots();
+    }
+
+    public void IncreseLevel()
+    {
+        int nextLevelValue = ((int)levelOn + 1);
+
+        if (nextLevelValue <= Settings.LevelMax) // Assuming Level_3 is the highest level
+        {
+            levelOn = (Level)nextLevelValue;
+            UpdateUpgradeSlots();
+        }
+        else
+        {
+            Debug.LogWarning("Cannot increase level beyond the maximum.");
+        }
+
     }
 
     public Level CurrentLevel()

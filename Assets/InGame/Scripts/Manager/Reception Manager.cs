@@ -7,89 +7,105 @@ using UnityEngine.UI;
 
 public class ReceptionManager : MonoBehaviour
 {
+   // Managers
+   [Header("Managers")]
+   [SerializeField] private QueueManager queueManager;
+   [SerializeField] private RoomManager roomManager;
+   [SerializeField] private UIManager uIManager;
 
-   [SerializeField] QueueManager queueManager;
-   [SerializeField] RoomManager roomManager;
-   [SerializeField] UIManager uIManager;
-   [SerializeField] GameObject WaitingCustomerObj;
+   // Customer related
+   [Header("Customer Related")]
+   [SerializeField] private GameObject waitingCustomerObj;
+   [SerializeField] private MoneyPlace moneyPlace;
+   [SerializeField] private int handOutKeyTime = 2;
+   public int CustomerHandled = 0;
 
-   [SerializeField] MoneyPlace moneyPlace;
+   // UI elements
+   [Header("UI Elements")]
+   public Button acceptCustomerButton;
+   private RadialProgressBar radialProgressBar;
 
-   public Button AcceptCustomerB;
-
-   public int numberOfCustomerAssigned = 0;
+   // Initialization
    void Start()
    {
-
+      // Subscribe to events
       EventManager.SubscribeRoomRequest(HandleRoomRequest);
+
+      // Initialize managers
       queueManager = GameManager.Instance.GetManager<QueueManager>() as QueueManager;
       roomManager = GameManager.Instance.GetManager<RoomManager>() as RoomManager;
       uIManager = GameManager.Instance.GetManager<UIManager>() as UIManager;
-      AcceptCustomerB = uIManager.GetUIElement<GameObject>("AcceptCustomerB").GetComponent<Button>();
-      uIManager.HideUIElement("AcceptCustomerB");
 
-
+      // Initialize UI elements
+      acceptCustomerButton = uIManager.GetUIElement<GameObject>("Key").GetComponent<Button>();
+      uIManager.HideUIElement("Key");
+      radialProgressBar = acceptCustomerButton.gameObject.GetComponent<RadialProgressBar>();
    }
+
+   // Event Handlers
    void HandleRoomRequest(GameObject customerObj)
    {
-      WaitingCustomerObj = customerObj;
-      AcceptCustomerB.onClick.AddListener(AssignRoomToCustomer);
-
-
+      waitingCustomerObj = customerObj;
+      acceptCustomerButton.onClick.AddListener(AssignRoomToCustomer);
    }
+
    private void AssignRoomToCustomer()
    {
-      if (roomManager.HasAvailableRooms() && WaitingCustomerObj != null)
+      if (roomManager.HasAvailableRooms() && waitingCustomerObj != null)
       {
-         customer c = WaitingCustomerObj.GetComponent<customer>();
+         customer c = waitingCustomerObj.GetComponent<customer>();
          if (c.RoomAllotted && c == null)
          {
             return;
          }
-         Debug.Log($"{queueManager.customerQueue.Count} Customers is requesting room");
-         RoomData assignedRoom = roomManager.AssignRoom();
-         if (assignedRoom != null)
-         {
-            assignedRoom.room.ChangeState(RoomDescript.CheckIn);
-            Debug.Log("room assigned");
-
-            if (c != null)
-            {
-               c.AssginDestination(assignedRoom.room.RoomDesitnation);
-               c.AssginRoomData(assignedRoom);
-               c.ChangeState(CustomerState.MovingToRoom);
-               queueManager.RemoveCustomerFromQueue(WaitingCustomerObj);
-               WaitingCustomerObj = null;
-               moneyPlace.PlaceMoney();
-               numberOfCustomerAssigned++;
-            }
-
-         }
-
+         Debug.Log($"{queueManager.customerQueue.Count} Customers are requesting room");
+         radialProgressBar.ActivateCountDown(handOutKeyTime);
+         radialProgressBar?.OnComplete.RemoveAllListeners();
+         radialProgressBar?.OnComplete.AddListener(Assign);
       }
       else if (!roomManager.HasAvailableRooms())
       {
          Debug.LogWarning("NO ROOM AVAILABLE!");
-
       }
    }
+
+   public void Assign()
+   {
+      RoomData assignedRoom = roomManager.AssignRoom();
+      customer c = waitingCustomerObj.GetComponent<customer>();
+      if (assignedRoom != null)
+      {
+         assignedRoom.room.ChangeState(RoomDescript.CheckIn);
+         Debug.Log("Room assigned");
+
+         if (c != null)
+         {
+            c.AssginDestination(assignedRoom.room.RoomDesitnation);
+            c.AssginRoomData(assignedRoom);
+            c.ChangeState(CustomerState.MovingToRoom);
+            queueManager.RemoveCustomerFromQueue(waitingCustomerObj);
+            waitingCustomerObj = null;
+            moneyPlace.PlaceMoney();
+            CustomerHandled++;
+         }
+      }
+   }
+
+   // Trigger Handlers
    void OnTriggerStay(Collider other)
    {
       // Check if the other object has a specific tag
       if (other.CompareTag("Player"))
       {
          // Perform actions while the player is inside the trigger
-         if (WaitingCustomerObj != null && !WaitingCustomerObj.GetComponent<customer>().RoomAllotted)
+         if (waitingCustomerObj != null && !waitingCustomerObj.GetComponent<customer>().RoomAllotted)
          {
-
-            uIManager.ShowUIElement("AcceptCustomerB");
+            uIManager.ShowUIElement("Key");
          }
          else
          {
-
-            uIManager.HideUIElement("AcceptCustomerB");
+            uIManager.HideUIElement("Key");
          }
-
       }
    }
 
@@ -97,14 +113,13 @@ public class ReceptionManager : MonoBehaviour
    {
       if (other.CompareTag("Player"))
       {
-         uIManager.HideUIElement("AcceptCustomerB");
+         uIManager.HideUIElement("Key");
       }
    }
 
+   // Cleanup
    void OnDestroy()
    {
       EventManager.UnsubscribeRoomRequest(HandleRoomRequest);
    }
-
-
 }

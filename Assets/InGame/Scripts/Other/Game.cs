@@ -24,18 +24,22 @@ public class Game : Manager
 
 
 
-  // public override void Init()
-  // {
-  //   if (Settings.GameData == null)
-  //   {
-  //     Settings.GameData = gameData;
-  //   }
-  //   gameData = Settings.GameData;
-  // }
+  public override void Init()
+  {
+    Settings.LevelMax = 3;
+    gameData.CurrentLevel = (Level)Settings.CurrentLevel;
+
+    if (gameData.CurrentLevel == 0) // if the there is no save data 
+    {
+      gameData.CurrentLevel = Level.Level_1;
+    }
+
+  }
   void Start()
   {
 
     GameManager.Instance.StartGame();
+
 
   }
 
@@ -44,7 +48,10 @@ public class Game : Manager
     Settings.GameData = gameData;
   }
 
-
+  void OnDisable()
+  {
+    Settings.CurrentLevel = (int)UpgradeManager.Instance.CurrentLevel();
+  }
 }
 
 

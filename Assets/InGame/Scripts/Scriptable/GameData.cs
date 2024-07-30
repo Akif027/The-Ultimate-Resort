@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameData : ScriptableObject
 {
     public SecuredDouble money;
-
+    public Level CurrentLevel = Level.Level_1;
     public SecuredDouble ResortFee = 10;
     public GameObject upgradeEffect;
     public GameObject textEffect;
@@ -27,6 +27,11 @@ public class GameData : ScriptableObject
         }
     }
 
+    public Level GetCurretLevel()
+    {
+        return CurrentLevel;
+
+    }
     public SecuredDouble GetResortFee()
     {
 

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class RadialProgressBar : MonoBehaviour
 {
     public bool isActive = false;
-
+    public bool returnToPool = false;
 
     private float indicatorTimer;
     private float maxIndicatorTimer;
@@ -52,7 +52,7 @@ public class RadialProgressBar : MonoBehaviour
     {
         OnComplete?.Invoke();
         isActive = false;
-        ObjectPool.Instance.ReturnObjectToPool(gameObject, "CleaningProgress");
+        if (!returnToPool) ObjectPool.Instance.ReturnObjectToPool(gameObject, "CleaningProgress");
 
 
     }
