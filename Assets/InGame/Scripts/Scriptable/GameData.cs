@@ -7,7 +7,6 @@ public class GameData : ScriptableObject
     public SecuredDouble money;
     public Level CurrentLevel = Level.Level_1;
     public SecuredDouble ResortFee = 10;
-    public GameObject upgradeEffect;
     public GameObject textEffect;
     public GameObject customerPrefab;
     public List<CharacterData> characterDatas = new List<CharacterData>();
@@ -15,7 +14,7 @@ public class GameData : ScriptableObject
     public List<BotResource> botDatas = new List<BotResource>();
 
     private Dictionary<Level, UpgradeData> upgradeDictionary = new Dictionary<Level, UpgradeData>();
-
+    public List<EffectData> effectList;
     private void OnEnable()
     {
 
@@ -126,7 +125,12 @@ public enum BotType
     Cleaner
 }
 
-
+[System.Serializable]
+public class EffectData
+{
+    public string effectName;
+    public GameObject effectPrefab;
+}
 
 [System.Serializable]
 public class UpgradeData

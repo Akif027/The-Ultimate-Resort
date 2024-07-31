@@ -60,6 +60,9 @@ public class CleanAnim : MonoBehaviour
         // Move the pillows back to their initial positions
         DoTweenManager.MoveTo(pillow1.transform, initialPositionPillow1, moveDuration, Ease.Linear);
         DoTweenManager.MoveTo(pillow2.transform, initialPositionPillow2, moveDuration, Ease.Linear);
+        Vector3 effectPosition = transform.position + new Vector3(0, 2, 0);
+        Effect.Instance.PlayEffect("CleanEffect", effectPosition);
+
     }
 
     private void StartCleaning()

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 198647651190638180}
   - component: {fileID: 199445709100865486}
   - component: {fileID: 3858550970291413813}
+  - component: {fileID: 3904511424496275194}
   m_Layer: 0
   m_Name: UpGrade
   m_TagString: Untagged
@@ -4688,9 +4689,23 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1292211345376930}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 260ab268dce710047aff381db403fa3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   after: 1
+--- !u!114 &3904511424496275194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1292211345376930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd2e8874f60266498a388d7229a1bac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnlyDeactivate: 1
+  name: Upgrade

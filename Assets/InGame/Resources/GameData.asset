@@ -13,14 +13,12 @@ MonoBehaviour:
   m_Name: GameData
   m_EditorClassIdentifier: 
   money:
-    encryptedValue: 421706199749713344
-    key: 5017137038272060864
+    encryptedValue: 749041398858666019
+    key: 5338068681660846115
   CurrentLevel: 1
   ResortFee:
     encryptedValue: 726738743541170177
     key: 5332795262434344961
-  upgradeEffect: {fileID: 1292211345376930, guid: c4997d50d0e45f1478084b6628b4cba5,
-    type: 3}
   textEffect: {fileID: 8594966643835156441, guid: f8f8384bd86bf4670b7173a7b7ca03de,
     type: 3}
   customerPrefab: {fileID: 6534824338324418642, guid: b6e57af25c7689c44992c14f78bc4be5,
@@ -33,9 +31,9 @@ MonoBehaviour:
   - type: 0
     level: 1
     cost:
-      encryptedValue: 524004984461217458
+      encryptedValue: 546030401388826290
       key: 5173197543535300274
-    isUpgraded: 0
+    isUpgraded: 1
   - type: 1
     level: 2
     cost:
@@ -49,3 +47,10 @@ MonoBehaviour:
       key: 0
     isUpgraded: 0
   botDatas: []
+  effectList:
+  - effectName: Upgrade
+    effectPrefab: {fileID: 1292211345376930, guid: c4997d50d0e45f1478084b6628b4cba5,
+      type: 3}
+  - effectName: CleanEffect
+    effectPrefab: {fileID: 92965829041071095, guid: 82cb263bbaf774b48946864ce099c05e,
+      type: 3}
