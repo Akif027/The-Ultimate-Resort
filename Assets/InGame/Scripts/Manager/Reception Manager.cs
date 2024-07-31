@@ -28,6 +28,7 @@ public class ReceptionManager : MonoBehaviour
    // Initialization
    void Start()
    {
+      CustomerHandled = IPlayerPrefs.GetInt("CustomerHandled");
       // Subscribe to events
       EventManager.SubscribeRoomRequest(HandleRoomRequest);
 
@@ -121,5 +122,6 @@ public class ReceptionManager : MonoBehaviour
    void OnDestroy()
    {
       EventManager.UnsubscribeRoomRequest(HandleRoomRequest);
+      IPlayerPrefs.SetInt("CustomerHandled", CustomerHandled);
    }
 }

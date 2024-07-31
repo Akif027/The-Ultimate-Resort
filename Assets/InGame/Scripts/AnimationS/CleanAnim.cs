@@ -64,6 +64,7 @@ public class CleanAnim : MonoBehaviour
 
     private void StartCleaning()
     {
+        if (circularProgressBar == null) return; // Ensure circularProgressBar is not null
         if (circularProgressBar.isActive) return;
         circularProgressBar?.OnComplete.RemoveAllListeners();
         circularProgressBar?.OnComplete.AddListener(isThisRoom ? OnCleanedForRoom : OnCleanedForActivity);

@@ -9,8 +9,9 @@ public class AllPurposeCamera : Singleton<AllPurposeCamera>
     private bool isMoving = false;
 
     public Transform target;
-    public float heightOffset = 10f;
-    public float Size = 10f;
+    public float distance = 10f; // Camera distance from target
+    public float height = 5f; // Camera height above target
+    public float Fov = 60f;
     private Vector3 StartPos;
     void Update()
     {
@@ -29,13 +30,17 @@ public class AllPurposeCamera : Singleton<AllPurposeCamera>
     public void FocusOnTarget(Transform targetTransform)
     {
         StartPos = target.position;
-        // Calculate the target position directly above the targetTransform
-        targetPosition = targetTransform.position + Vector3.up * heightOffset;
+        // Calculate the target position in front of the targetTransform for a perspective camera
 
-        // Enable the top-down camera and disable the main camera
+        targetPosition = targetTransform.position + (targetTransform.forward * -distance) + Vector3.up * height;
+
+        // Enable the perspective camera and disable the main camera
         topDownCamera.gameObject.SetActive(true);
         mainCamera.SetActive(false);
-        topDownCamera.orthographicSize = heightOffset;
+
+        // Set the Field of View for the topDownCamera
+        topDownCamera.fieldOfView = Fov; // Use the public float Fov defined in your class
+
         // Start the transition
         isMoving = true;
         TimerManager.Instance.ScheduleAction(2, ResetCamera);

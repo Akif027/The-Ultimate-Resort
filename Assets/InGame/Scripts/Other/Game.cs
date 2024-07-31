@@ -51,6 +51,7 @@ public class Game : Manager
   void OnDisable()
   {
     Settings.CurrentLevel = (int)UpgradeManager.Instance.CurrentLevel();
+    IPlayerPrefs.Save();
   }
 }
 

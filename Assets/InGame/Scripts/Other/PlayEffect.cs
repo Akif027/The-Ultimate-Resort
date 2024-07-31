@@ -10,9 +10,12 @@ public class PlayEffect : MonoBehaviour
     public Color upgradeColor = Color.yellow;
 
     public Transform Efectpos;
+
     public void PlayOnUpgrade()
     {
-        AllPurposeCamera.Instance.FocusOnTarget(this.transform);
+
+
+        AllPurposeCamera.Instance.FocusOnTarget(Efectpos);
         Effect.Instance.PlayUpgradeEffect(Efectpos);
         DoTweenManager.PlayUpgradeAnimation(this.transform, scaleUpDuration, scaleDownDuration, scaleMultiplier, upgradeColor);
     }

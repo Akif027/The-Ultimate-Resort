@@ -4399,6 +4399,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Key
       objectReference: {fileID: 0}
+    - target: {fileID: 1528970526926515143, guid: 2f99457bc5434ce4384ab4e71fb0db1d,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4de3233df702b9944889bf30203f160e,
+        type: 3}
     - target: {fileID: 3690304820904250261, guid: 2f99457bc5434ce4384ab4e71fb0db1d,
         type: 3}
       propertyPath: m_Pivot.x
@@ -13718,7 +13724,7 @@ PrefabInstance:
     - target: {fileID: 6822569831400862016, guid: 14878253b78163e46b95060cf5e1b98b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.55
+      value: -4.75
       objectReference: {fileID: 0}
     - target: {fileID: 6822569831400862016, guid: 14878253b78163e46b95060cf5e1b98b,
         type: 3}
@@ -24336,17 +24342,17 @@ PrefabInstance:
     - target: {fileID: 7887277819473723578, guid: 14878253b78163e46b95060cf5e1b98b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.02
+      value: -1.676
       objectReference: {fileID: 0}
     - target: {fileID: 7887277819473723578, guid: 14878253b78163e46b95060cf5e1b98b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.17
+      value: 3.143
       objectReference: {fileID: 0}
     - target: {fileID: 7887277819473723578, guid: 14878253b78163e46b95060cf5e1b98b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.85
+      value: -3.06
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -25740,7 +25746,7 @@ MonoBehaviour:
   waitingCustomerObj: {fileID: 0}
   moneyPlace: {fileID: 1467331598}
   handOutKeyTime: 2
-  numberOfCustomerAssigned: 0
+  CustomerHandled: 0
   acceptCustomerButton: {fileID: 0}
 --- !u!65 &891689283
 BoxCollider:
@@ -27026,9 +27032,10 @@ MonoBehaviour:
   mainCamera: {fileID: 378749829}
   topDownCamera: {fileID: 1742938146}
   transitionSpeed: 1.5
-  target: {fileID: 905108365}
-  heightOffset: 12
-  Size: 8
+  target: {fileID: 1405279827}
+  distance: -40
+  height: 5
+  Fov: 60
 --- !u!1001 &925217620
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -49118,7 +49125,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 1
+  orthographic: 0
   orthographic size: 8
   m_Depth: 1
   m_CullingMask:
