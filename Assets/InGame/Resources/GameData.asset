@@ -45,7 +45,7 @@ MonoBehaviour:
     cost:
       encryptedValue: 4658815484840378368
       key: 0
-    isUpgraded: 0
+    isUpgraded: 1
   botDatas: []
   effectList:
   - effectName: Upgrade
