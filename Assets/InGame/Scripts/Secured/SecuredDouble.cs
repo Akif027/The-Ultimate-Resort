@@ -205,11 +205,13 @@ public struct SecuredDouble
             units[i - 1].exponent = (i - 1) * 3;
 
             int exp = 14;
+#pragma warning disable CS1717 // Assignment made to same variable
             for (i = i; i < units.Length; i++)
             {
                 units[i].name = "e" + (++exp);
                 units[i].exponent = exp;
             }
+#pragma warning restore CS1717 // Assignment made to same variable
         }
 
         public static Unit Find(double value)

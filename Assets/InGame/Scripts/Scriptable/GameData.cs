@@ -11,7 +11,7 @@ public class GameData : ScriptableObject
     public GameObject customerPrefab;
     public List<CharacterData> characterDatas = new List<CharacterData>();
     public List<UpgradeData> upgrades = new List<UpgradeData>();
-    public List<BotResource> botDatas = new List<BotResource>();
+    // public List<BotResource> botDatas = new List<BotResource>();
 
     private Dictionary<Level, UpgradeData> upgradeDictionary = new Dictionary<Level, UpgradeData>();
     public List<EffectData> effectList;
@@ -79,10 +79,10 @@ public class GameData : ScriptableObject
         return characterDatas.Find(cd => cd.type == type);
     }
 
-    public BotResource GetBotResource(BotType type)
-    {
-        return botDatas.Find(bd => bd.type == type);
-    }
+    // public BotResource GetBotResource(BotEmployeeType type)
+    // {
+    //     return botDatas.Find(bd => bd.type == type);
+    // }
 
     public CharacterData RandomCharacter
     {
@@ -107,12 +107,12 @@ public class CharacterData
     }
 }
 
-[System.Serializable]
-public class BotResource
-{
-    public BotType type;
-    public GameObject model;
-}
+// [System.Serializable]
+// public class BotResource
+// {
+//     public BotEmployeeType type;
+//     public GameObject model;
+// }
 
 [System.Serializable]
 public class MapData
@@ -120,10 +120,12 @@ public class MapData
     public GameObject model;
 }
 
-public enum BotType
-{
-    Cleaner
-}
+// public enum BotEmployeeType
+// {
+//     Cleaner,
+//     Receptionest
+
+// }
 
 [System.Serializable]
 public class EffectData
@@ -135,7 +137,7 @@ public class EffectData
 [System.Serializable]
 public class UpgradeData
 {
-    public enum Type { Room, Room2, pool }
+    public enum Type { Room, Room2, pool, Cleaner, Receptionist }
     public Type type;
     public Level level;
     public SecuredDouble cost;

@@ -35,4 +35,8 @@ public class HotelManager : MonoBehaviour
 
       sortSlot.transform.parent = parent;
    }
+
+
+
+
 }

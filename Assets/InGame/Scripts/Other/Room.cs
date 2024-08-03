@@ -1,5 +1,5 @@
 
-using Microsoft.Unity.VisualStudio.Editor;
+
 using UnityEngine;
 
 using UnityEngine.AI;
@@ -137,7 +137,17 @@ public class Room : MonoBehaviour
         }
         return true; // Everything is cleaned
     }
-
+    public CleanAnim GetUncleanedFurniture()
+    {
+        foreach (var c in cleanAnim)
+        {
+            if (!c.IsCleaningComplete)
+            {
+                return c; // Not everything is cleaned yet
+            }
+        }
+        return null; // Everything is cleaned
+    }
     public void MakeCleanedFlagFalse()
     {
         foreach (var cleanAnim in cleanAnim)

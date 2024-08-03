@@ -92,7 +92,17 @@ public class RoomManager : Manager
 
     }
 
-
+    public Room GetUncleanedRooms()
+    {
+        foreach (var roomData in roomData)
+        {
+            if (!roomData.isClean)
+            {
+                return roomData.room; // Assuming roomData has a property 'room' of type Room
+            }
+        }
+        return null; // Return null if no uncleaned rooms are found
+    }
     public void ToggleRoom(int roomNumber)
     {
         if (RoomContainer.ContainsKey(roomNumber))
@@ -145,18 +155,7 @@ public class RoomManager : Manager
         }
     }
 
-    public int GetAvailableRoomCount()
-    {
-        int count = 0;
-        foreach (var roomData in roomData)
-        {
-            if (roomData.isAvailable)
-            {
-                count++;
-            }
-        }
-        return count;
-    }
+
 
     public RoomData FindRoomData(int roomNumber)
     {

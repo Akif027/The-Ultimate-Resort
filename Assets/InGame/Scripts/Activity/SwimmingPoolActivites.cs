@@ -18,7 +18,7 @@ public class SwimmingPoolActivites : MonoBehaviour
     public static int CoustomerPlayCount;
 
     private bool isDirty = false;
-    public Status Up_status;
+
 
     void Start()
     {

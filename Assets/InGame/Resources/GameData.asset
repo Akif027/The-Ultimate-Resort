@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: GameData
   m_EditorClassIdentifier: 
   money:
-    encryptedValue: 727841025522959987
-    key: 5377367836131886707
-  CurrentLevel: 1
+    encryptedValue: 1066959186681146396
+    key: 5652705526786042908
+  CurrentLevel: 3
   ResortFee:
     encryptedValue: 726738743541170177
     key: 5332795262434344961
@@ -46,7 +46,12 @@ MonoBehaviour:
       encryptedValue: 4643985272004935680
       key: 0
     isUpgraded: 1
-  botDatas: []
+  - type: 3
+    level: 1
+    cost:
+      encryptedValue: 4648488871632306176
+      key: 0
+    isUpgraded: 1
   effectList:
   - effectName: Upgrade
     effectPrefab: {fileID: 1292211345376930, guid: c4997d50d0e45f1478084b6628b4cba5,

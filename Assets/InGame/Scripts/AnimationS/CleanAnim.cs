@@ -69,6 +69,7 @@ public class CleanAnim : MonoBehaviour
     {
         if (circularProgressBar == null) return; // Ensure circularProgressBar is not null
         if (circularProgressBar.isActive) return;
+
         circularProgressBar?.OnComplete.RemoveAllListeners();
         circularProgressBar?.OnComplete.AddListener(isThisRoom ? OnCleanedForRoom : OnCleanedForActivity);
         ExecuteCleaningProgressSignEffect();
@@ -119,24 +120,26 @@ public class CleanAnim : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Player")) return;
+        if (!(other.CompareTag("Player") || other.CompareTag("Employee"))) return;
+
         StartCleaning();
         circularProgressBar?.ResumeCountdown();
     }
 
     private void OnTriggerStay(Collider other)
     {
+        if (!(other.CompareTag("Player") || other.CompareTag("Employee"))) return;
 
-        if (!other.CompareTag("Player")) return;
         Playeranimation = other.gameObject.GetComponent<Animation>();
         if (!IsCleaningComplete && isSignPlaced) Playeranimation?.ChangeState(AnimationState.Clean);
-
     }
+
     private void OnTriggerExit(Collider other)
     {
-        if (!other.CompareTag("Player")) return;
+        if (!(other.CompareTag("Player") || other.CompareTag("Employee"))) return;
 
-        Playeranimation.ChangeState(AnimationState.Idle);
+        //  Playeranimation.ChangeState(AnimationState.Idle);
         circularProgressBar?.PauseCountdown();
+
     }
 }

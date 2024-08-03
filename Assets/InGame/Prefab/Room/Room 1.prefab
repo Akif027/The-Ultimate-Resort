@@ -2869,15 +2869,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6350760848086103499, guid: 171822e55c6acbd4789dea1c302379f2,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6715019532832582753}
-    - targetCorrespondingSourceObject: {fileID: 6350760848086103499, guid: 171822e55c6acbd4789dea1c302379f2,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 2231099182311371674}
     - targetCorrespondingSourceObject: {fileID: 6350760848086103499, guid: 171822e55c6acbd4789dea1c302379f2,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2777014017506807586}
+    - targetCorrespondingSourceObject: {fileID: 6350760848086103499, guid: 171822e55c6acbd4789dea1c302379f2,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9040736218688639543}
   m_SourcePrefab: {fileID: 100100000, guid: 171822e55c6acbd4789dea1c302379f2, type: 3}
 --- !u!1 &116933326609405349 stripped
 GameObject:
@@ -2897,22 +2897,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3343094229329330784}
   m_PrefabAsset: {fileID: 0}
---- !u!208 &6715019532832582753
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8522887656167978923}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.54700005, y: 0.25800002, z: 0.24000001}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0.26000002, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!114 &2231099182311371674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2974,6 +2958,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.0938526, y: 0.51647455, z: 0.7744088}
   m_Center: {x: 0.000000053877933, y: 0.25967452, z: -0.14691153}
+--- !u!114 &9040736218688639543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8522887656167978923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35e95dc5ff2b64380880dd7ac5922847, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Size: {x: 1.0517328, y: 0.6362285, z: 0.5070997}
+  m_Center: {x: -0.01357758, y: 0.2076613, z: -0.017990202}
+  m_Area: 1
+  m_AffectedAgents: ffffffff
 --- !u!4 &9010772145101630737 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6010546264223068017, guid: 171822e55c6acbd4789dea1c302379f2,
