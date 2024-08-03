@@ -79,7 +79,7 @@ public class UpgradeManager : Singleton<UpgradeManager>
 
     public bool IsPoolUpgraded()
     {
-        UpgradeData poolUpgradeData = GetUpgradeData(UpgradeData.Type.pool);
+        UpgradeData poolUpgradeData = GetUpgradeDataWithType(UpgradeData.Type.pool);
         return poolUpgradeData != null && poolUpgradeData.isUpgraded;
     }
 

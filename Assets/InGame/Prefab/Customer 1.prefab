@@ -126,6 +126,13 @@ MonoBehaviour:
   animator: {fileID: 5233441670040801422}
   Sleepingtime: 5
   currentState: 0
+  stateProbabilitiesList:
+  - state: 5
+    probability: 0.5
+  - state: 4
+    probability: 0.5
+  - state: 3
+    probability: 0.3
   NextDestination: {fileID: 0}
 --- !u!114 &5233441670040801422
 MonoBehaviour:

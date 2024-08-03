@@ -2,6 +2,7 @@ using System.Linq;
 using System;
 using UnityEngine;
 using UnityEngine.AI;
+using System.Collections.Generic;
 public class customer : MonoBehaviour
 {
 
@@ -17,9 +18,12 @@ public class customer : MonoBehaviour
    private NavMeshAgent agent; // Reference to the NavMeshAgent component
    private RoomData roomData;
    private QueueManager queueManager;
+
+
+   private Dictionary<CustomerState, float> stateProbabilities;
+   [SerializeField] private List<StateProbability> stateProbabilitiesList;
+
    public Transform NextDestination = null;
-
-
    public Animation Animator
    {
       get { return animator; }
@@ -27,6 +31,16 @@ public class customer : MonoBehaviour
    }
 
    #region Unity
+
+   private void Awake()
+   {
+      // Initialize the dictionary from the list
+      stateProbabilities = new Dictionary<CustomerState, float>();
+      foreach (var sp in stateProbabilitiesList)
+      {
+         stateProbabilities[sp.state] = sp.probability;
+      }
+   }
    void Start()
    {
       queueManager = GameManager.Instance.GetManager<QueueManager>() as QueueManager;
@@ -34,6 +48,7 @@ public class customer : MonoBehaviour
       // Initialize the NavMeshAgent
       agent = GetComponent<NavMeshAgent>();
       animator = GetComponent<Animation>();
+
 
    }
    private void CustomerAnimationWalkAndIdle()
@@ -152,9 +167,10 @@ public class customer : MonoBehaviour
 
       roomData.room.SleepOver(gameObject);
       // animator.AnimationPlay("Idle", true);
-      //ChangeState(CustomerState.SwimingPool);
-
-      SetRandomCustomerState(CustomerState.MovingToRoom, CustomerState.waiting);
+      // ChangeState(CustomerState.SwimingPool);
+      // SetRandomCustomerState(CustomerState.MovingToRoom, CustomerState.waiting, CustomerState.GoingToilet, CustomerState.Exiting, CustomerState.Sleeping);
+      //SetRandomCustomerState(CustomerState.MovingToRoom, CustomerState.waiting);
+      SetRandomCustomerState(CustomerState.waiting, CustomerState.MovingToRoom, CustomerState.Sleeping);
    }
    private void ExitRoom()
    {
@@ -182,12 +198,15 @@ public class customer : MonoBehaviour
          hasBeenAddedToPoolQueue = true; // Set the flag to true after adding the customer to the queue
       }
    }
+
+
+
    public void SetRandomCustomerState(params CustomerState[] excludeStates)
    {
       Array values = Enum.GetValues(typeof(CustomerState));
-      CustomerState[] filteredValues = values.Cast<CustomerState>()
-                                             .Where(state => !excludeStates.Contains(state))
-                                             .ToArray();
+      var filteredValues = values.Cast<CustomerState>()
+                                 .Where(state => !excludeStates.Contains(state))
+                                 .ToArray();
 
       if (filteredValues.Length == 0)
       {
@@ -195,8 +214,7 @@ public class customer : MonoBehaviour
          return;
       }
 
-      System.Random random = new System.Random();
-      CustomerState randomState = filteredValues[random.Next(filteredValues.Length)];
+      CustomerState randomState = GetStateByProbability(filteredValues);
 
       // Ensure the pool state is only set if the pool is upgraded
       if (randomState == CustomerState.SwimingPool && !UpgradeManager.Instance.IsPoolUpgraded())
@@ -209,6 +227,29 @@ public class customer : MonoBehaviour
       }
 
       Debug.Log("Random Customer State: " + currentState);
+   }
+
+   private CustomerState GetStateByProbability(CustomerState[] possibleStates)
+   {
+      float totalProbability = 0f;
+      foreach (var state in possibleStates)
+      {
+         totalProbability += stateProbabilities[state];
+      }
+
+      float randomValue = UnityEngine.Random.value * totalProbability;
+      float cumulativeProbability = 0f;
+
+      foreach (var state in possibleStates)
+      {
+         cumulativeProbability += stateProbabilities[state];
+         if (randomValue <= cumulativeProbability)
+         {
+            return state;
+         }
+      }
+
+      return possibleStates[0]; // Fallback
    }
 
    public void ChangeState(CustomerState newState)
@@ -266,4 +307,10 @@ public enum CustomerState
    GoingToilet,
    SwimingPool,
 
+}
+[System.Serializable]
+public class StateProbability
+{
+   public CustomerState state;
+   public float probability;
 }

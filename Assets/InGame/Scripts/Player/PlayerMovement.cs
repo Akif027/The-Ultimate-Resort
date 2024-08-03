@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Animation animator;
     public SortSlot sortSlot;
     public LayerMask groundLayer;
-    public float raycastDistance = 1f;
+
 
     public Camera mainCamera;
     public Camera allPurposeCamera;
@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         MovePlayer();
-        KeepPlayerGrounded();
+
     }
 
     private void HandleTouchInput()
@@ -149,14 +149,5 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private void KeepPlayerGrounded()
-    {
-        Ray ray = new Ray(transform.position, Vector3.down);
-        if (Physics.Raycast(ray, out RaycastHit hit, raycastDistance, groundLayer))
-        {
-            Vector3 position = rb.position;
-            position.y = hit.point.y;
-            rb.position = position;
-        }
-    }
+
 }
