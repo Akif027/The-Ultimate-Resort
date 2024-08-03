@@ -29,14 +29,14 @@ public class RoomFocus : MonoBehaviour
     public void FocusRoom()
     {
 
-        AllPurposeCamera.Instance.ActivateCameraAtPosition(RoomAngle);
+        CameraTransition.Instance.ActivateCameraAtPosition(RoomAngle);
 
     }
 
     public void ResetRoomFocus()
     {
 
-        AllPurposeCamera.Instance.ResetCamera();
+        CameraTransition.Instance.ResetTopdown();
 
     }
 }

@@ -15,7 +15,7 @@ public class PlayEffect : MonoBehaviour
     {
 
 
-        AllPurposeCamera.Instance.FocusOnTarget(Efectpos);
+        CameraTransition.Instance.FocusOnTarget(Efectpos);
         Effect.Instance.PlayEffect("Upgrade", Efectpos.position);
         DoTweenManager.PlayUpgradeAnimation(this.transform, scaleUpDuration, scaleDownDuration, scaleMultiplier, upgradeColor);
     }

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: GameData
   m_EditorClassIdentifier: 
   money:
-    encryptedValue: 1125429958597898527
-    key: 5719308286701826335
+    encryptedValue: 62205549209183916
+    key: 4640708306710292140
   CurrentLevel: 1
   ResortFee:
     encryptedValue: 726738743541170177
