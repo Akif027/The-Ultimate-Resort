@@ -114,7 +114,8 @@ public class CleanAnim : MonoBehaviour
         energizedEffect = null;
         circularProgressBar = null;
         Playeranimation.ChangeState(AnimationState.Idle);
-
+        SoundManager.Instance.PlayPopSound(transform.position);
+        VibrationManager.StopVibration();
     }
 
 
@@ -131,15 +132,32 @@ public class CleanAnim : MonoBehaviour
         if (!(other.CompareTag("Player") || other.CompareTag("Employee"))) return;
 
         Playeranimation = other.gameObject.GetComponent<Animation>();
-        if (!IsCleaningComplete && isSignPlaced) Playeranimation?.ChangeState(AnimationState.Clean);
+        if (!IsCleaningComplete && isSignPlaced)
+        {
+            Playeranimation?.ChangeState(AnimationState.Clean);
+            VibrationManager.StartVibration(this);
+
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (!(other.CompareTag("Player") || other.CompareTag("Employee"))) return;
+        // Check if the collider belongs to either an Employee or Player
+        if (!(other.CompareTag("Employee") || other.CompareTag("Player"))) return;
+        VibrationManager.StopVibration();
+        // Check specifically for a Player to change animation state to Idle
+        if (other.CompareTag("Player"))
+        {
+            // Change the player's animation state to Idle
+            if (Playeranimation.CurrentState != AnimationState.Walk) Playeranimation.ChangeState(AnimationState.Idle);
+        }
 
-        //  Playeranimation.ChangeState(AnimationState.Idle);
+        // Pause the countdown of the circularProgressBar for both Employee and Player
+        PauseCircularProgressBar();
+    }
+
+    private void PauseCircularProgressBar()
+    {
         circularProgressBar?.PauseCountdown();
-
     }
 }

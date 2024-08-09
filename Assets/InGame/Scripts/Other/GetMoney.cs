@@ -26,6 +26,7 @@ public class GetMoney : MonoBehaviour
 
             SortObject sortObject = g.GetComponent<SortObject>();
             sortSlot.AddObjectNotEffect(sortObject);
+            SoundManager.Instance.PlayGetObject(transform.position);
             TimerManager.Instance.ScheduleAction(time, () => DestroyAfterTime(sortObject));
 
         }

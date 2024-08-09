@@ -33,7 +33,9 @@ public class QueueManager : Manager
     {
         for (int i = 0; i < numberOfCustomers; i++)
         {
-            GameObject customerInstance = ObjectPool.Instance.GetPooledObject("Customer");//Instantiate(gameData.RandomCharacter.GetRandomModel(), CustomerStart.position, Quaternion.identity);
+            GameObject customerInstance = ObjectPool.Instance.GetPooledObject("Customer");
+            Debug.Log(customerInstance.name);
+            //Instantiate(gameData.RandomCharacter.GetRandomModel(), CustomerStart.position, Quaternion.identity);
             NavMeshAgent agent = customerInstance.GetComponent<NavMeshAgent>();
             agent.Warp(CustomerStart.position);
             if (agent != null)

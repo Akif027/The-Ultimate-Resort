@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/UnityTechnologies/Basic Asset Pack Interior/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/InGame/Scene/Loading Scene.unity
+    guid: 550b18bdafeac154fa6bc210ba5488b8
+  - enabled: 1
+    path: Assets/InGame/Scene/Akif.unity
+    guid: 8fe8221db81b5dd4da11a8ba6d30ad2a
   m_configObjects: {}

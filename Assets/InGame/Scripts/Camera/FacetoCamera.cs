@@ -25,13 +25,17 @@ public class FacetoCamera : MonoBehaviour
             allPurposeCamera = allPurposeCameraObject.GetComponent<Camera>();
         }
     }
-
+    public Camera activeCamera = null;
     void Update()
     {
-        Camera activeCamera = null;
+        // Determine which camera is actively rendering the scene
+        Camera renderingCamera = Camera.main;
 
-        // Determine which camera is active
-        if (allPurposeCamera != null && allPurposeCamera.gameObject.activeInHierarchy)
+        if (renderingCamera != null)
+        {
+            activeCamera = renderingCamera;
+        }
+        else if (allPurposeCamera != null && allPurposeCamera.gameObject.activeInHierarchy)
         {
             activeCamera = allPurposeCamera;
         }

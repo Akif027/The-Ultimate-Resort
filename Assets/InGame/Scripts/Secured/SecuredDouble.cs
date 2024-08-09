@@ -101,6 +101,11 @@ public struct SecuredDouble
         return Value.ToString();
     }
 
+    internal static SecuredDouble Parse(string v)
+    {
+        throw new NotImplementedException();
+    }
+
     // Override operators for ease of use
     public static implicit operator double(SecuredDouble s) => s.Value;
     public static implicit operator SecuredDouble(double d) => new SecuredDouble(d);

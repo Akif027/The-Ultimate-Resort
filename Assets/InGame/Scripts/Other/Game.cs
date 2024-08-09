@@ -45,13 +45,18 @@ public class Game : Manager
 
   public void Save()
   {
+    // Settings.GameData = gameData;
+    Settings.CurrentLevel = (int)UpgradeManager.Instance.CurrentLevel();
     Settings.GameData = gameData;
+    Settings.Money = gameData.money; // Save the current amount of money
+    IPlayerPrefs.Save();
   }
 
   void OnDisable()
   {
-    Settings.CurrentLevel = (int)UpgradeManager.Instance.CurrentLevel();
-    IPlayerPrefs.Save();
+
+    Save();
+
   }
 }
 

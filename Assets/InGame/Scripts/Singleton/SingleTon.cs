@@ -6,21 +6,10 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     private static readonly object _lock = new object();
     private static bool _applicationIsQuitting = false;
 
-
-    public bool ApplicationIsQuitting
-    {
-        get { return _applicationIsQuitting; }
-    }
     public static T Instance
     {
         get
         {
-            if (_applicationIsQuitting)
-            {
-                Debug.LogWarning("[Singleton] Instance '" + typeof(T) +
-                    "' already destroyed on application quit. Won't create again - returning null.");
-                return null;
-            }
 
             lock (_lock)
             {
@@ -53,25 +42,8 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         }
     }
 
-    // protected virtual void OnDestroy()
-    // {
-    //     if (_instance == this)
-    //     {
-    //         _instance = null;
-    //     }
-    // }
-
-    // protected virtual void OnApplicationQuit()
-    // {
-    //     _applicationIsQuitting = true;
-    // }
-
-    // protected virtual void OnDisable()
-    // {
-    //     if (_instance == this)
-    //     {
-    //         _instance = null;
-    //     }
-    //     _applicationIsQuitting = true;
-    // }
+    protected virtual void OnApplicationQuit()
+    {
+        _applicationIsQuitting = true;
+    }
 }

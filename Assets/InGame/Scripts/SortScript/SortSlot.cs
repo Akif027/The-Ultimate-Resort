@@ -46,12 +46,14 @@ public class SortSlot : MonoBehaviour
     {
         sortManagers.Sort((SortManager a, SortManager b) => a.Height.CompareTo(b.Height));
         sortManagers[0].AddObject(sortObject);
+        // SoundManager.Instance.PlayGetObject(transform.position);
     }
 
     public void AddObjectNotEffect(SortObject sortObject)
     {
         sortManagers.Sort((SortManager a, SortManager b) => a.Height.CompareTo(b.Height));
         sortManagers[0].AddObjectNotEffect(sortObject);
+        //SoundManager.Instance.PlayGetObject(transform.position);
     }
 
     public bool RemoveObject(SortObject sortObject)

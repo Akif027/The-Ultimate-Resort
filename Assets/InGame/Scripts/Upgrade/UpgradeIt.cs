@@ -28,6 +28,7 @@ public class UpgradeIt : MonoBehaviour
         upgradeData = status.getUpgradedata();
         Cost = upgradeData.cost;
         PriceTxt.text = Cost.ToString();
+
         NameTxt.text = UpgradeName;
         // if (upgradeData.isUpgraded)
         // {
@@ -70,7 +71,7 @@ public class UpgradeIt : MonoBehaviour
         Debug.Log("Upgraded");
         upgradeData.isUpgraded = true;
         OnUpgrade?.Invoke();
-
+        SoundManager.Instance.PlayUpgrade(transform.position);
 
     }
 

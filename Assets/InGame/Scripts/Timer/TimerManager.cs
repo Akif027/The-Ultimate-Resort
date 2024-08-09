@@ -6,6 +6,7 @@ public class TimerManager : Singleton<TimerManager>
 {
     private Stack<TimerCallback> callbackPool = new Stack<TimerCallback>();
     private List<TimerCallback> activeCallbacks = new List<TimerCallback>();
+    private readonly bool ApplicationIsQuitting;
 
     void Start()
     {

@@ -10,7 +10,7 @@ public class CameraTransition : Singleton<CameraTransition>
     public float transitionSpeed = 5f; // Speed of the camera transition
     public float targetSize = 15f; // Target size when focusing on the target
 
-    public Transform target;
+    private Transform target;
     private bool isTransitioningToTarget = false;
     private bool isTransitioningBack = false;
 
@@ -39,11 +39,7 @@ public class CameraTransition : Singleton<CameraTransition>
             UpdateCameraTransitionBack();
         }
 
-        if (Input.GetMouseButtonDown(1) && target != null)
-        {
-            // Call FocusOnTarget to focus on the target
-            FocusOnTarget(target);
-        }
+
     }
 
     public void FocusOnTarget(Transform targetTransform)

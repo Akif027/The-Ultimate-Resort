@@ -7,7 +7,7 @@ public class AnimationManager : Singleton<AnimationManager>
 {
 
     [SerializeField] GameObject Player;
-    private Animator PlayerAnim;
+
     private static AnimationManager _instance;
 
     private RoomManager roomManager;
@@ -20,7 +20,7 @@ public class AnimationManager : Singleton<AnimationManager>
 
     void Start()
     {
-        PlayerAnim = Player.GetComponent<Animator>();
+
         roomManager = GetComponent<RoomManager>();
         if (_instance == null)
         {

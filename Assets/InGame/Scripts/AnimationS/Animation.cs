@@ -5,10 +5,13 @@ using UnityEngine;
 
 public class Animation : MonoBehaviour
 {
-    public Animator anim;
+    [SerializeField] Animator anim;
     [SerializeField] AnimationState currentState;
 
     private Dictionary<AnimationState, string> animationMap;
+
+    private RandomCharacter randomCharacter;
+    [SerializeField] bool itsCustomer = false;
     public AnimationState CurrentState
     {
         get { return currentState; }
@@ -20,6 +23,12 @@ public class Animation : MonoBehaviour
     }
     void Start()
     {
+        if (itsCustomer)
+        {
+            randomCharacter = GetComponentInChildren<RandomCharacter>();
+            anim = randomCharacter.GetAnimator();
+        }
+
         animationMap = new Dictionary<AnimationState, string>
         {
             { AnimationState.Idle, "Idle" },

@@ -52,7 +52,7 @@ public class MoneyEffect : MonoBehaviour
                 };
 
                 onClick.Invoke();
-
+                SoundManager.Instance.PlayGetMoneySound(transform.position);
             }
             else
             {

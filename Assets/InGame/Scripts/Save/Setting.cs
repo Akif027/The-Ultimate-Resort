@@ -5,6 +5,13 @@ public static class Settings
 
     public static readonly string CURRENT_LEVEL = "CURRENT_LEVEL";
     public static readonly string LEVEL_MAX = "LEVEL_MAX";
+    public static readonly string MONEY_KEY = "MONEY";
+
+    public static SecuredDouble Money
+    {
+        get => SecuredDouble.Parse(IPlayerPrefs.GetString(MONEY_KEY));
+        set => IPlayerPrefs.SetString(MONEY_KEY, value.ToString());
+    }
 
     public static int LevelMax
     {

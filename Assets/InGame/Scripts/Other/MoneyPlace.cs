@@ -37,6 +37,7 @@ public class MoneyPlace : MonoBehaviour
 
             SortObject sortObject = g.GetComponent<SortObject>();
             sortSlot.AddObjectNotEffect(sortObject);
+            SoundManager.Instance.PlayGetObject(transform.position);
         }
     }
     public void Put(Transform character)
@@ -59,7 +60,7 @@ public class MoneyPlace : MonoBehaviour
                 text.transform.position = character.transform.position + Vector3.up;
                 text.GetComponent<TextEffect>().Initialize("+" + moneyValue.value.Round().ToString());
 
-                //      SoundManager.Instance.PlayGetMoneySound(transform.position);
+                SoundManager.Instance.PlayGetMoneySound(transform.position);
             }
         }
     }
